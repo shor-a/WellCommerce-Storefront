@@ -40,7 +40,7 @@
   --sidebar-ring: oklch(0.7 0 0);
 
   /* Typography */
-  --font-heading: "IntegralCF-Bold", sans-serif;
+  --font-heading: "Integral CF", sans-serif;
   --font-sans: "Satoshi", sans-serif;
   --font-serif: "Satoshi", serif;
   --font-mono: "Satoshi", monospace;
@@ -102,7 +102,7 @@
   --sidebar-border: oklch(0.3 0 0);
   --sidebar-ring: oklch(0.72 0 0);
 
-  --font-heading: "IntegralCF-Bold", sans-serif;
+  --font-heading: "Integral CF", sans-serif;
   --font-sans: "Satoshi", sans-serif;
   --font-serif: "Satoshi", serif;
   --font-mono: "Satoshi", monospace;
@@ -153,7 +153,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-heading: "IntegralCF-Bold", sans-serif;
+  --font-heading: "Integral CF", sans-serif;
   --font-sans: "Satoshi", sans-serif;
   --font-serif: "Satoshi", serif;
   --font-mono: "Satoshi", monospace;

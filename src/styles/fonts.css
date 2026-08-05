@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Light.woff2') format('woff2');
+  src: url('/src/assets/fonts/Satoshi-Light.woff2') format('woff2');
   font-weight: 300;
   font-display: swap;
   font-style: normal;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Regular.woff2') format('woff2');
+  src: url('/src/assets/fonts/Satoshi-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
   font-style: normal;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Medium.woff2') format('woff2');
+  src: url('/src/assets/fonts/Satoshi-Medium.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
   font-style: normal;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Bold.woff2') format('woff2');
+  src: url('/src/assets/fonts/Satoshi-Bold.woff2') format('woff2');
   font-weight: 700;
   font-display: swap;
   font-style: normal;
