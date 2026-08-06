@@ -45,7 +45,7 @@ const Navbar = () => {
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      Item
+                      On Sale
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
