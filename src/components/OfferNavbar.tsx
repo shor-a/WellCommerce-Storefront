@@ -3,7 +3,7 @@ import { X } from "lucide-react"
 const OfferNavbar = () => {
   return (
     <>
-      <div className="offer bg-primary p-2 text-primary-foreground">
+      <div className="offernav bg-primary p-2 text-primary-foreground">
         <div className="container mx-auto flex items-center gap-5 px-2">
           <div className="flex flex-1 justify-center">
             <p className="mx-1 text-sm">
