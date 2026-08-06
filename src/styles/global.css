@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "fonts.css";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -176,17 +176,24 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    font-size: 1rem;
     font-weight: 400;
   }
 
   h1 {
     font-family: var(--font-heading);
-    font-weight: 700; 
-    text-transform: uppercase; 
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 
-  h2,h3,h4,h5,h6 {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
-    font-weight: 600; 
+    font-size: 2rem;
+    font-weight: 600;
   }
 }
