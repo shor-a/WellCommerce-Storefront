@@ -184,6 +184,7 @@
     font-family: var(--font-heading);
     font-size: 3rem;
     font-weight: 700;
+    text-box: trim-both cap alphabetic;
     text-transform: uppercase;
   }
 
@@ -195,5 +196,6 @@
     font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 600;
+    text-box: trim-both cap alphabetic;
   }
 }
