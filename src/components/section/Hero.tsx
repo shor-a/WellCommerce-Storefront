@@ -40,8 +40,25 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <div className="flex basis-5/12 items-center justify-center">
-            Image
+          <div className="flex basis-5/12 items-center justify-center"></div>
+
+{/* container (flex-col)
+├── top row (flex row)
+│   ├── basis-7/12 — text, button, stats
+│   └── basis-5/12 — image
+└── bottom row (grid-cols-5) — brand logos */}
+
+          <div className="grid grid-cols-5">
+            <p>as</p>
+            <p>as</p>
+            <p>as</p>
+            <p>as</p>
+            <p>as</p>
+            {/* <img src="" alt="logo-1" />
+              <img src="" alt="logo-1" />
+              <img src="" alt="logo-1" />
+              <img src="" alt="logo-1" />
+              <img src="" alt="logo-1" /> */}
           </div>
         </div>
       </div>
