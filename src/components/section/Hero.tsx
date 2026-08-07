@@ -9,7 +9,7 @@ import vector5 from "@/assets/images/general/vector5.png"
 const Hero = () => {
   return (
     <>
-      <div className="hero bg-secondary py-25">
+      <div className="hero bg-secondary pt-20 pb-0">
         <div className="container mx-auto flex flex-col gap-10 px-10">
           <div className="flex w-full flex-row justify-start">
             <div className="basis-7/12">
@@ -50,12 +50,15 @@ const Hero = () => {
             <div className="basis-5/12"></div>
           </div>
         </div>
-        <div className="mt-15 grid h-25 grid-cols-5 items-center justify-items-center bg-primary px-10">
-          <img className="h-10 w-40" src={vector1} alt="logo-1" />
-          <img className="h-10 w-40" src={vector2} alt="logo-2" />
-          <img className="h-10 w-40" src={vector3} alt="logo-3" />
-          <img className="h-10 w-40" src={vector4} alt="logo-4" />
-          <img className="h-10 w-40" src={vector5} alt="logo-5" />
+
+        <div className="brands bg-primary">
+          <div className="container mx-auto mt-15 grid h-25 grid-cols-5 items-center justify-items-center gap-10">
+            <img className="h-10 w-40" src={vector1} alt="logo-1" />
+            <img className="h-10 w-40" src={vector2} alt="logo-2" />
+            <img className="h-10 w-40" src={vector3} alt="logo-3" />
+            <img className="h-10 w-40" src={vector4} alt="logo-4" />
+            <img className="h-10 w-40" src={vector5} alt="logo-5" />
+          </div>
         </div>
       </div>
     </>
