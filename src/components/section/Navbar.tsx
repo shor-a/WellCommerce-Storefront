@@ -22,8 +22,8 @@ const Navbar = () => {
   return (
     <>
       <OfferNavbar />
-      <div className="nav border bg-background p-5">
-        <div className="container mx-auto flex items-center justify-center gap-10 px-2">
+      <div className="nav border bg-background py-5">
+        <div className="container mx-auto flex items-center justify-center gap-10 px-10">
           <div className="flex basis-5/12 items-center justify-between gap-10">
             <div className="flex basis-1/4">
               <h2>WellCommerce</h2>
