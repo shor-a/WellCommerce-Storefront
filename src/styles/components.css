@@ -1,0 +1,8 @@
+.hero {
+  background-image: url(../assets/images/general/rectangle2.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 70% 0%;
+  height: 100%;
+  width: 100%;
+}
