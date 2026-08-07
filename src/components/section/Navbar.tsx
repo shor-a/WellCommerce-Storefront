@@ -1,7 +1,5 @@
 import OfferNavbar from "./OfferNavbar"
 
-import { Button } from "@/components/ui/button"
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -28,7 +26,7 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-center gap-10 px-2">
           <div className="flex basis-5/12 items-center justify-between gap-10">
             <div className="flex basis-1/4">
-              <h2>WELLCOMMERCE</h2>
+              <h2>WellCommerce</h2>
             </div>
             <div className="flex basis-3/4">
               <NavigationMenu>
