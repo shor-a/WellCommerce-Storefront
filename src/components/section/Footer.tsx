@@ -2,6 +2,19 @@ import { CircleUserRound } from "lucide-react"
 
 import { Separator } from "@/components/ui/separator"
 
+import visa from "@/assets/images/general/visa.png"
+import mastercard from "@/assets/images/general/mastercard.png"
+import paypal from "@/assets/images/general/paypal.png"
+import applePay from "@/assets/images/general/applepay.png"
+import googlePay from "@/assets/images/general/googlepay.png"
+
+import {
+  SiFacebook,
+  SiX,
+  SiGithub,
+  SiInstagram,
+} from "@icons-pack/react-simple-icons"
+
 function Footer() {
   return (
     <>
@@ -16,10 +29,18 @@ function Footer() {
               </p>
               <div className="flex justify-start">
                 <div className="grid grid-cols-5 gap-1">
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
+                    <SiX className="size-4" />
+                  </div>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
+                    <SiFacebook className="size-4" />
+                  </div>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
+                    <SiInstagram className="size-4" />
+                  </div>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
+                    <SiGithub className="size-4" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,15 +119,27 @@ function Footer() {
             {/* Because the parent is flex we use basis-full */}
             <div className="flex basis-full">
               <div className="basis-8/12">
-                <p>WellCommerce 2026, All Rights Reserved</p>
+                <p className="text-sm">
+                  WellCommerce 2026, All Rights Reserved
+                </p>
               </div>
               <div className="flex basis-6/12 justify-end">
                 <div className="grid grid-cols-5 gap-1">
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
-                  <CircleUserRound></CircleUserRound>
+                  <div className="flex items-center justify-center rounded border bg-background p-2">
+                    <img className="h-3 w-6" src={visa} alt="" />
+                  </div>
+                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
+                    <img className="h-3 w-6" src={mastercard} alt="" />
+                  </div>
+                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
+                    <img className="h-3 w-6" src={paypal} alt="" />
+                  </div>
+                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
+                    <img className="h-3 w-6" src={applePay} alt="" />
+                  </div>
+                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
+                    <img className="h-3 w-6" src={googlePay} alt="" />
+                  </div>
                 </div>
               </div>
             </div>
