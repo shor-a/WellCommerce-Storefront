@@ -10,7 +10,9 @@ const Hero = () => {
   return (
     <>
       <div className="hero bg-secondary pt-20 pb-0">
-        <div className="container mx-auto flex flex-col gap-10 px-10">
+        <div className="container mx-auto gap-10 px-10">
+          {/* Because the parent is not flex then we use w-full
+              If the parent is flex we can use basis-full */}
           <div className="flex w-full flex-row justify-start">
             <div className="basis-7/12">
               <h1 className="mb-4 text-5xl">
@@ -29,19 +31,19 @@ const Hero = () => {
               <div className="grid grid-cols-3 gap-4">
                 <div className="border-r-2">
                   <p className="text-4xl font-bold text-foreground">200+</p>
-                  <p className="text-md text-muted-foreground">
+                  <p className="text-md mt-3 text-muted-foreground">
                     International Brands
                   </p>
                 </div>
-                <div className="">
+                <div className="border-r-2">
                   <p className="text-4xl font-bold text-foreground">2.000+</p>
-                  <p className="text-md text-muted-foreground">
+                  <p className="text-md mt-3 text-muted-foreground">
                     High-Quality Products
                   </p>
                 </div>
-                <div className="">
+                <div>
                   <p className="text-4xl font-bold text-foreground">30.000+</p>
-                  <p className="text-md text-muted-foreground">
+                  <p className="text-md mt-3 text-muted-foreground">
                     Happy Customers
                   </p>
                 </div>

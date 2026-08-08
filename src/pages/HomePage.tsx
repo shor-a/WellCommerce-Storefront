@@ -1,3 +1,4 @@
+import Footer from "@/components/section/Footer"
 import Hero from "@/components/section/Hero"
 import Navbar from "@/components/section/Navbar"
 
@@ -6,6 +7,8 @@ const HomePage = () => {
     <>
       <Navbar />
       <Hero />
+
+      <Footer />
     </>
   )
 }

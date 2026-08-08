@@ -181,6 +181,11 @@
     font-weight: 400;
   }
 
+  a,
+  p {
+    text-box: trim-both cap alphabetic;
+  }
+
   h1 {
     font-family: var(--font-heading);
     font-size: 3rem;
