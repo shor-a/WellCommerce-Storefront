@@ -1,4 +1,4 @@
-import { CircleUserRound } from "lucide-react"
+import NewsLetter from "./NewsLetter"
 
 import { Separator } from "@/components/ui/separator"
 
@@ -18,7 +18,10 @@ import {
 function Footer() {
   return (
     <>
-      <footer className="footer bg-secondary py-10">
+      <div className="flex justify-center">
+        <NewsLetter className="relative top-22" />
+      </div>
+      <footer className="footer bg-secondary pt-35 pb-10">
         <div className="container mx-auto px-10">
           <div className="flex w-full flex-row items-start gap-30">
             <div className="basis-[20%]">
