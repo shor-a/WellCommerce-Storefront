@@ -1,3 +1,4 @@
+import DressStyle from "@/components/section/DressStyle"
 import Footer from "@/components/section/Footer"
 import Hero from "@/components/section/Hero"
 import Navbar from "@/components/section/Navbar"
@@ -7,7 +8,7 @@ const HomePage = () => {
     <>
       <Navbar />
       <Hero />
-
+      <DressStyle />
       <Footer />
     </>
   )
