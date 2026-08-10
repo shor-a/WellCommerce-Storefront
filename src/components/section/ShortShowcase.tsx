@@ -23,16 +23,16 @@ const ShortShowcase = ({ title, product, className }: ShowcaseProps) => {
           <div className="flex w-full flex-row justify-between gap-5 pt-10 pb-5">
             {product.map((p) => (
               <div className="basis-3/12">
-                <Card className="border-none p-0" key={p.itemId}>
-                  <CardContent className="flex flex-col gap-3 pt-2 pb-5">
+                <Card className="pt-3 sm:min-h-58 lg:min-h-90" key={p.itemId}>
+                  <CardContent className="flex flex-col gap-3 pt-2">
                     <div className="flex justify-center bg-secondary">
                       <img
-                        className="sm:h-25 sm:w-30 lg:h-60 lg:w-70"
+                        className="sm:h-30 sm:w-40 lg:h-60 lg:w-70"
                         src={p.itemImg}
                         alt={`product-${p.itemId}`}
                       />
                     </div>
-                    <p className="text-md">{p.itemName}</p>
+                    <p className="text-md font-bold">{p.itemName}</p>
 
                     {<Rating starValue={p.itemRating} />}
                     {
