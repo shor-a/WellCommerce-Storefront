@@ -18,10 +18,10 @@ import {
 function Footer() {
   return (
     <>
-      <div className="flex justify-center">
-        <NewsLetter className="relative top-22" />
+      <div className="-mt-10 flex justify-center">
+        <NewsLetter className="relative top-23" />
       </div>
-      <footer className="footer bg-secondary pt-35 pb-10">
+      <footer className="footer bg-secondary pt-30 pb-10">
         <div className="container mx-auto px-10">
           <div className="flex w-full flex-row items-start gap-30">
             <div className="basis-[20%]">
