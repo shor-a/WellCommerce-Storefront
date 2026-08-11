@@ -6,10 +6,15 @@ interface testimony {
 
 export const reviews: testimony[] = [
   {
-    name: "Sarah M.",
+    name: "Jonathan",
     review:
-      "\"I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.\"",
+      '"I really loved the vibes and overall services provided, top quality brands. Many hugs and love from me for this web service."',
     blurred: true,
+  },
+  {
+    name: "Priscillia",
+    review:
+      '"Never before I have seen brands this good and have worldwide collections, really liked and really loved the overall elegantness of the website."',
   },
   {
     name: "Sarah M.",
