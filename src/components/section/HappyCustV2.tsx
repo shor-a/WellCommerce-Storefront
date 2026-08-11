@@ -5,7 +5,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import reviews from "@/constants/testimonyConst"
 import Rating from "../atomic/Rating"
 
-const HappyCustomers = (): React.ReactNode => {
+//This is a customer component I made - for learning purpose only
+
+const HappyCustV2 = () => {
   const [activeReview, setActiveReview] = useState(2)
 
   const showPreviousReview = () => {
@@ -100,4 +102,4 @@ const HappyCustomers = (): React.ReactNode => {
   )
 }
 
-export default HappyCustomers
+export default HappyCustV2

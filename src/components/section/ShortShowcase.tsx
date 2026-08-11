@@ -1,4 +1,4 @@
-import type { product } from "@/constants/product"
+import type { product } from "@/constants/productConst"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
