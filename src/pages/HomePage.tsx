@@ -1,9 +1,10 @@
 import DressStyle from "@/components/section/DressStyle"
 import Footer from "@/components/section/Footer"
+import HappyCustomers from "@/components/section/HappyCustomers"
 import Hero from "@/components/section/Hero"
 import Navbar from "@/components/section/Navbar"
 import ShortShowcase from "@/components/section/ShortShowcase"
-import { arrivals } from "@/config/constants/productConst"
+import { arrivals } from "@/constants/productConst"
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
         className="py-0"
       />
       <DressStyle />
+      <HappyCustomers />
       <Footer />
     </>
   )

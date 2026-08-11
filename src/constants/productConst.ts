@@ -6,7 +6,15 @@ import product5 from "@/assets/images/clothes/image5.webp"
 import product6 from "@/assets/images/clothes/image6.webp"
 import product7 from "@/assets/images/clothes/image7.webp"
 import product8 from "@/assets/images/clothes/image8.webp"
-import type { product } from "@/types/product"
+
+export interface product {
+  itemId: string
+  itemName: string
+  itemRating: number
+  itemPrice: number
+  discount: number
+  itemImg: string
+}
 
 export const arrivals: product[] = [
   {

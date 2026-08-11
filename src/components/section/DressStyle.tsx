@@ -51,7 +51,7 @@ const DressStyle = () => {
   )
 
   return (
-    <section className="dresss bg-background pt-20">
+    <section className="dresss bg-background pt-5">
       <div className="container mx-auto flex justify-center gap-10 px-10">
         <div
           className="w-full max-w-[1100px] overflow-hidden rounded-[40px] bg-[#efefef] pt-[5.68%] pb-[6.14%]"
