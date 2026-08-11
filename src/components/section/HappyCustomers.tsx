@@ -1,8 +1,9 @@
-import { ArrowLeft, ArrowRight, Check, Star } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import reviews from "@/constants/testimonyConst"
+import Rating from "../atomic/Rating"
 
 const HappyCustomers = (): React.ReactNode => {
   const [activeReview, setActiveReview] = useState(2)
@@ -70,19 +71,8 @@ const HappyCustomers = (): React.ReactNode => {
                 removeBlur() && review.blurred ? "blur-[2px]" : ""
               }`}
             >
-              <CardContent className="flex flex-col items-start gap-[15px] px-8 py-3">
-                <div
-                  className="inline-flex items-start gap-[6.49px]"
-                  aria-label="5 out of 5 stars"
-                >
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <Star
-                      key={starIndex}
-                      aria-hidden="true"
-                      className="h-[21px] w-[21px] fill-[#FFC633] text-[#FFC633]"
-                    />
-                  ))}
-                </div>
+              <CardContent className="flex flex-col items-start gap-[10px] px-8 py-3">
+                <Rating starValue={5} className="size-5" />
                 <div className="flex w-full flex-col items-start gap-3">
                   <div className="inline-flex items-center gap-1">
                     <h3 className="text-xl leading-[22px] font-bold tracking-[0] text-black">
