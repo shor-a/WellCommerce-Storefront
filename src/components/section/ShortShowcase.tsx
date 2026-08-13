@@ -1,4 +1,4 @@
-import type { product } from "@/constants/productConst"
+import type { Product } from "@/constants/productConst"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -11,7 +11,7 @@ import DiscPrice from "../atomic/DiscPrice"
 interface ShowcaseProps {
   className?: string
   title: string
-  product: product[]
+  product: Product[]
 }
 
 const ShortShowcase = ({ title, product, className }: ShowcaseProps) => {

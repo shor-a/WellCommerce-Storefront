@@ -7,7 +7,7 @@ import product6 from "@/assets/images/clothes/image6.webp"
 import product7 from "@/assets/images/clothes/image7.webp"
 import product8 from "@/assets/images/clothes/image8.webp"
 
-export interface product {
+export interface Product {
   itemId: string
   itemName: string
   itemRating: number
@@ -16,7 +16,7 @@ export interface product {
   itemImg: string
 }
 
-export const arrivals: product[] = [
+export const arrivals: Product[] = [
   {
     itemId: "1",
     itemName: "T-shirt with Tape Details",
