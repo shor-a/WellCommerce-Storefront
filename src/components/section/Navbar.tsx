@@ -16,76 +16,93 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 
-import { ShoppingCart, CircleUserRound, SearchIcon } from "lucide-react"
+import { ShoppingCart, CircleUserRound, Search, AlignLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-const Navbar = () => {
-  return (
-    <>
-      <OfferNavbar />
-      <div className="nav border bg-background py-5">
-        <div className="container mx-auto flex items-center justify-center gap-10 px-10">
-          <div className="flex basis-5/12 items-center justify-between gap-10">
-            <div className="flex basis-1/4">
-              <h2>WellCommerce</h2>
-            </div>
-            <div className="flex basis-3/4">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Shop</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <NavigationMenuLink>T-Shirt</NavigationMenuLink>
-                      <NavigationMenuLink>Pants</NavigationMenuLink>
-                      <NavigationMenuLink>Shorts</NavigationMenuLink>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      On Sale
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      New Arrivals
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Brands
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
-          </div>
+const Navbar = () => (
+  <>
+    <OfferNavbar />
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+      <div className="container mx-auto flex items-center gap-6 px-4 py-4 sm:px-6 lg:gap-10 lg:px-10">
+        {/* Mobile: hamburger */}
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Open menu"
+          className="lg:hidden"
+        >
+          <AlignLeft strokeWidth={2} />
+        </Button>
 
-          <div className="flex basis-7/12 items-center justify-between gap-10">
-            <div className="flex basis-5/6 gap-3">
-              <InputGroup className="h-10 w-full">
-                <InputGroupInput
-                  id="inline-start-input"
-                  placeholder="Search for products..."
-                />
-                <InputGroupAddon align="inline-start">
-                  <SearchIcon className="text-muted-foreground" />
-                </InputGroupAddon>
-              </InputGroup>
-            </div>
-            <div className="flex basis-1/6 justify-start gap-3">
-              <ShoppingCart className="size-5" strokeWidth={2.5} />
-              <CircleUserRound className="size-5" strokeWidth={2.5} />
-            </div>
-          </div>
+        {/* Brand */}
+        <span className="font-heading text-xl font-bold tracking-tight lg:text-2xl">
+          WELLCOMMERCE
+        </span>
+
+        {/* Desktop nav links */}
+        <div className="hidden lg:flex lg:flex-1">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Shop</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>T-Shirts</NavigationMenuLink>
+                  <NavigationMenuLink>Pants</NavigationMenuLink>
+                  <NavigationMenuLink>Shorts</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  On Sale
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  New Arrivals
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Brands
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* Search bar — grows to fill remaining space */}
+        <div className="hidden flex-1 lg:flex">
+          <InputGroup className="h-10 w-full">
+            <InputGroupAddon align="inline-start">
+              <Search className="size-4 text-muted-foreground" />
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search for products..."
+              aria-label="Search for products"
+            />
+          </InputGroup>
+        </div>
+
+        {/* Action icons */}
+        <div className="ml-auto flex items-center gap-3 lg:ml-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Search"
+            className="lg:hidden"
+          >
+            <Search strokeWidth={2} />
+          </Button>
+          <Button variant="ghost" size="icon" aria-label="Shopping cart">
+            <ShoppingCart strokeWidth={2} />
+          </Button>
+          <Button variant="ghost" size="icon" aria-label="Account">
+            <CircleUserRound strokeWidth={2} />
+          </Button>
         </div>
       </div>
-    </>
-  )
-}
+    </header>
+  </>
+)
 
 export default Navbar
