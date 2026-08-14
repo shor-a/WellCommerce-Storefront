@@ -21,43 +21,19 @@ export const ProductSection = () => {
   return (
     <section aria-label="Product detail" className="w-full bg-background">
       <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
-        {/* Three-tier layout: mobile stacks, desktop side-by-side */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
           {/* ── Gallery block ── */}
           <div className="flex flex-col gap-3 lg:shrink-0 lg:basis-6/12">
-            {/* Mobile: main image on top */}
-            <div className="aspect-4/5 w-full overflow-hidden rounded-2xl bg-secondary md:hidden">
-              <img
-                src={product.images[activeImageIndex]}
-                alt={product.itemName}
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
-
-            {/* Mobile: horizontal thumbnail strip */}
-            <div className="flex gap-3 overflow-x-auto pb-1 md:hidden">
-              {product.images.map((img, i) => (
-                <div key={i} className="w-24 shrink-0">
-                  <ProductImageThumb
-                    src={img}
-                    alt={`${product.itemName} view ${i + 1}`}
-                    isActive={i === activeImageIndex}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Tablet+: vertical thumbs + main image side by side */}
-            <div className="hidden md:flex md:gap-3">
-              {/* Vertical thumbnail column */}
-              <div className="flex flex-col gap-3 md:w-24 lg:w-28">
+            <div className="flex flex-col-reverse gap-3 md:flex-row">
+              <div className="flex flex-row gap-3 overflow-x-auto pb-1 md:w-24 md:flex-col md:overflow-x-visible md:pb-0 lg:w-28">
                 {product.images.map((img, i) => (
-                  <ProductImageThumb
-                    key={i}
-                    src={img}
-                    alt={`${product.itemName} view ${i + 1}`}
-                    isActive={i === activeImageIndex}
-                  />
+                  <div key={i} className="w-24 shrink-0 md:w-auto">
+                    <ProductImageThumb
+                      src={img}
+                      alt={`${product.itemName} view ${i + 1}`}
+                      isActive={i === activeImageIndex}
+                    />
+                  </div>
                 ))}
               </div>
 

@@ -1,3 +1,4 @@
+// import Footer from "@/components/section/Footer"
 import Navbar from "@/components/section/Navbar"
 import NavigationText from "@/components/section/NavigationText"
 import ProductSection from "@/components/section/ProductSection"
@@ -7,6 +8,7 @@ const ProductDetailPage = () => (
     <Navbar />
     <NavigationText />
     <ProductSection />
+    {/* <Footer /> */}
   </div>
 )
 
