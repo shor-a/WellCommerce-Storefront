@@ -1,15 +1,19 @@
 import { cn } from "@/lib/utils"
 
 interface ProductImageThumbProps {
+  index: number
   src: string
   alt: string
   isActive: boolean
+  changeActiveImg: (selectedImg: number) => void
 }
 
 export const ProductImageThumb = ({
+  index,
   src,
   alt,
   isActive,
+  changeActiveImg,
 }: ProductImageThumbProps) => (
   <button
     type="button"
@@ -19,6 +23,7 @@ export const ProductImageThumb = ({
       "aspect-square w-full overflow-hidden rounded-xl bg-secondary transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
       isActive ? "border-2 border-foreground" : "border-2 border-transparent"
     )}
+    onClick={() => changeActiveImg(index)}
   >
     <img
       src={src}

@@ -10,7 +10,16 @@ export interface ProductColor {
   label: string
 }
 
-export type ProductSize = "Small" | "Medium" | "Large" | "X-Large"
+export const ProductSize = {
+  SMALL: "Small",
+  MEDIUM: "Medium",
+  LARGE: "Large",
+  X_LARGE: "X-Large",
+} as const
+
+export type ProductSize = (typeof ProductSize)[keyof typeof ProductSize]
+
+// export type ProductSize = "Small" | "Medium" | "Large" | "X-Large"
 
 export interface ProductDetail extends Product {
   ratingCount: number
@@ -45,6 +54,11 @@ export const oneLifeTshirt: ProductDetail = {
     { colorId: "teal", hex: "#314F4A", label: "Teal" },
     { colorId: "navy", hex: "#31344F", label: "Navy" },
   ],
-  sizes: ["Small", "Medium", "Large", "X-Large"],
+  sizes: [
+    ProductSize.SMALL,
+    ProductSize.MEDIUM,
+    ProductSize.LARGE,
+    ProductSize.X_LARGE,
+  ],
   images: [pdImage1, pdImage2, pdImage6],
 }

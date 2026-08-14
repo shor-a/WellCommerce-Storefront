@@ -1,4 +1,4 @@
-import { oneLifeTshirt } from "@/constants/productDetailConst"
+import { oneLifeTshirt, ProductSize } from "@/constants/productDetailConst"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -7,6 +7,7 @@ import { ColorSwatch } from "@/components/atomic/ColorSwatch"
 import { SizePill } from "@/components/atomic/SizePill"
 import { QuantityStepper } from "@/components/atomic/QuantityStepper"
 import { ProductImageThumb } from "@/components/atomic/ProductImageThumb"
+import { useState } from "react"
 
 export const ProductSection = () => {
   const product = oneLifeTshirt
@@ -14,33 +15,45 @@ export const ProductSection = () => {
     product.itemPrice - (product.itemPrice * product.discount) / 100
   )
   const selectedColor = "olive"
-  const selectedSize = "Large"
-  const activeImageIndex = 0
+  const [selectedSize, setSize] = useState<ProductSize>(ProductSize.MEDIUM)
+  const [activeImgIndex, setActiveImg] = useState(0)
   const quantity = 1
+
+  const changeSize = (selectedSize: ProductSize): void => {
+    setSize(selectedSize)
+    alert(selectedSize)
+  }
+
+  const changeActiveImg = (selectedImg: number): void => {
+    setActiveImg(selectedImg)
+  }
 
   return (
     <section aria-label="Product detail" className="w-full bg-background">
-      <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
+      <div className="container mx-auto px-4 py-3 sm:px-6 lg:px-10 lg:py-5">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
           {/* ── Gallery block ── */}
-          <div className="flex flex-col gap-3 lg:shrink-0 lg:basis-6/12">
+          <div className="flex flex-col gap-3 lg:shrink-0 lg:basis-5/12">
             <div className="flex flex-col-reverse gap-3 md:flex-row">
+              {/* Thumbnail strip */}
               <div className="flex flex-row gap-3 overflow-x-auto pb-1 md:w-24 md:flex-col md:overflow-x-visible md:pb-0 lg:w-28">
                 {product.images.map((img, i) => (
                   <div key={i} className="w-24 shrink-0 md:w-auto">
                     <ProductImageThumb
+                      index={i}
                       src={img}
                       alt={`${product.itemName} view ${i + 1}`}
-                      isActive={i === activeImageIndex}
+                      isActive={i === activeImgIndex}
+                      changeActiveImg={changeActiveImg}
                     />
                   </div>
                 ))}
               </div>
 
               {/* Main image */}
-              <div className="aspect-4/5 flex-1 overflow-hidden rounded-2xl bg-secondary">
+              <div className="aspect-4/5 w-full overflow-hidden rounded-2xl bg-secondary md:flex-1">
                 <img
-                  src={product.images[activeImageIndex]}
+                  src={product.images[activeImgIndex]}
                   alt={product.itemName}
                   className="h-full w-full object-cover object-top"
                 />
@@ -115,6 +128,7 @@ export const ProductSection = () => {
                     key={size}
                     label={size}
                     isActive={selectedSize === size}
+                    changeSize={changeSize}
                   />
                 ))}
               </div>
