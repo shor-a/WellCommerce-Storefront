@@ -19,13 +19,29 @@ export const CartItemRow = ({ cartItem }: CartItemRowProps) => {
         )}
       </div>
 
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium text-foreground">
-          {cartItem.itemName}
-        </p>
-        <p className="mt-0.5 text-xs text-muted-foreground">
-          Qty: {cartItem.itemQty}
-        </p>
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
+        <div className="flex-1">
+          <p className="text-sm font-medium text-foreground">
+            {cartItem.itemName}
+          </p>
+        </div>
+        <div className="flex flex-row">
+          <div className="basis-2/6">
+            <p className="text-xs font-medium text-muted-foreground">
+              Qty: {cartItem.itemQty}
+            </p>
+          </div>
+          <div className="basis-2/6">
+            <p className="text-xs font-medium text-muted-foreground">
+              {cartItem.itemColor}
+            </p>
+          </div>
+          <div className="basis-2/6">
+            <p className="text-xs font-medium text-muted-foreground">
+              {cartItem.itemSize}
+            </p>
+          </div>
+        </div>
       </div>
 
       <p className="shrink-0 text-sm font-bold text-foreground">

@@ -11,9 +11,9 @@ export interface ProductColorItem {
 }
 
 export const ProductColor = {
-  OLIVE: { colorId: "olive", hex: "#4F4631", label: "Olive" },
-  TEAL: { colorId: "teal", hex: "#314F4A", label: "Teal" },
-  NAVY: { colorId: "navy", hex: "#31344F", label: "Navy" },
+  OLIVE: { colorId: "Olive", hex: "#4F4631", label: "Olive" },
+  TEAL: { colorId: "Teal", hex: "#314F4A", label: "Teal" },
+  NAVY: { colorId: "Navy", hex: "#31344F", label: "Navy" },
 } as const satisfies Record<string, ProductColorItem>
 
 export type ProductColor = (typeof ProductColor)[keyof typeof ProductColor]
