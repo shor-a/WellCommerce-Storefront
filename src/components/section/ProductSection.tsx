@@ -1,4 +1,8 @@
-import { oneLifeTshirt, ProductSize } from "@/constants/productDetailConst"
+import {
+  oneLifeTshirt,
+  ProductColor,
+  ProductSize,
+} from "@/constants/productDetailConst"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -14,18 +18,16 @@ export const ProductSection = () => {
   const discountedPrice = Math.round(
     product.itemPrice - (product.itemPrice * product.discount) / 100
   )
-  const selectedColor = "olive"
+
+  const [selectedColor, setColor] = useState<string>(ProductColor.OLIVE.colorId)
   const [selectedSize, setSize] = useState<ProductSize>(ProductSize.MEDIUM)
   const [activeImgIndex, setActiveImg] = useState(0)
-  const quantity = 1
+  const [quantity, setQty] = useState(1)
 
-  const changeSize = (selectedSize: ProductSize): void => {
-    setSize(selectedSize)
-    alert(selectedSize)
-  }
-
-  const changeActiveImg = (selectedImg: number): void => {
-    setActiveImg(selectedImg)
+  const changeQty = (increment: boolean): void => {
+    return void (increment
+      ? setQty((qty) => (qty < 10 ? qty + 1 : qty))
+      : setQty((qty) => (qty > 1 ? qty - 1 : qty)))
   }
 
   return (
@@ -44,7 +46,7 @@ export const ProductSection = () => {
                       src={img}
                       alt={`${product.itemName} view ${i + 1}`}
                       isActive={i === activeImgIndex}
-                      changeActiveImg={changeActiveImg}
+                      setActiveImg={setActiveImg}
                     />
                   </div>
                 ))}
@@ -108,10 +110,12 @@ export const ProductSection = () => {
               <div className="flex gap-3">
                 {product.colors.map((color) => (
                   <ColorSwatch
+                    colorId={color.colorId}
                     key={color.colorId}
                     hex={color.hex}
                     label={color.label}
                     isActive={selectedColor === color.colorId}
+                    setColor={setColor}
                   />
                 ))}
               </div>
@@ -128,7 +132,7 @@ export const ProductSection = () => {
                     key={size}
                     label={size}
                     isActive={selectedSize === size}
-                    changeSize={changeSize}
+                    setSize={setSize}
                   />
                 ))}
               </div>
@@ -138,7 +142,7 @@ export const ProductSection = () => {
 
             {/* CTA row — quantity stepper + Add to Cart */}
             <div className="flex gap-3">
-              <QuantityStepper quantity={quantity} />
+              <QuantityStepper quantity={quantity} changeQty={changeQty} />
               <Button
                 variant="default"
                 size="xl"

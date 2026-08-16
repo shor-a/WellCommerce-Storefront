@@ -2,12 +2,20 @@ import { cn } from "@/lib/utils"
 import { Check } from "lucide-react"
 
 interface ColorSwatchProps {
+  colorId: string
   hex: string
   label: string
   isActive: boolean
+  setColor: (colorId: string) => void
 }
 
-export const ColorSwatch = ({ hex, label, isActive }: ColorSwatchProps) => (
+export const ColorSwatch = ({
+  colorId,
+  hex,
+  label,
+  isActive,
+  setColor,
+}: ColorSwatchProps) => (
   <button
     type="button"
     aria-label={`Select color ${label}`}
@@ -17,6 +25,7 @@ export const ColorSwatch = ({ hex, label, isActive }: ColorSwatchProps) => (
       isActive ? "border-foreground" : "border-transparent"
     )}
     style={{ backgroundColor: hex }}
+    onClick={() => setColor(colorId)}
   >
     {isActive && <Check className="size-4 text-white" strokeWidth={2.5} />}
   </button>

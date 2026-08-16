@@ -4,12 +4,21 @@ import pdImage1 from "@/assets/images/productdetail/image1.webp"
 import pdImage2 from "@/assets/images/productdetail/image2.webp"
 import pdImage6 from "@/assets/images/productdetail/image6.webp"
 
-export interface ProductColor {
+export interface ProductColorItem {
   colorId: string
   hex: string
   label: string
 }
 
+export const ProductColor = {
+  OLIVE: { colorId: "olive", hex: "#4F4631", label: "Olive" },
+  TEAL: { colorId: "teal", hex: "#314F4A", label: "Teal" },
+  NAVY: { colorId: "navy", hex: "#31344F", label: "Navy" },
+} as const satisfies Record<string, ProductColorItem>
+
+export type ProductColor = (typeof ProductColor)[keyof typeof ProductColor]
+
+// export type ProductSize = "Small" | "Medium" | "Large" | "X-Large"
 export const ProductSize = {
   SMALL: "Small",
   MEDIUM: "Medium",
@@ -18,8 +27,6 @@ export const ProductSize = {
 } as const
 
 export type ProductSize = (typeof ProductSize)[keyof typeof ProductSize]
-
-// export type ProductSize = "Small" | "Medium" | "Large" | "X-Large"
 
 export interface ProductDetail extends Product {
   ratingCount: number
@@ -49,11 +56,7 @@ export const oneLifeTshirt: ProductDetail = {
   ratingCount: 451,
   description:
     "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
-  colors: [
-    { colorId: "olive", hex: "#4F4631", label: "Olive" },
-    { colorId: "teal", hex: "#314F4A", label: "Teal" },
-    { colorId: "navy", hex: "#31344F", label: "Navy" },
-  ],
+  colors: [ProductColor.OLIVE, ProductColor.TEAL, ProductColor.NAVY],
   sizes: [
     ProductSize.SMALL,
     ProductSize.MEDIUM,

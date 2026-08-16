@@ -5,7 +5,7 @@ interface ProductImageThumbProps {
   src: string
   alt: string
   isActive: boolean
-  changeActiveImg: (selectedImg: number) => void
+  setActiveImg: (selectedImg: number) => void
 }
 
 export const ProductImageThumb = ({
@@ -13,7 +13,7 @@ export const ProductImageThumb = ({
   src,
   alt,
   isActive,
-  changeActiveImg,
+  setActiveImg,
 }: ProductImageThumbProps) => (
   <button
     type="button"
@@ -23,7 +23,7 @@ export const ProductImageThumb = ({
       "aspect-square w-full overflow-hidden rounded-xl bg-secondary transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
       isActive ? "border-2 border-foreground" : "border-2 border-transparent"
     )}
-    onClick={() => changeActiveImg(index)}
+    onClick={() => setActiveImg(index)}
   >
     <img
       src={src}

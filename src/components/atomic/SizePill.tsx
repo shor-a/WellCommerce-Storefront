@@ -6,14 +6,14 @@ interface SizePillProps {
   label: ProductSize
   isActive: boolean
   className?: string
-  changeSize: (size: ProductSize) => void
+  setSize: (size: ProductSize) => void
 }
 
 export const SizePill = ({
   label,
   isActive,
   className,
-  changeSize,
+  setSize,
 }: SizePillProps) => (
   <Button
     type="button"
@@ -23,7 +23,7 @@ export const SizePill = ({
       "h-auto rounded-full px-5 py-3 text-base font-normal",
       className
     )}
-    onClick={() => changeSize(label)}
+    onClick={() => setSize(label)}
   >
     {label}
   </Button>

@@ -3,9 +3,13 @@ import { Minus, Plus } from "lucide-react"
 
 interface QuantityStepperProps {
   quantity: number
+  changeQty: (incement: boolean) => void
 }
 
-export const QuantityStepper = ({ quantity }: QuantityStepperProps) => (
+export const QuantityStepper = ({
+  quantity,
+  changeQty,
+}: QuantityStepperProps) => (
   <div className="flex h-auto items-center gap-4 rounded-full bg-secondary px-5 py-3">
     <Button
       type="button"
@@ -13,6 +17,7 @@ export const QuantityStepper = ({ quantity }: QuantityStepperProps) => (
       variant="ghost"
       size="icon-sm"
       className="rounded-full"
+      onClick={() => changeQty(false)}
     >
       <Minus strokeWidth={2.5} />
     </Button>
@@ -25,6 +30,7 @@ export const QuantityStepper = ({ quantity }: QuantityStepperProps) => (
       variant="ghost"
       size="icon-sm"
       className="rounded-full"
+      onClick={() => changeQty(true)}
     >
       <Plus strokeWidth={2.5} />
     </Button>
