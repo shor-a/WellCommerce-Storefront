@@ -11,12 +11,21 @@ import { ColorSwatch } from "@/components/atomic/ColorSwatch"
 import { SizePill } from "@/components/atomic/SizePill"
 import { QuantityStepper } from "@/components/atomic/QuantityStepper"
 import { ProductImageThumb } from "@/components/atomic/ProductImageThumb"
+
+import { useCartStore } from "@/hooks/cartStores"
+
 import { useState } from "react"
 
 export const ProductSection = () => {
-  const product = oneLifeTshirt
+  const { cart, addToCart, removeFromCart, countItems } = useCartStore()
+
+  console.log(JSON.stringify(cart, null, 2))
+
+  const productDetail = oneLifeTshirt
+
   const discountedPrice = Math.round(
-    product.itemPrice - (product.itemPrice * product.discount) / 100
+    productDetail.itemPrice -
+      (productDetail.itemPrice * productDetail.discount) / 100
   )
 
   const [selectedColor, setColor] = useState<string>(ProductColor.OLIVE.colorId)
@@ -39,12 +48,12 @@ export const ProductSection = () => {
             <div className="flex flex-col-reverse gap-3 md:flex-row">
               {/* Thumbnail strip */}
               <div className="flex flex-row gap-3 overflow-x-auto pb-1 md:w-24 md:flex-col md:overflow-x-visible md:pb-0 lg:w-28">
-                {product.images.map((img, i) => (
+                {productDetail.images.map((img, i) => (
                   <div key={i} className="w-24 shrink-0 md:w-auto">
                     <ProductImageThumb
                       index={i}
                       src={img}
-                      alt={`${product.itemName} view ${i + 1}`}
+                      alt={`${productDetail.itemName} view ${i + 1}`}
                       isActive={i === activeImgIndex}
                       setActiveImg={setActiveImg}
                     />
@@ -55,8 +64,8 @@ export const ProductSection = () => {
               {/* Main image */}
               <div className="aspect-4/5 w-full overflow-hidden rounded-2xl bg-secondary md:flex-1">
                 <img
-                  src={product.images[activeImgIndex]}
-                  alt={product.itemName}
+                  src={productDetail.images[activeImgIndex]}
+                  alt={productDetail.itemName}
                   className="h-full w-full object-cover object-top"
                 />
               </div>
@@ -67,14 +76,14 @@ export const ProductSection = () => {
           <div className="flex flex-col gap-4 lg:basis-6/12">
             {/* Title */}
             <h1 className="text-3xl leading-tight lg:text-4xl">
-              {product.itemName}
+              {productDetail.itemName}
             </h1>
 
             {/* Rating */}
             <div className="flex items-center gap-2">
-              <Rating starValue={product.itemRating} className="size-5" />
+              <Rating starValue={productDetail.itemRating} className="size-5" />
               <span className="text-sm text-foreground">
-                {product.itemRating}/
+                {productDetail.itemRating}/
                 <span className="text-muted-foreground">5</span>
               </span>
             </div>
@@ -85,19 +94,19 @@ export const ProductSection = () => {
                 ${discountedPrice}
               </span>
               <span className="font-heading text-3xl font-bold text-foreground/40 line-through">
-                ${product.itemPrice}
+                ${productDetail.itemPrice}
               </span>
               <Badge
                 variant="destructive"
                 className="h-auto rounded-full px-3 py-1 text-sm"
               >
-                -{product.discount}%
+                -{productDetail.discount}%
               </Badge>
             </div>
 
             {/* Description */}
             <p className="text-sm leading-relaxed text-muted-foreground">
-              {product.description}
+              {productDetail.description}
             </p>
 
             <Separator />
@@ -108,7 +117,7 @@ export const ProductSection = () => {
                 Select Colors
               </span>
               <div className="flex gap-3">
-                {product.colors.map((color) => (
+                {productDetail.colors.map((color) => (
                   <ColorSwatch
                     colorId={color.colorId}
                     key={color.colorId}
@@ -127,7 +136,7 @@ export const ProductSection = () => {
             <div className="flex flex-col gap-3">
               <span className="text-sm text-muted-foreground">Choose Size</span>
               <div className="flex flex-wrap gap-3">
-                {product.sizes.map((size) => (
+                {productDetail.sizes.map((size) => (
                   <SizePill
                     key={size}
                     label={size}
@@ -148,6 +157,15 @@ export const ProductSection = () => {
                 size="xl"
                 className="flex-1 rounded-full text-base"
                 aria-label="Add to cart"
+                onClick={() => {
+                  addToCart(quantity, {
+                    itemId: productDetail.itemId,
+                    itemQty: quantity,
+                    itemColor: selectedColor,
+                    itemSize: selectedSize,
+                    finalPrice: discountedPrice,
+                  })
+                }}
               >
                 Add to Cart
               </Button>

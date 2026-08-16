@@ -29,7 +29,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
         }
       }
       return {
-        cart: [...state.cart, { ...cartItem, itemQty: cartItem.itemQty }],
+        cart: [...state.cart, { ...cartItem, itemQty: qty }],
       }
     }),
   removeFromCart: (qty, itemId) =>

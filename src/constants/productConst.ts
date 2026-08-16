@@ -16,7 +16,7 @@ export interface Product {
   itemImg: string
 }
 
-export const arrivals: Product[] = [
+export const productList: Product[] = [
   {
     itemId: 1,
     itemName: "T-shirt with Tape Details",

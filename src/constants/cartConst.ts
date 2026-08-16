@@ -1,8 +1,7 @@
-import type { Product } from "./productConst"
-
-export interface Cart extends Product {
+export interface Cart {
+  itemId: number
   itemQty: number
-  selectedColor: string
-  selectedSize: string
+  itemColor: string
+  itemSize: string
   finalPrice: number
 }
