@@ -13,7 +13,7 @@ export interface Product {
   itemRating: number
   itemPrice: number
   discount: number
-  itemImg: string
+  itemImg?: string
 }
 
 export const productList: Product[] = [

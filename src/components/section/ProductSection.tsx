@@ -159,8 +159,10 @@ export const ProductSection = () => {
                 aria-label="Add to cart"
                 onClick={() => {
                   addToCart(quantity, {
+                    itemName: productDetail.itemName,
                     itemId: productDetail.itemId,
                     itemQty: quantity,
+                    itemImg: productDetail.itemImg,
                     itemColor: selectedColor,
                     itemSize: selectedSize,
                     finalPrice: discountedPrice,
