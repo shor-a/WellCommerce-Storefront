@@ -37,7 +37,7 @@ export interface ProductDetail extends Product {
 }
 
 const defaultProduct: Product = {
-  itemId: "",
+  itemId: 0,
   itemName: "",
   itemRating: 0,
   itemPrice: 0,
@@ -47,7 +47,7 @@ const defaultProduct: Product = {
 
 export const oneLifeTshirt: ProductDetail = {
   ...defaultProduct,
-  itemId: "pd-1",
+  itemId: 6,
   itemName: "One Life Graphic T-shirt",
   itemRating: 4.5,
   itemPrice: 300,

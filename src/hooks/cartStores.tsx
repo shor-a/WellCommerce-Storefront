@@ -1,0 +1,49 @@
+import { create } from "zustand"
+
+import type { Cart } from "@/constants/cartConst"
+
+interface CartStore {
+  cart: Cart[]
+  addToCart: (qty: number, cartItem: Cart) => void
+  removeFromCart: (qty: number, itemId: number) => void
+  countItems: () => number
+}
+
+export const useCartStore = create<CartStore>((set, get) => ({
+  cart: [],
+  // addToCart just calls set((state)) and do nothing / returns void
+  // the return statements bellow is for callback function of set((state)) / set new value for state
+  addToCart: (qty, cartItem) =>
+    set((state) => {
+      const itemExist = state.cart.some(
+        (item) => item.itemId === cartItem.itemId
+      )
+
+      if (itemExist) {
+        return {
+          cart: state.cart.map((item) =>
+            item.itemId === cartItem.itemId
+              ? { ...item, itemQty: item.itemQty + qty }
+              : item
+          ),
+        }
+      }
+      return {
+        cart: [...state.cart, { ...cartItem, itemQty: cartItem.itemQty }],
+      }
+    }),
+  removeFromCart: (qty, itemId) =>
+    set((state) => {
+      return {
+        cart: state.cart.map((item) =>
+          item.itemId === itemId
+            ? {
+                ...item,
+                itemQty: item.itemQty - qty < 1 ? 1 : item.itemQty - qty,
+              }
+            : item
+        ),
+      }
+    }),
+  countItems: () => get().cart.reduce((sum, item) => sum + item.itemQty, 0),
+}))

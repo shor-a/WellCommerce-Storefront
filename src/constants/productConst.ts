@@ -8,7 +8,7 @@ import product7 from "@/assets/images/clothes/image7.webp"
 import product8 from "@/assets/images/clothes/image8.webp"
 
 export interface Product {
-  itemId: string
+  itemId: number
   itemName: string
   itemRating: number
   itemPrice: number
@@ -18,7 +18,7 @@ export interface Product {
 
 export const arrivals: Product[] = [
   {
-    itemId: "1",
+    itemId: 1,
     itemName: "T-shirt with Tape Details",
     itemPrice: 120,
     itemRating: 4.5,
@@ -26,7 +26,7 @@ export const arrivals: Product[] = [
     itemImg: product1,
   },
   {
-    itemId: "2",
+    itemId: 2,
     itemName: "Skinny Fit Jeans",
     itemPrice: 260,
     itemRating: 3.5,
@@ -34,7 +34,7 @@ export const arrivals: Product[] = [
     itemImg: product2,
   },
   {
-    itemId: "3",
+    itemId: 3,
     itemName: "Checkered Shirt",
     itemPrice: 180,
     itemRating: 4.5,
@@ -42,7 +42,7 @@ export const arrivals: Product[] = [
     itemImg: product3,
   },
   {
-    itemId: "4",
+    itemId: 4,
     itemName: "Sleeve Stripped T-shirt",
     itemPrice: 160,
     itemRating: 5.0,
@@ -50,7 +50,7 @@ export const arrivals: Product[] = [
     itemImg: product4,
   },
   {
-    itemId: "5",
+    itemId: 5,
     itemName: "Vertical Striped Shirt",
     itemPrice: 232,
     itemRating: 5.0,
@@ -58,7 +58,7 @@ export const arrivals: Product[] = [
     itemImg: product5,
   },
   {
-    itemId: "6",
+    itemId: 6,
     itemName: "Courage Graphic T-shirt",
     itemPrice: 145,
     itemRating: 4.0,
@@ -66,7 +66,7 @@ export const arrivals: Product[] = [
     itemImg: product6,
   },
   {
-    itemId: "7",
+    itemId: 7,
     itemName: "Loose Fit Bermuda Shorts",
     itemPrice: 80,
     itemRating: 3.0,
@@ -74,7 +74,7 @@ export const arrivals: Product[] = [
     itemImg: product7,
   },
   {
-    itemId: "8",
+    itemId: 8,
     itemName: "Faded Skinny Jeans",
     itemPrice: 210,
     itemRating: 4.5,
