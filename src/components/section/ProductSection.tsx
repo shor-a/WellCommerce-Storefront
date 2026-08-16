@@ -17,9 +17,7 @@ import { useCartStore } from "@/hooks/cartStores"
 import { useState } from "react"
 
 export const ProductSection = () => {
-  const { cart, addToCart, removeFromCart, countItems } = useCartStore()
-
-  console.log(JSON.stringify(cart, null, 2))
+  const { addToCart } = useCartStore()
 
   const productDetail = oneLifeTshirt
 
