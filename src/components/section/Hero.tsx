@@ -5,6 +5,8 @@ import vector2 from "@/assets/images/general/vector2.png"
 import vector3 from "@/assets/images/general/vector3.png"
 import vector4 from "@/assets/images/general/vector4.png"
 import vector5 from "@/assets/images/general/vector5.png"
+import { PageRoutes } from "@/config/routes"
+import { Link } from "react-router-dom"
 
 const Hero = () => {
   return (
@@ -24,7 +26,11 @@ const Hero = () => {
                 your sense of style.
               </p>
 
-              <Button className="mb-10" size="xl">
+              <Button
+                render={<Link to={PageRoutes.BROWSE} />}
+                className="mb-10"
+                size="xl"
+              >
                 Shop Now
               </Button>
 

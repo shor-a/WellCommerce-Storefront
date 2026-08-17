@@ -88,25 +88,48 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Shop</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    Browse Collections
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <NavigationMenuLink>T-Shirts</NavigationMenuLink>
-                    <NavigationMenuLink>Pants</NavigationMenuLink>
-                    <NavigationMenuLink>Shorts</NavigationMenuLink>
+                    <NavigationMenuLink
+                      render={<Link to={PageRoutes.BROWSE} />}
+                    >
+                      Fancy T-Shirts
+                    </NavigationMenuLink>
+                    <NavigationMenuLink
+                      render={<Link to={PageRoutes.BROWSE} />}
+                    >
+                      Sports Pants
+                    </NavigationMenuLink>
+                    <NavigationMenuLink
+                      render={<Link to={PageRoutes.BROWSE} />}
+                    >
+                      Unique Shorts
+                    </NavigationMenuLink>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    render={<Link to={PageRoutes.BROWSE} />}
+                    className={navigationMenuTriggerStyle()}
+                  >
                     On Sale
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    render={<Link to={PageRoutes.BROWSE} />}
+                    className={navigationMenuTriggerStyle()}
+                  >
                     New Arrivals
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    render={<Link to={PageRoutes.BROWSE} />}
+                    className={navigationMenuTriggerStyle()}
+                  >
                     Brands
                   </NavigationMenuLink>
                 </NavigationMenuItem>

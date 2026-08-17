@@ -64,7 +64,11 @@ const ShortShowcase = ({
           </div>
           {showAllBtn ? (
             <div className="flex w-full items-center justify-center pb-10">
-              <Button className="px-18 py-5" variant="outline">
+              <Button
+                render={<Link to={PageRoutes.BROWSE} />}
+                className="px-18 py-5"
+                variant="outline"
+              >
                 View All
               </Button>
             </div>
