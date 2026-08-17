@@ -2,14 +2,20 @@ import { PageRoutes } from "./config/routes"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import HomePage from "./pages/HomePage"
+import BrowseCategoryPage from "./pages/BrowseCategoryPage"
+import ShoppingCartPage from "./pages/ShoppingCartPage"
 import ProductDetailPage from "./pages/ProductDetailPage"
+import ScrollToTop from "./hooks/scrollToTop"
 
 export function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
-        <Route path={PageRoutes.HOME} element={<HomePage />}></Route>
-        <Route path={PageRoutes.SHOP} element={<ProductDetailPage />}></Route>
+        <Route path={PageRoutes.HOME} element={<HomePage />} />
+        <Route path={PageRoutes.BROWSE} element={<BrowseCategoryPage />} />
+        <Route path={PageRoutes.PRODUCT} element={<ProductDetailPage />} />
+        <Route path={PageRoutes.CART} element={<ShoppingCartPage />} />
       </Routes>
     </BrowserRouter>
   )

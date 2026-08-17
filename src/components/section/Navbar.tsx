@@ -36,6 +36,8 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { useCartStore } from "@/hooks/cartStores"
+import { Link } from "react-router-dom"
+import { PageRoutes } from "@/config/routes"
 
 const Navbar = () => {
   const cartItems = useCartStore((state) => state.cart)
@@ -74,9 +76,12 @@ const Navbar = () => {
           </Button>
 
           {/* Brand */}
-          <span className="font-heading text-xl font-bold tracking-tight lg:text-2xl">
-            WELLCOMMERCE
-          </span>
+          <Link
+            className="font-heading text-xl font-bold tracking-tight lg:text-2xl"
+            to={PageRoutes.HOME}
+          >
+            <span>WELLCOMMERCE</span>
+          </Link>
 
           {/* Desktop nav links */}
           <div className="hidden lg:flex lg:flex-1">

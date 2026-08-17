@@ -1,7 +1,6 @@
 export const PageRoutes = {
   HOME: "/",
-  SHOP: "/shop",
-  SALE: "sale",
-  ARRIVALS: "/arrivals",
-  BRANDS: "/brands",
+  BROWSE: "/browse-category",
+  PRODUCT: "/product-detail/:productid",
+  CART: "/shopping-cart",
 } as const
