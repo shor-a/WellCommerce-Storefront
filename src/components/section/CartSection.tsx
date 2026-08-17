@@ -13,26 +13,31 @@ export const CartSection = () => {
     0
   )
 
+  const deliveryFee = subtotal > 0 ? DELIVERY_FEE : 0
   const discountAmt = Math.round((subtotal * DISCOUNT_RATE) / 100)
-  const total = subtotal - discountAmt + DELIVERY_FEE
+  const total = subtotal - discountAmt + deliveryFee
 
   return (
     <section aria-label="Shopping cart" className="w-full bg-background">
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-10 lg:py-12">
+      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
         <h1 className="mb-6 text-3xl lg:text-4xl">Your cart</h1>
 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
           {/* ── Cart items list ── */}
           <div className="lg:basis-7/12">
             <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
-              {cartItems.map((item, index) => (
-                <div key={item.itemId}>
-                  <CartPageItemRow cartItem={item} />
-                  {index < cartItems.length - 1 && (
-                    <Separator className="mt-6" />
-                  )}
-                </div>
-              ))}
+              {cartItems.length > 0 ? (
+                cartItems.map((item, index) => (
+                  <div key={item.itemId}>
+                    <CartPageItemRow cartItem={item} />
+                    {index < cartItems.length - 1 && (
+                      <Separator className="mt-6" />
+                    )}
+                  </div>
+                ))
+              ) : (
+                <h2 className="text-2xl font-bold">No items in cart</h2>
+              )}
             </div>
           </div>
 
@@ -63,7 +68,7 @@ export const CartSection = () => {
                   <span className="text-xl text-muted-foreground">
                     Delivery Fee
                   </span>
-                  <span className="text-xl font-bold">${DELIVERY_FEE}</span>
+                  <span className="text-xl font-bold">${deliveryFee}</span>
                 </div>
 
                 <Separator />

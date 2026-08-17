@@ -211,9 +211,18 @@ const Navbar = () => {
 
                   {/* Items */}
                   <div className="flex flex-col gap-3 px-4 py-3">
-                    {cartItems.map((cartItem) => (
-                      <CartItemRow key={cartItem.itemId} cartItem={cartItem} />
-                    ))}
+                    {cartItems.length > 0 ? (
+                      cartItems.map((cartItem) => (
+                        <CartItemRow
+                          key={cartItem.itemId}
+                          cartItem={cartItem}
+                        />
+                      ))
+                    ) : (
+                      <span className="font-heading text-sm font-bold tracking-tight">
+                        No items in cart
+                      </span>
+                    )}
                   </div>
 
                   <Separator />
