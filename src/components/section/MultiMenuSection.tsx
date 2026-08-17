@@ -16,7 +16,7 @@ export const MultiMenuSection = () => (
         {/* Tabs bar */}
         <TabsList
           variant="line"
-          className="h-auto w-full rounded-none p-0 [&>*]:flex-1"
+          className="h-auto w-full rounded-none p-0 *:flex-1"
         >
           <TabsTrigger
             value="product-details"

@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import type { ProductSize } from "@/constants/productDetailConst"
 
 interface SizePillProps {
-  label: ProductSize
+  label: ProductSize | string
   isActive: boolean
   className?: string
-  setSize: (size: ProductSize) => void
+  setSize?: (size: string) => void
 }
 
 export const SizePill = ({
@@ -23,7 +23,7 @@ export const SizePill = ({
       "h-auto rounded-full px-5 py-3 text-base font-normal",
       className
     )}
-    onClick={() => setSize(label)}
+    onClick={() => setSize?.(label)}
   >
     {label}
   </Button>
