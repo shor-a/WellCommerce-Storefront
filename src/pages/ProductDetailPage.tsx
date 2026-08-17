@@ -1,8 +1,9 @@
 import Footer from "@/components/section/Footer"
+import MultiMenuSection from "@/components/section/MultiMenuSection"
 import Navbar from "@/components/section/Navbar"
 import NavigationText from "@/components/section/NavigationText"
 import ProductSection from "@/components/section/ProductSection"
-import ShortShowcase from "../components/section/ShortShowcase"
+import ShortShowcase from "@/components/section/ShortShowcase"
 import { productList } from "@/constants/productConst"
 
 const ProductDetailPage = () => (
@@ -10,6 +11,7 @@ const ProductDetailPage = () => (
     <Navbar />
     <NavigationText />
     <ProductSection />
+    <MultiMenuSection />
     <ShortShowcase
       title="You might also like"
       product={productList.slice(0, 4)}
