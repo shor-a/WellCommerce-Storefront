@@ -43,13 +43,17 @@ const Navbar = () => {
   const subTotal = useCartStore((state) => state.countSubTotal())
 
   const [cartOpen, setCartOpen] = useState(false)
+  // Utilize useRef so that closeTimer timer ID can survive re-render
+  // If use state will triggers re-render, while normal variable set null each render
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // clear the timeout set by closeCartDelayed and open cart panel
   const openCart = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
     setCartOpen(true)
   }
 
+  // set the timer ID for the next 150 ms perform panel close
   const closeCartDelayed = () => {
     closeTimer.current = setTimeout(() => setCartOpen(false), 150)
   }
@@ -130,6 +134,7 @@ const Navbar = () => {
             </Button>
 
             {/* Cart button with hover dropdown */}
+            {/* Open and onOpenChange is base-ui props to control popover behavior */}
             <Popover open={cartOpen} onOpenChange={setCartOpen}>
               {/* Hover zone wraps trigger so the pointer moving from button to panel doesn't close */}
               <div
@@ -156,6 +161,7 @@ const Navbar = () => {
                   </Badge>
                 </PopoverTrigger>
 
+                {/* Need mouse action trigger here too, so when mouse hover to PopOver content it won't close */}
                 <PopoverContent
                   side="bottom"
                   align="end"
