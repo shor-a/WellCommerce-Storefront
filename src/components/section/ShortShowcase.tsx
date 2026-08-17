@@ -11,10 +11,16 @@ import DiscPrice from "../atomic/DiscPrice"
 interface ShowcaseProps {
   className?: string
   title: string
+  showAllBtn?: boolean
   product: Product[]
 }
 
-const ShortShowcase = ({ title, product, className }: ShowcaseProps) => {
+const ShortShowcase = ({
+  title,
+  product,
+  showAllBtn = true,
+  className,
+}: ShowcaseProps) => {
   return (
     <>
       <section className={cn("showcase", className)}>
@@ -46,11 +52,16 @@ const ShortShowcase = ({ title, product, className }: ShowcaseProps) => {
               </div>
             ))}
           </div>
-          <div className="flex w-full items-center justify-center pb-10">
-            <Button className="px-18 py-5" variant="outline">
-              View All
-            </Button>
-          </div>
+          {showAllBtn ? (
+            <div className="flex w-full items-center justify-center pb-10">
+              <Button className="px-18 py-5" variant="outline">
+                View All
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <Separator />
         </div>
       </section>
