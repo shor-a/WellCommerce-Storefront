@@ -139,7 +139,7 @@ export const ProductSection = () => {
                     key={size}
                     label={size}
                     isActive={selectedSize === size}
-                    setSize={setSize}
+                    setSize={() => setSize(size)}
                   />
                 ))}
               </div>

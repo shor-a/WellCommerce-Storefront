@@ -1,20 +1,18 @@
-import {
-  defaultCartItems,
-  DELIVERY_FEE,
-  DISCOUNT_RATE,
-} from "@/constants/cartConst"
-import { CartItemRow } from "@/components/atomic/CartItemRow"
+import { CartPageItemRow } from "@/components/atomic/CartPageItemRow"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Tag, ArrowRight } from "lucide-react"
+import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/cartConst"
+import { useCartStore } from "@/hooks/cartStores"
 
 export const CartSection = () => {
-  const cartItems = defaultCartItems
+  const cartItems = useCartStore((state) => state.cart)
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.finalPrice * item.itemQty,
     0
   )
+
   const discountAmt = Math.round((subtotal * DISCOUNT_RATE) / 100)
   const total = subtotal - discountAmt + DELIVERY_FEE
 
@@ -26,10 +24,10 @@ export const CartSection = () => {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
           {/* ── Cart items list ── */}
           <div className="lg:basis-7/12">
-            <div className="flex flex-col gap-6 rounded-2xl border border-border/10 p-6">
+            <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
               {cartItems.map((item, index) => (
                 <div key={item.itemId}>
-                  <CartItemRow cartItem={item} />
+                  <CartPageItemRow cartItem={item} />
                   {index < cartItems.length - 1 && (
                     <Separator className="mt-6" />
                   )}
@@ -40,7 +38,7 @@ export const CartSection = () => {
 
           {/* ── Order Summary ── */}
           <div className="lg:basis-5/12">
-            <div className="flex flex-col gap-6 rounded-2xl border border-border/10 p-6">
+            <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
               <h2 className="text-2xl font-bold">Order Summary</h2>
 
               {/* Line items */}

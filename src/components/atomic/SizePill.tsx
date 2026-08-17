@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import type { ProductSize } from "@/constants/productDetailConst"
 
 interface SizePillProps {
-  label: ProductSize | string
+  label: ProductSize
   isActive: boolean
   className?: string
-  setSize?: (size: string) => void
+  setSize?: (size: ProductSize) => void
 }
 
 export const SizePill = ({

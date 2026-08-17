@@ -59,7 +59,6 @@ const Navbar = () => {
   const closeCartDelayed = () => {
     closeTimer.current = setTimeout(() => setCartOpen(false), 150)
   }
-
   return (
     <>
       <OfferNavbar />
@@ -240,6 +239,7 @@ const Navbar = () => {
                     </div>
 
                     <Button
+                      render={<Link to={PageRoutes.CART} />}
                       variant="default"
                       size="lg"
                       className="w-full gap-2"
