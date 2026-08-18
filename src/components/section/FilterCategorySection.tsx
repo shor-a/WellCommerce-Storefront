@@ -1,6 +1,15 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 import DiscPrice from "@/components/atomic/DiscPrice"
 import { Rating } from "@/components/atomic/Rating"
 import FilterSidebar from "@/components/section/FilterSidebar"
@@ -81,7 +90,7 @@ export const FilterCategorySection = () => {
                   aria-label={product.itemName}
                 >
                   {/* Product image */}
-                  <div className="aspect-4/5 w-full overflow-hidden rounded-2xl bg-secondary">
+                  <div className="aspect-5/5 w-full overflow-hidden rounded-2xl bg-secondary">
                     <img
                       src={product.itemImg}
                       alt={product.itemName}
@@ -105,30 +114,60 @@ export const FilterCategorySection = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex items-center justify-between border-t border-border pt-6">
-              <Button variant="outline" size="sm">
-                ← Previous
-              </Button>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, "...", 8, 9, 10].map((page, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={page === "..." ? "More pages" : `Page ${page}`}
-                    aria-current={page === currentPage ? "page" : undefined}
-                    className={`flex size-10 items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
-                      page === currentPage
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-              <Button variant="outline" size="sm">
-                Next →
-              </Button>
+            <div className="border-t border-border pt-6">
+              <Pagination className="justify-between">
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      href="#"
+                      className="rounded-[7px] border-border px-4 [&_span]:block"
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+                <PaginationContent>
+                  {[1, 2, 3].map((page) => (
+                    <PaginationItem key={page}>
+                      <PaginationLink
+                        href="#"
+                        isActive={page === currentPage}
+                        className={
+                          page === currentPage
+                            ? "rounded-[7px] border-transparent bg-secondary text-foreground hover:bg-secondary"
+                            : "rounded-[7px] border-transparent"
+                        }
+                      >
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                  {[8, 9, 10].map((page) => (
+                    <PaginationItem key={page}>
+                      <PaginationLink
+                        href="#"
+                        isActive={page === currentPage}
+                        className={
+                          page === currentPage
+                            ? "rounded-[7px] border-transparent bg-secondary text-foreground hover:bg-secondary"
+                            : "rounded-[7px] border-transparent"
+                        }
+                      >
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                </PaginationContent>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationNext
+                      href="#"
+                      className="rounded-[7px] border-border px-4 [&_span]:block"
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
             </div>
           </div>
         </div>
