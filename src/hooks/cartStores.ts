@@ -5,7 +5,7 @@ import { type Cart } from "@/constants/cartConst"
 interface CartStore {
   cart: Cart[]
   addToCart: (qty: number, cartItem: Cart) => void
-  removeFromCart: (qty: number, cartItemID: string) => void
+  removeFromCart: (qty: number, cartItemID: string, removeAll: boolean) => void
   countItems: () => number
   countSubTotal: () => number
 }
@@ -33,17 +33,23 @@ export const useCartStore = create<CartStore>((set, get) => ({
         cart: [...state.cart, { ...cartItem, itemQty: qty }],
       }
     }),
-  removeFromCart: (qty, cartItemID) =>
+  removeFromCart: (qty, cartItemID, removeAll = false) =>
     set((state) => {
-      return {
-        cart: state.cart.map((item) =>
-          item.cartItemID === cartItemID
-            ? {
-                ...item,
-                itemQty: item.itemQty - qty < 1 ? 1 : item.itemQty - qty,
-              }
-            : item
-        ),
+      if (removeAll) {
+        return {
+          cart: state.cart.filter((item) => item.cartItemID !== cartItemID),
+        }
+      } else {
+        return {
+          cart: state.cart.map((item) =>
+            item.cartItemID === cartItemID
+              ? {
+                  ...item,
+                  itemQty: item.itemQty - qty < 1 ? 1 : item.itemQty - qty,
+                }
+              : item
+          ),
+        }
       }
     }),
   countItems: () => get().cart.reduce((sum, item) => sum + item.itemQty, 0),
