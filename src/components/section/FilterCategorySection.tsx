@@ -1,5 +1,4 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import {
   Pagination,
@@ -67,13 +66,14 @@ export const FilterCategorySection = () => {
                 </span>
                 <span className="hidden sm:inline">
                   Sort by:{" "}
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1 font-medium text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-auto gap-1 px-2 py-1 font-medium text-foreground"
                   >
                     Most Popular
                     <ChevronDown className="size-4" strokeWidth={1.5} />
-                  </button>
+                  </Button>
                 </span>
               </div>
             </div>
