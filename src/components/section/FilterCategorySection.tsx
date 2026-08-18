@@ -1,15 +1,7 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 import DiscPrice from "@/components/atomic/DiscPrice"
+import ProductPagination from "@/components/atomic/ProductPagination"
 import { Rating } from "@/components/atomic/Rating"
 import FilterSidebar from "@/components/section/FilterSidebar"
 import { productList } from "@/constants/productConst"
@@ -114,61 +106,11 @@ export const FilterCategorySection = () => {
             </div>
 
             {/* Pagination */}
-            <div className="border-t border-border pt-6">
-              <Pagination className="justify-between">
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href="#"
-                      className="rounded-[7px] border-border px-4 [&_span]:block"
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-                <PaginationContent>
-                  {[1, 2, 3].map((page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        href="#"
-                        isActive={page === currentPage}
-                        className={
-                          page === currentPage
-                            ? "rounded-[7px] border-transparent bg-secondary text-foreground hover:bg-secondary"
-                            : "rounded-[7px] border-transparent"
-                        }
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  {[8, 9, 10].map((page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        href="#"
-                        isActive={page === currentPage}
-                        className={
-                          page === currentPage
-                            ? "rounded-[7px] border-transparent bg-secondary text-foreground hover:bg-secondary"
-                            : "rounded-[7px] border-transparent"
-                        }
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                </PaginationContent>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationNext
-                      href="#"
-                      className="rounded-[7px] border-border px-4 [&_span]:block"
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </div>
+            <ProductPagination
+              currentPage={currentPage}
+              startPages={[1, 2, 3]}
+              endPages={[8, 9, 10]}
+            />
           </div>
         </div>
       </div>
