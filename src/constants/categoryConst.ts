@@ -1,32 +1,35 @@
-export interface FilterColor {
-  colorId: string
-  hex: string
-  label: string
-}
+import {
+  ProductColor,
+  type ProductColor as ProductColorType,
+} from "./colorConst"
 
-export const filterColors: FilterColor[] = [
-  { colorId: "green", hex: "#00C12B", label: "Green" },
-  { colorId: "red", hex: "#F50606", label: "Red" },
-  { colorId: "yellow", hex: "#F5DD06", label: "Yellow" },
-  { colorId: "orange", hex: "#F57906", label: "Orange" },
-  { colorId: "cyan", hex: "#06CAF5", label: "Cyan" },
-  { colorId: "blue", hex: "#063AF5", label: "Blue" },
-  { colorId: "purple", hex: "#7D06F5", label: "Purple" },
-  { colorId: "pink", hex: "#F506A4", label: "Pink" },
-  { colorId: "white", hex: "#FFFFFF", label: "White" },
-  { colorId: "black", hex: "#000000", label: "Black" },
+import { ProductSize, type ProductSize as ProductSizeType } from "./sizeConst"
+
+export const filterColors: ProductColorType[] = [
+  ProductColor.OLIVE,
+  ProductColor.TEAL,
+  ProductColor.NAVY,
+  ProductColor.GREEN,
+  ProductColor.RED,
+  ProductColor.YELLOW,
+  ProductColor.ORANGE,
+  ProductColor.CYAN,
+  ProductColor.BLUE,
+  ProductColor.PURPLE,
+  ProductColor.PINK,
+  ProductColor.WHITE,
+  ProductColor.BLACK,
 ]
 
-export const filterSizes: string[] = [
-  "XX-Small",
-  "X-Small",
-  "Small",
-  "Medium",
-  "Large",
-  "X-Large",
-  "XX-Large",
-  "3X-Large",
-  "4X-Large",
+export const filterSizes: ProductSizeType[] = [
+  ProductSize.XX_SMALL,
+  ProductSize.X_SMALL,
+  ProductSize.SMALL,
+  ProductSize.MEDIUM,
+  ProductSize.LARGE,
+  ProductSize.X_LARGE,
+  ProductSize.XX_LARGE,
+  ProductSize.XXXX_LARGE,
 ]
 
 export const filterCategories: string[] = [

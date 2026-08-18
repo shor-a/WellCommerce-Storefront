@@ -1,8 +1,6 @@
-import {
-  oneLifeTshirt,
-  ProductColor,
-  ProductSize,
-} from "@/constants/productDetailConst"
+import { oneLifeTshirt } from "@/constants/productDetailConst"
+import { ProductColor } from "@/constants/colorConst"
+import { ProductSize } from "@/constants/sizeConst"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"

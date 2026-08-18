@@ -12,9 +12,11 @@ import {
   filterPriceRange,
   filterSizes,
 } from "@/constants/categoryConst"
+import { ProductColor } from "@/constants/colorConst"
+import { ProductSize } from "@/constants/sizeConst"
 
-const selectedColor = "blue"
-const selectedSize = "Large"
+const selectedColor: string = ProductColor.BLACK.colorId
+const selectedSize: string = ProductSize.LARGE
 const priceRange = [filterPriceRange.min, filterPriceRange.max]
 
 interface FilterSidebarProps {

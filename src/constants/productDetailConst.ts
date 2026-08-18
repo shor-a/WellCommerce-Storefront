@@ -3,36 +3,18 @@ import type { Product } from "@/constants/productConst"
 import pdImage1 from "@/assets/images/productdetail/image1.webp"
 import pdImage2 from "@/assets/images/productdetail/image2.webp"
 import pdImage6 from "@/assets/images/productdetail/image6.webp"
+import {
+  ProductColor,
+  type ProductColor as ProductColorType,
+} from "./colorConst"
 
-export interface ProductColorItem {
-  colorId: string
-  hex: string
-  label: string
-}
-
-export const ProductColor = {
-  OLIVE: { colorId: "Olive", hex: "#4F4631", label: "Olive" },
-  TEAL: { colorId: "Teal", hex: "#314F4A", label: "Teal" },
-  NAVY: { colorId: "Navy", hex: "#31344F", label: "Navy" },
-} as const satisfies Record<string, ProductColorItem>
-
-export type ProductColor = (typeof ProductColor)[keyof typeof ProductColor]
-
-// export type ProductSize = "Small" | "Medium" | "Large" | "X-Large"
-export const ProductSize = {
-  SMALL: "Small",
-  MEDIUM: "Medium",
-  LARGE: "Large",
-  X_LARGE: "X-Large",
-} as const
-
-export type ProductSize = (typeof ProductSize)[keyof typeof ProductSize]
+import { ProductSize, type ProductSize as ProductSizeType } from "./sizeConst"
 
 export interface ProductDetail extends Product {
   ratingCount: number
   description: string
-  colors: ProductColor[]
-  sizes: ProductSize[]
+  colors: ProductColorType[]
+  sizes: ProductSizeType[]
   images: string[]
 }
 
