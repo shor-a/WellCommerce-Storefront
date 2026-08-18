@@ -15,6 +15,7 @@ import { ProductImageThumb } from "@/components/atomic/ProductImageThumb"
 import { useCartStore } from "@/hooks/cartStores"
 
 import { useState } from "react"
+import { constructCID } from "@/constants/cartConst"
 
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
@@ -158,7 +159,11 @@ export const ProductSection = () => {
                 onClick={() => {
                   addToCart(quantity, {
                     itemName: productDetail.itemName,
-                    itemId: productDetail.itemId,
+                    cartItemID: constructCID(
+                      productDetail.itemId,
+                      selectedColor,
+                      selectedSize
+                    ),
                     itemQty: quantity,
                     itemImg: productDetail.itemImg,
                     itemColor: selectedColor,

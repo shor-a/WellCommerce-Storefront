@@ -28,7 +28,7 @@ export const CartSection = () => {
             <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
               {cartItems.length > 0 ? (
                 cartItems.map((item, index) => (
-                  <div key={item.itemId}>
+                  <div key={item.cartItemID}>
                     <CartPageItemRow cartItem={item} />
                     {index < cartItems.length - 1 && (
                       <Separator className="mt-6" />
