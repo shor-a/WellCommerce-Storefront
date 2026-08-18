@@ -1,4 +1,4 @@
-import { oneLifeTshirt } from "@/constants/productDetailConst"
+import { allProductDetails } from "@/constants/productDetailConst"
 import { ProductColor } from "@/constants/colorConst"
 import { ProductSize } from "@/constants/sizeConst"
 import { Badge } from "@/components/ui/badge"
@@ -18,7 +18,7 @@ import { constructCID } from "@/constants/cartConst"
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
 
-  const productDetail = oneLifeTshirt
+  const productDetail = allProductDetails[0]
 
   const discountedPrice = Math.round(
     productDetail.itemPrice -

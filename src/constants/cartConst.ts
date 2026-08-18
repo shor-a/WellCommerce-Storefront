@@ -1,5 +1,5 @@
 import type { Product } from "./productConst"
-import type { ProductSize } from "./productDetailConst"
+import type { ProductSize } from "./sizeConst"
 
 export interface Cart extends Pick<Product, "itemName" | "itemImg"> {
   cartItemID: string

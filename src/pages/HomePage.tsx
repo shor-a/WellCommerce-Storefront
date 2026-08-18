@@ -19,7 +19,7 @@ const HomePage = () => {
         />
         <ShortShowcase
           title="TOP SELLING"
-          product={productList.slice(4)}
+          product={productList.slice(4, 8)}
           className="py-0"
         />
         <DressStyle />

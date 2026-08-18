@@ -6,6 +6,11 @@ import product5 from "@/assets/images/clothes/image5.webp"
 import product6 from "@/assets/images/clothes/image6.webp"
 import product7 from "@/assets/images/clothes/image7.webp"
 import product8 from "@/assets/images/clothes/image8.webp"
+import product9 from "@/assets/images/clothes/image9.webp"
+import product10 from "@/assets/images/clothes/image10.webp"
+import product11 from "@/assets/images/clothes/image11.webp"
+import product12 from "@/assets/images/clothes/image12.webp"
+import product13 from "@/assets/images/clothes/image13.webp"
 
 export interface Product {
   itemId: number
@@ -16,7 +21,7 @@ export interface Product {
   itemImg?: string
 }
 
-export const productList: Product[] = [
+export const allProducts: Product[] = [
   {
     itemId: 1,
     itemName: "T-shirt with Tape Details",
@@ -27,17 +32,17 @@ export const productList: Product[] = [
   },
   {
     itemId: 2,
-    itemName: "Skinny Fit Jeans",
-    itemPrice: 260,
-    itemRating: 3.5,
-    discount: 20,
+    itemName: "Polo Collar T-shirt",
+    itemPrice: 210,
+    itemRating: 4.5,
+    discount: 0,
     itemImg: product2,
   },
   {
     itemId: 3,
-    itemName: "Checkered Shirt",
-    itemPrice: 180,
-    itemRating: 4.5,
+    itemName: "Pink Polo Shirt",
+    itemPrice: 80,
+    itemRating: 3.0,
     discount: 0,
     itemImg: product3,
   },
@@ -51,34 +56,74 @@ export const productList: Product[] = [
   },
   {
     itemId: 5,
-    itemName: "Vertical Striped Shirt",
-    itemPrice: 232,
-    itemRating: 5.0,
+    itemName: "Skinny Fit Jeans",
+    itemPrice: 260,
+    itemRating: 3.5,
     discount: 20,
     itemImg: product5,
   },
   {
     itemId: 6,
-    itemName: "Courage Graphic T-shirt",
-    itemPrice: 145,
-    itemRating: 4.0,
+    itemName: "Checkered Shirt",
+    itemPrice: 180,
+    itemRating: 4.5,
     discount: 0,
     itemImg: product6,
   },
   {
     itemId: 7,
-    itemName: "Loose Fit Bermuda Shorts",
-    itemPrice: 80,
-    itemRating: 3.0,
+    itemName: "Courage Graphic T-shirt",
+    itemPrice: 145,
+    itemRating: 4.0,
     discount: 0,
     itemImg: product7,
   },
   {
     itemId: 8,
-    itemName: "Faded Skinny Jeans",
-    itemPrice: 210,
+    itemName: "Vertical Striped Shirt",
+    itemPrice: 232,
+    itemRating: 5.0,
+    discount: 20,
+    itemImg: product8,
+  },
+  {
+    itemId: 9,
+    itemName: "War Courage Graphic T-shirt",
+    itemPrice: 135,
+    itemRating: 4.0,
+    discount: 0,
+    itemImg: product9,
+  },
+  {
+    itemId: 10,
+    itemName: "Distressed Denim Shorts",
+    itemPrice: 95,
+    itemRating: 4.0,
+    discount: 15,
+    itemImg: product10,
+  },
+  {
+    itemId: 11,
+    itemName: "Black Slim Fit Jeans",
+    itemPrice: 240,
     itemRating: 4.5,
     discount: 0,
-    itemImg: product8,
+    itemImg: product11,
+  },
+  {
+    itemId: 12,
+    itemName: "New Rules Tape Sleeve T-shirt",
+    itemPrice: 125,
+    itemRating: 5.0,
+    discount: 10,
+    itemImg: product12,
+  },
+  {
+    itemId: 13,
+    itemName: "One Life Graphic T-shirt",
+    itemPrice: 300,
+    itemRating: 4.5,
+    discount: 40,
+    itemImg: product13,
   },
 ]
