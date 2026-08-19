@@ -71,12 +71,14 @@ const Navbar = () => {
   const [search, setSearch] = useState<string>("")
 
   const populateSearch = (): React.ReactNode => {
+    /* Custom search filter (to use disable shadcn fuzzy filter <Command shouldFilter={false})
     const filteredRes = allProducts.filter((product) =>
       product.itemName.toLowerCase().includes(search.toLowerCase())
     )
+  */
     return (
       <>
-        {filteredRes.map((product) => (
+        {allProducts.map((product) => (
           <Link
             to={generatePath(PageRoutes.PRODUCT, {
               productid: String(product.itemId),
@@ -178,7 +180,7 @@ const Navbar = () => {
 
           {/* Search bar */}
           <div className="relative hidden flex-1 lg:flex">
-            <Command shouldFilter={false} className="h-10 w-full">
+            <Command className="h-10 w-full">
               <CommandInput
                 placeholder="Search for products..."
                 value={search}
