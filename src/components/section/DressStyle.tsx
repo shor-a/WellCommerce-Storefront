@@ -36,9 +36,8 @@ const DressStyle = () => {
   ]
 
   const renderDressCard = (dressStyle: (typeof dressStyles)[number]) => (
-    <Link to={PageRoutes.BROWSE}>
+    <Link key={dressStyle.title} to={PageRoutes.BROWSE}>
       <Card
-        key={dressStyle.title}
         className={`h-full w-full overflow-hidden rounded-[20px] border-0 bg-white p-0 shadow-none ${dressStyle.cardClassName}`}
       >
         <CardContent className="relative h-full p-0">

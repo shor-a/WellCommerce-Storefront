@@ -65,14 +65,14 @@ export const Rating = ({
   if (halfStar > 0) {
     stars = (
       <>
-        {stars} <StarHalf strokeWidth={1} fill="yellow" className="size-4" />
+        {stars} <StarHalf strokeWidth={1} fill="yellow" className={className} />
       </>
     )
   }
 
   return (
     <div className="flex items-center gap-1">
-      {stars} {showScale ? <p className="px-1">{starValue}/5</p> : <></>}
+      {stars} {showScale ? <p className={"px-1"}>{starValue}/5</p> : <></>}
     </div>
   )
 }

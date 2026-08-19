@@ -12,10 +12,14 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group"
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from "@/components/ui/command"
 
 import {
   Popover,
@@ -36,8 +40,11 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { useCartStore } from "@/hooks/cartStores"
-import { Link } from "react-router-dom"
+import { generatePath, Link } from "react-router-dom"
 import { PageRoutes } from "@/config/routes"
+import { allProducts } from "@/constants/productConst"
+import Rating from "../atomic/Rating"
+import { cn } from "@/lib/utils"
 
 const Navbar = () => {
   const cartItems = useCartStore((state) => state.cart)
@@ -59,6 +66,39 @@ const Navbar = () => {
   const closeCartDelayed = () => {
     closeTimer.current = setTimeout(() => setCartOpen(false), 150)
   }
+
+  // Search bar hooks
+  const [search, setSearch] = useState<string>("")
+
+  const populateSearch = (): React.ReactNode => {
+    const filteredRes = allProducts.filter((product) =>
+      product.itemName.toLowerCase().includes(search.toLowerCase())
+    )
+    return (
+      <>
+        {filteredRes.map((product) => (
+          <Link
+            to={generatePath(PageRoutes.PRODUCT, {
+              productid: String(product.itemId),
+            })}
+          >
+            <CommandItem className="hover:cursor-pointer" key={product.itemId}>
+              <div className="flex w-full">
+                <div className="-mr-5 flex basis-2/6 justify-start">
+                  <img src={product.itemImg} className="size-14" />
+                </div>
+                <div className="flex basis-4/6 flex-col items-start justify-center gap-2">
+                  <p>{product.itemName}</p>
+                  <Rating starValue={product.itemRating} className="size-3" />
+                </div>
+              </div>
+            </CommandItem>
+          </Link>
+        ))}
+      </>
+    )
+  }
+
   return (
     <>
       <OfferNavbar />
@@ -136,17 +176,29 @@ const Navbar = () => {
             </NavigationMenu>
           </div>
 
-          {/* Search bar — grows to fill remaining space */}
-          <div className="hidden flex-1 lg:flex">
-            <InputGroup className="h-10 w-full">
-              <InputGroupAddon align="inline-start">
-                <Search className="size-4 text-muted-foreground" />
-              </InputGroupAddon>
-              <InputGroupInput
+          {/* Search bar */}
+          <div className="relative hidden flex-1 lg:flex">
+            <Command shouldFilter={false} className="h-10 w-full">
+              <CommandInput
                 placeholder="Search for products..."
-                aria-label="Search for products"
+                value={search}
+                onValueChange={(searchVal) => {
+                  setSearch(searchVal)
+                }}
               />
-            </InputGroup>
+              <CommandList
+                className={cn(
+                  search ? `` : `hidden`,
+                  "absolute top-full left-2 z-50 mt-1 w-full rounded-sm border bg-background shadow-lg"
+                )}
+              >
+                <CommandEmpty>No results found.</CommandEmpty>
+                <CommandGroup heading="Product search results">
+                  {populateSearch()}
+                  <CommandSeparator />
+                </CommandGroup>
+              </CommandList>
+            </Command>
           </div>
 
           {/* Action icons */}
