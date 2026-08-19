@@ -1,13 +1,13 @@
 import Navbar from "@/components/section/Navbar"
 import NavigationText from "@/components/section/NavigationText"
-import FilterCategorySection from "@/components/section/FilterCategorySection"
+import ProductCategorySection from "@/components/section/ProductCategorySection"
 import Footer from "@/components/section/Footer"
 
 const BrowseCategoryPage = () => (
   <>
     <Navbar />
     <NavigationText />
-    <FilterCategorySection />
+    <ProductCategorySection />
     <Footer />
   </>
 )

@@ -28,6 +28,7 @@ export const FilterSidebar = ({ onClose }: FilterSidebarProps) => (
     {/* Header */}
     <div className="flex items-center justify-between">
       <span className="text-xl font-bold text-foreground">Filters</span>
+      {/* onClose conditional if screen size is SM swap icon to X for close filter pop-up */}
       {onClose ? (
         <button
           type="button"

@@ -80,6 +80,7 @@ const Navbar = () => {
       <>
         {allProducts.map((product) => (
           <Link
+            key={product.itemId}
             to={generatePath(PageRoutes.PRODUCT, {
               productid: String(product.itemId),
             })}

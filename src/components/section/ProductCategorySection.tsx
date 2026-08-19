@@ -8,7 +8,7 @@ const totalProducts = 100
 const currentPage = 1
 const pageSize = 10
 
-export const FilterCategorySection = () => {
+export const ProductCategorySection = () => {
   const displayedProducts = allProducts
 
   return (
@@ -50,4 +50,4 @@ export const FilterCategorySection = () => {
   )
 }
 
-export default FilterCategorySection
+export default ProductCategorySection
