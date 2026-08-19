@@ -23,7 +23,6 @@ const ShortShowcase = ({
   showAllBtn = true,
   className,
 }: ShowcaseProps) => {
-  const currentSlug = "1"
   return (
     <>
       <section className={cn("showcase", className)}>
@@ -34,7 +33,7 @@ const ShortShowcase = ({
               <Link
                 key={p.itemId}
                 to={generatePath(PageRoutes.PRODUCT, {
-                  productid: currentSlug,
+                  productid: String(p.itemId),
                 })}
               >
                 <div className="basis-3/12">
@@ -66,6 +65,7 @@ const ShortShowcase = ({
             <div className="flex w-full items-center justify-center pb-10">
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
+                nativeButton={false}
                 className="px-18 py-5"
                 variant="outline"
               >

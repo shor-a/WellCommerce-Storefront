@@ -214,7 +214,7 @@ const Navbar = () => {
                     {cartItems.length > 0 ? (
                       cartItems.map((cartItem) => (
                         <CartItemRow
-                          key={cartItem.itemId}
+                          key={cartItem.cartItemID}
                           cartItem={cartItem}
                         />
                       ))
@@ -249,6 +249,7 @@ const Navbar = () => {
 
                     <Button
                       render={<Link to={PageRoutes.CART} />}
+                      nativeButton={false}
                       variant="default"
                       size="lg"
                       className="w-full gap-2"

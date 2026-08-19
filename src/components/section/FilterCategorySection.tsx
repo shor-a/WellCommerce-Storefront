@@ -1,7 +1,7 @@
 import ProductPagination from "@/components/atomic/ProductPagination"
 import FilterSidebar from "@/components/section/FilterSidebar"
 import ProductShowcase from "@/components/section/ProductShowcase"
-import { productList } from "@/constants/productConst"
+import { allProducts } from "@/constants/productConst"
 
 const categoryName = "Casual"
 const totalProducts = 100
@@ -9,7 +9,7 @@ const currentPage = 1
 const pageSize = 10
 
 export const FilterCategorySection = () => {
-  const displayedProducts = productList
+  const displayedProducts = allProducts
 
   return (
     <section

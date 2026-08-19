@@ -2,8 +2,11 @@ import type { Product } from "@/constants/productConst"
 
 import { ChevronDown, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import DiscPrice from "@/components/atomic/DiscPrice"
 import { Rating } from "@/components/atomic/Rating"
+import { generatePath, Link } from "react-router-dom"
+import { PageRoutes } from "@/config/routes"
 
 interface ProductShowcaseProps {
   categoryName: string
@@ -65,30 +68,35 @@ export const ProductShowcase = ({
       className="grid grid-cols-2 gap-4 lg:grid-cols-3"
     >
       {products.map((product) => (
-        <article
-          key={product.itemId}
-          className="flex flex-col gap-2"
-          aria-label={product.itemName}
+        <Link
+          to={generatePath(PageRoutes.PRODUCT, {
+            productid: String(product.itemId),
+          })}
         >
-          <div className="aspect-square w-full overflow-hidden rounded-2xl bg-secondary">
-            <img
-              src={product.itemImg}
-              alt={product.itemName}
-              className="h-full w-full object-cover object-top"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 px-1">
-            <p className="truncate text-sm font-bold text-foreground sm:text-base">
-              {product.itemName}
-            </p>
-            <Rating starValue={product.itemRating} showScale />
-            <DiscPrice
-              itemPrice={product.itemPrice}
-              discount={product.discount}
-            />
-          </div>
-        </article>
+          <Card
+            key={product.itemId}
+            aria-label={product.itemName}
+            className="ring-0"
+          >
+            <CardContent className="flex flex-col gap-3 pt-2">
+              <div className="aspect-square w-full overflow-hidden rounded-xl bg-secondary">
+                <img
+                  src={product.itemImg}
+                  alt={product.itemName}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
+              <p className="truncate text-sm font-bold text-foreground sm:text-base">
+                {product.itemName}
+              </p>
+              <Rating starValue={product.itemRating} showScale />
+              <DiscPrice
+                itemPrice={product.itemPrice}
+                discount={product.discount}
+              />
+            </CardContent>
+          </Card>
+        </Link>
       ))}
     </div>
   </div>

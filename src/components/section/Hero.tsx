@@ -28,6 +28,7 @@ const Hero = () => {
 
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
+                nativeButton={false}
                 className="mb-10"
                 size="xl"
               >

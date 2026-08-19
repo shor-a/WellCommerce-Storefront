@@ -1,4 +1,4 @@
-import type { Product } from "@/constants/productConst"
+import { allProducts, type Product } from "@/constants/productConst"
 
 import product1 from "@/assets/images/clothes/image1.webp"
 import product2 from "@/assets/images/clothes/image2.webp"
@@ -15,7 +15,6 @@ import product12 from "@/assets/images/clothes/image12.webp"
 
 import pdImage1 from "@/assets/images/productdetail/image1.webp"
 import pdImage2 from "@/assets/images/productdetail/image2.webp"
-import pdImage5 from "@/assets/images/productdetail/image5.webp"
 import pdImage6 from "@/assets/images/productdetail/image6.webp"
 import {
   ProductColor,
@@ -34,12 +33,7 @@ export interface ProductDetail extends Product {
 
 export const allProductDetails: ProductDetail[] = [
   {
-    itemId: 1,
-    itemName: "T-shirt with Tape Details",
-    itemPrice: 120,
-    itemRating: 4.5,
-    discount: 0,
-    itemImg: product1,
+    ...allProducts[0],
     ratingCount: 120,
     description:
       "A casual t-shirt featuring distinctive tape details. Made from soft, breathable cotton for all-day comfort and effortless style.",
@@ -53,12 +47,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product1],
   },
   {
-    itemId: 2,
-    itemName: "Polo Collar T-shirt",
-    itemPrice: 210,
-    itemRating: 4.5,
-    discount: 0,
-    itemImg: product2,
+    ...allProducts[1],
     ratingCount: 156,
     description:
       "A classic polo collar t-shirt with a clean, structured look. Crafted from breathable piqué fabric for smart-casual styling.",
@@ -72,12 +61,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product2],
   },
   {
-    itemId: 3,
-    itemName: "Pink Polo Shirt",
-    itemPrice: 80,
-    itemRating: 3.0,
-    discount: 0,
-    itemImg: product3,
+    ...allProducts[2],
     ratingCount: 75,
     description:
       "A clean and classic pink polo shirt with a relaxed fit. Perfect for smart-casual occasions or everyday wear.",
@@ -91,12 +75,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product3],
   },
   {
-    itemId: 4,
-    itemName: "Sleeve Stripped T-shirt",
-    itemPrice: 160,
-    itemRating: 5.0,
-    discount: 30,
-    itemImg: product4,
+    ...allProducts[3],
     ratingCount: 340,
     description:
       "A sporty raglan tee with bold sleeve stripes. Lightweight fabric makes it ideal for active days or casual wear.",
@@ -110,12 +89,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product4],
   },
   {
-    itemId: 5,
-    itemName: "Skinny Fit Jeans",
-    itemPrice: 260,
-    itemRating: 3.5,
-    discount: 20,
-    itemImg: product5,
+    ...allProducts[4],
     ratingCount: 98,
     description:
       "Classic skinny fit jeans crafted from stretch denim for a sleek silhouette with maximum comfort throughout the day.",
@@ -129,12 +103,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product5],
   },
   {
-    itemId: 6,
-    itemName: "Checkered Shirt",
-    itemPrice: 180,
-    itemRating: 4.5,
-    discount: 0,
-    itemImg: product6,
+    ...allProducts[5],
     ratingCount: 210,
     description:
       "A timeless checkered flannel shirt with a relaxed fit. Versatile enough for casual outings or smart-casual occasions.",
@@ -148,12 +117,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product6],
   },
   {
-    itemId: 7,
-    itemName: "Courage Graphic T-shirt",
-    itemPrice: 145,
-    itemRating: 4.0,
-    discount: 0,
-    itemImg: product7,
+    ...allProducts[6],
     ratingCount: 188,
     description:
       "A bold colorblock raglan tee with striking sleeve contrast. Crafted from premium cotton for a comfortable, relaxed fit.",
@@ -167,12 +131,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product7],
   },
   {
-    itemId: 8,
-    itemName: "Vertical Striped Shirt",
-    itemPrice: 232,
-    itemRating: 5.0,
-    discount: 20,
-    itemImg: product8,
+    ...allProducts[7],
     ratingCount: 275,
     description:
       "A relaxed-fit shirt with vertical stripes that elongate the silhouette. Perfect for both office and weekend wear.",
@@ -186,12 +145,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product8],
   },
   {
-    itemId: 9,
-    itemName: "War Courage Graphic T-shirt",
-    itemPrice: 135,
-    itemRating: 4.0,
-    discount: 0,
-    itemImg: product9,
+    ...allProducts[8],
     ratingCount: 203,
     description:
       "An expressive graphic tee with vivid artwork. Made from soft cotton blend for comfortable everyday wear.",
@@ -205,12 +159,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product9],
   },
   {
-    itemId: 10,
-    itemName: "Distressed Denim Shorts",
-    itemPrice: 95,
-    itemRating: 4.0,
-    discount: 15,
-    itemImg: product10,
+    ...allProducts[9],
     ratingCount: 134,
     description:
       "Casual denim shorts with a distressed finish and relaxed cut. A summer essential for effortless street style.",
@@ -224,12 +173,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product10],
   },
   {
-    itemId: 11,
-    itemName: "Black Slim Fit Jeans",
-    itemPrice: 240,
-    itemRating: 4.5,
-    discount: 0,
-    itemImg: product11,
+    ...allProducts[10],
     ratingCount: 312,
     description:
       "Sleek black slim fit jeans that transition effortlessly from day to night. Crafted from premium stretch denim.",
@@ -243,12 +187,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product11],
   },
   {
-    itemId: 12,
-    itemName: "New Rules Tape Sleeve T-shirt",
-    itemPrice: 125,
-    itemRating: 5.0,
-    discount: 10,
-    itemImg: product12,
+    ...allProducts[11],
     ratingCount: 289,
     description:
       "A minimal black tee with subtle branding and tape sleeve detailing. Clean design for a modern, understated look.",
@@ -262,12 +201,7 @@ export const allProductDetails: ProductDetail[] = [
     images: [product12],
   },
   {
-    itemId: 13,
-    itemName: "One Life Graphic T-shirt",
-    itemRating: 4.5,
-    itemPrice: 300,
-    discount: 40,
-    itemImg: pdImage1,
+    ...allProducts[12],
     ratingCount: 451,
     description:
       "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
@@ -278,6 +212,6 @@ export const allProductDetails: ProductDetail[] = [
       ProductSize.LARGE,
       ProductSize.X_LARGE,
     ],
-    images: [pdImage1, pdImage2, pdImage5, pdImage6],
+    images: [pdImage1, pdImage2, pdImage6],
   },
 ]

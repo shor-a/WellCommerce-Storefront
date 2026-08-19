@@ -4,6 +4,8 @@ import image15 from "@/assets/images/general/image15.webp"
 import image16 from "@/assets/images/general/image16.webp"
 import image17 from "@/assets/images/general/image17.webp"
 import image18 from "@/assets/images/general/image18.webp"
+import { Link } from "react-router-dom"
+import { PageRoutes } from "@/config/routes"
 
 const DressStyle = () => {
   const dressStyles = [
@@ -34,21 +36,23 @@ const DressStyle = () => {
   ]
 
   const renderDressCard = (dressStyle: (typeof dressStyles)[number]) => (
-    <Card
-      key={dressStyle.title}
-      className={`h-full w-full overflow-hidden rounded-[20px] border-0 bg-white p-0 shadow-none ${dressStyle.cardClassName}`}
-    >
-      <CardContent className="relative h-full p-0">
-        <img
-          className={`absolute top-0 h-full object-cover ${dressStyle.imageClassName}`}
-          alt="Image"
-          src={dressStyle.image}
-        />
-        <span className="relative z-10 flex pt-[8.65%] pl-[8.85%] text-[clamp(1.25rem,2.91vw,2.25rem)] leading-[normal] font-bold tracking-[0] text-black">
-          {dressStyle.title}
-        </span>
-      </CardContent>
-    </Card>
+    <Link to={PageRoutes.BROWSE}>
+      <Card
+        key={dressStyle.title}
+        className={`h-full w-full overflow-hidden rounded-[20px] border-0 bg-white p-0 shadow-none ${dressStyle.cardClassName}`}
+      >
+        <CardContent className="relative h-full p-0">
+          <img
+            className={`absolute top-0 h-full object-cover ${dressStyle.imageClassName}`}
+            alt="Image"
+            src={dressStyle.image}
+          />
+          <span className="relative z-10 flex pt-[8.65%] pl-[8.85%] text-[clamp(1.25rem,2.91vw,2.25rem)] leading-[normal] font-bold tracking-[0] text-black">
+            {dressStyle.title}
+          </span>
+        </CardContent>
+      </Card>
+    </Link>
   )
 
   return (

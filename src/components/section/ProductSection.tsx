@@ -14,11 +14,14 @@ import { useCartStore } from "@/hooks/cartStores"
 
 import { useState } from "react"
 import { constructCID } from "@/constants/cartConst"
+import { useParams } from "react-router-dom"
 
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
 
-  const productDetail = allProductDetails[0]
+  const { productid } = useParams()
+  const productDetail =
+    allProductDetails[productid ? parseInt(productid) - 1 : parseInt("0")]
 
   const discountedPrice = Math.round(
     productDetail.itemPrice -
