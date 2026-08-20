@@ -1,7 +1,11 @@
 import ProductPagination from "@/components/atomic/ProductPagination"
 import FilterSidebar from "@/components/section/FilterSidebar"
 import ProductShowcase from "@/components/section/ProductShowcase"
+import { filterPriceRange } from "@/constants/categoryConst"
+import { ProductColor } from "@/constants/colorConst"
 import { allProducts } from "@/constants/productConst"
+import { ProductSize } from "@/constants/sizeConst"
+import { useState } from "react"
 
 const categoryName = "Casual"
 const totalProducts = 100
@@ -10,6 +14,14 @@ const pageSize = 10
 
 export const ProductCategorySection = () => {
   const displayedProducts = allProducts
+
+  const [selectedColor, setColor] = useState<string>(ProductColor.NAVY.colorId)
+  const [selectedSize, setSize] = useState<ProductSize>(ProductSize.LARGE)
+
+  const [sliderRange, setSlider] = useState<[number, number]>([
+    filterPriceRange.min,
+    filterPriceRange.max,
+  ])
 
   return (
     <section
@@ -24,7 +36,14 @@ export const ProductCategorySection = () => {
             aria-label="Product filters"
             className="hidden lg:block lg:shrink-0 lg:basis-1/4"
           >
-            <FilterSidebar />
+            <FilterSidebar
+              sliderRange={sliderRange}
+              selectedColor={selectedColor}
+              selectedSize={selectedSize}
+              changeColor={setColor}
+              changeSize={setSize}
+              changeSliderValue={setSlider}
+            />
           </aside>
 
           {/* Products panel */}
@@ -36,7 +55,6 @@ export const ProductCategorySection = () => {
               pageSize={pageSize}
               totalProducts={totalProducts}
             />
-
             {/* Pagination */}
             <ProductPagination
               currentPage={currentPage}
