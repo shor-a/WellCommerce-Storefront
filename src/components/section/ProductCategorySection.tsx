@@ -2,33 +2,54 @@ import ProductPagination from "@/components/atomic/ProductPagination"
 import FilterSidebar from "@/components/section/FilterSidebar"
 import ProductShowcase from "@/components/section/ProductShowcase"
 import { filterPriceRange } from "@/constants/categoryConst"
-import { ProductColor } from "@/constants/colorConst"
 import { allProducts } from "@/constants/productConst"
 import { ProductSize } from "@/constants/sizeConst"
 import { useState } from "react"
 
+// Used by ProductShowcase
 const categoryName = "Casual"
 const totalProducts = 100
+// Used by both
 const currentPage = 1
+// Used by Pagination
 const pageSize = 10
 
 export const ProductCategorySection = () => {
   const displayedProducts = allProducts
 
-  const [selectedColor, setColor] = useState<string>(ProductColor.NAVY.colorId)
-  const [selectedSize, setSize] = useState<ProductSize>(ProductSize.LARGE)
+  const [selectedColor, setColor] = useState<string[]>([])
+
+  const [selectedSize, setSize] = useState<ProductSize[]>([])
 
   const [sliderRange, setSlider] = useState<[number, number]>([
     filterPriceRange.min,
     filterPriceRange.max,
   ])
 
+  const selectMultipleColor = (addColor: string) => {
+    const exist = selectedColor.some((color) => addColor === color)
+    console.log(JSON.stringify(selectedColor, null, 1))
+
+    return exist
+      ? setColor(selectedColor.filter((color) => addColor !== color))
+      : setColor([...selectedColor, addColor])
+  }
+
+  const selectMultipleSize = (addSize: ProductSize) => {
+    const exist = selectedSize.some((size) => size === addSize)
+    console.log(JSON.stringify(selectedSize, null, 1))
+
+    return exist
+      ? setSize(selectedSize.filter((size) => size !== addSize))
+      : setSize([...selectedSize, addSize])
+  }
+
   return (
     <section
       aria-label="Filter and category browse"
       className="w-full bg-background"
     >
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-10 lg:py-12">
+      <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
         {/* Desktop layout: sidebar + product grid side by side */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           {/* Filter sidebar */}
@@ -40,8 +61,8 @@ export const ProductCategorySection = () => {
               sliderRange={sliderRange}
               selectedColor={selectedColor}
               selectedSize={selectedSize}
-              changeColor={setColor}
-              changeSize={setSize}
+              changeColor={selectMultipleColor}
+              changeSize={selectMultipleSize}
               changeSliderValue={setSlider}
             />
           </aside>

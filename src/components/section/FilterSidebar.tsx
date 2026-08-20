@@ -16,8 +16,8 @@ import { ProductSize } from "@/constants/sizeConst"
 
 interface FilterSidebarProps {
   sliderRange: [number, number]
-  selectedColor: string
-  selectedSize: ProductSize
+  selectedColor: string[]
+  selectedSize: ProductSize[]
   changeColor: (newColor: string) => void
   changeSize: (newSize: ProductSize) => void
   changeSliderValue: (newRange: [number, number]) => void
@@ -119,7 +119,9 @@ export const FilterSidebar = ({
               colorId={color.colorId}
               hex={color.hex}
               label={color.label}
-              isActive={selectedColor === color.colorId}
+              isActive={selectedColor.some(
+                (findColor) => findColor === color.colorId
+              )}
               size="lg"
               setColor={changeColor}
             />
@@ -143,7 +145,7 @@ export const FilterSidebar = ({
             <SizePill
               key={size}
               label={size}
-              isActive={selectedSize === size}
+              isActive={selectedSize.some((findSize) => findSize === size)}
               className="text-sm"
               setSize={changeSize}
             />

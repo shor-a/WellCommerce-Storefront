@@ -25,7 +25,7 @@ export const ColorSwatch = ({
     className={cn(
       "inline-flex items-center justify-center rounded-full border-2 transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
       size === "lg" ? "size-9" : "size-6",
-      isActive ? "border-foreground" : "border-transparent"
+      isActive ? "border-foreground" : "border-foreground/15"
     )}
     style={{ backgroundColor: hex }}
     onClick={() => setColor?.(colorId)}
