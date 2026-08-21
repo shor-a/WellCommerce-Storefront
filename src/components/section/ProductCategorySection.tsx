@@ -1,10 +1,11 @@
 import ProductPagination from "@/components/atomic/ProductPagination"
 import FilterSidebar from "@/components/section/FilterSidebar"
 import ProductShowcase from "@/components/section/ProductShowcase"
-import { filterPriceRange } from "@/constants/categoryConst"
-import { allProducts } from "@/constants/productConst"
-import { ProductSize } from "@/constants/sizeConst"
-import { useState } from "react"
+import {
+  allProductDetails,
+  populateFilteredProducts,
+} from "@/constants/productDetailConst"
+import ProductCategoryHooks from "@/hooks/ProductCategoryHooks"
 
 // Used by ProductShowcase
 const categoryName = "Casual"
@@ -15,34 +16,21 @@ const currentPage = 1
 const pageSize = 10
 
 export const ProductCategorySection = () => {
-  const displayedProducts = allProducts
+  const {
+    selectedColor,
+    selectedSize,
+    sliderRange,
+    setMultipleColor,
+    setMultipleSize,
+    setSlider,
+  } = ProductCategoryHooks()
 
-  const [selectedColor, setColor] = useState<string[]>([])
-
-  const [selectedSize, setSize] = useState<ProductSize[]>([])
-
-  const [sliderRange, setSlider] = useState<[number, number]>([
-    filterPriceRange.min,
-    filterPriceRange.max,
-  ])
-
-  const selectMultipleColor = (addColor: string) => {
-    const exist = selectedColor.some((color) => addColor === color)
-    console.log(JSON.stringify(selectedColor, null, 1))
-
-    return exist
-      ? setColor(selectedColor.filter((color) => addColor !== color))
-      : setColor([...selectedColor, addColor])
-  }
-
-  const selectMultipleSize = (addSize: ProductSize) => {
-    const exist = selectedSize.some((size) => size === addSize)
-    console.log(JSON.stringify(selectedSize, null, 1))
-
-    return exist
-      ? setSize(selectedSize.filter((size) => size !== addSize))
-      : setSize([...selectedSize, addSize])
-  }
+  const displayedProducts = populateFilteredProducts(
+    selectedColor,
+    selectedSize,
+    sliderRange,
+    allProductDetails
+  )
 
   return (
     <section
@@ -61,8 +49,8 @@ export const ProductCategorySection = () => {
               sliderRange={sliderRange}
               selectedColor={selectedColor}
               selectedSize={selectedSize}
-              changeColor={selectMultipleColor}
-              changeSize={selectMultipleSize}
+              changeColor={setMultipleColor}
+              changeSize={setMultipleSize}
               changeSliderValue={setSlider}
             />
           </aside>

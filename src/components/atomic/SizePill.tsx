@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import type { ProductSize } from "@/constants/productDetailConst"
+import type { ProductSize } from "@/constants/sizeConst"
 
 interface SizePillProps {
   label: ProductSize

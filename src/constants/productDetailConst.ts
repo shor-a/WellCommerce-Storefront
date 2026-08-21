@@ -31,6 +31,28 @@ export interface ProductDetail extends Product {
   images: string[]
 }
 
+export const populateFilteredProducts = (
+  selectedColor: string[],
+  selectedSize: string[],
+  sliderRange: [number, number],
+  products: ProductDetail[]
+): ProductDetail[] => {
+  return products
+    .filter((p) =>
+      selectedColor.length === 0
+        ? true
+        : p.colors.some((c) => selectedColor.includes(c.colorId))
+    )
+    .filter((p) =>
+      selectedSize.length === 0
+        ? true
+        : p.sizes.some((size) => selectedSize.includes(size))
+    )
+    .filter(
+      (p) => p.itemPrice >= sliderRange[0] && p.itemPrice <= sliderRange[1]
+    )
+}
+
 export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[0],
@@ -121,7 +143,7 @@ export const allProductDetails: ProductDetail[] = [
     ratingCount: 188,
     description:
       "A bold colorblock raglan tee with striking sleeve contrast. Crafted from premium cotton for a comfortable, relaxed fit.",
-    colors: [ProductColor.ORANGE, ProductColor.BLACK, ProductColor.WHITE],
+    colors: [ProductColor.GREEN, ProductColor.BLACK, ProductColor.WHITE],
     sizes: [
       ProductSize.SMALL,
       ProductSize.MEDIUM,
@@ -149,7 +171,7 @@ export const allProductDetails: ProductDetail[] = [
     ratingCount: 203,
     description:
       "An expressive graphic tee with vivid artwork. Made from soft cotton blend for comfortable everyday wear.",
-    colors: [ProductColor.ORANGE, ProductColor.BLACK, ProductColor.WHITE],
+    colors: [ProductColor.NAVY, ProductColor.BLACK, ProductColor.WHITE],
     sizes: [
       ProductSize.SMALL,
       ProductSize.MEDIUM,

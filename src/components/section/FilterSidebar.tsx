@@ -12,15 +12,15 @@ import {
   filterPriceRange,
   filterSizes,
 } from "@/constants/categoryConst"
-import { ProductSize } from "@/constants/sizeConst"
+import type { PCategoryHook } from "@/hooks/ProductCategoryHooks"
 
 interface FilterSidebarProps {
-  sliderRange: [number, number]
-  selectedColor: string[]
-  selectedSize: ProductSize[]
-  changeColor: (newColor: string) => void
-  changeSize: (newSize: ProductSize) => void
-  changeSliderValue: (newRange: [number, number]) => void
+  sliderRange: PCategoryHook["sliderRange"]
+  selectedColor: PCategoryHook["selectedColor"]
+  selectedSize: PCategoryHook["selectedSize"]
+  changeColor: PCategoryHook["setMultipleColor"]
+  changeSize: PCategoryHook["setMultipleSize"]
+  changeSliderValue: PCategoryHook["setSlider"]
   onClose?: () => void
 }
 

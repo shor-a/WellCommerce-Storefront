@@ -1,3 +1,4 @@
+import { ProductColor } from "@/constants/colorConst"
 import { cn } from "@/lib/utils"
 import { Check } from "lucide-react"
 
@@ -32,7 +33,10 @@ export const ColorSwatch = ({
   >
     {isActive && (
       <Check
-        className={cn(size === "lg" ? "size-4" : "size-3", "text-white")}
+        className={cn(
+          size === "lg" ? "size-4" : "size-3",
+          colorId === ProductColor.WHITE.colorId ? "text-black" : "text-white"
+        )}
         strokeWidth={2.5}
       />
     )}
