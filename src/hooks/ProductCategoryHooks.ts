@@ -6,39 +6,44 @@ export type PCategoryHook = ReturnType<typeof ProductCategoryHooks>
 
 const ProductCategoryHooks = () => {
   const [selectedColor, setColor] = useState<string[]>([])
-
   const [selectedSize, setSize] = useState<ProductSize[]>([])
-
   const [sliderRange, setSlider] = useState<[number, number]>([
     filterPriceRange.min,
     filterPriceRange.max,
   ])
+  const [currentPage, setCurrentPage] = useState(1)
 
   const setMultipleColor = (addColor: string) => {
-    const exist = selectedColor.some((color) => addColor === color)
-    console.log(JSON.stringify(selectedColor, null, 1))
-
-    return exist
+    // Reset to page 1 whenever a filter changes
+    setCurrentPage(1)
+    const exists = selectedColor.some((color) => addColor === color)
+    return exists
       ? setColor(selectedColor.filter((color) => addColor !== color))
       : setColor([...selectedColor, addColor])
   }
 
   const setMultipleSize = (addSize: ProductSize) => {
-    const exist = selectedSize.some((size) => size === addSize)
-    console.log(JSON.stringify(selectedSize, null, 1))
-
-    return exist
+    setCurrentPage(1)
+    const exists = selectedSize.some((size) => size === addSize)
+    return exists
       ? setSize(selectedSize.filter((size) => size !== addSize))
       : setSize([...selectedSize, addSize])
+  }
+
+  const handleSliderChange = (range: [number, number]) => {
+    setCurrentPage(1)
+    setSlider(range)
   }
 
   return {
     selectedColor,
     selectedSize,
     sliderRange,
+    currentPage,
     setMultipleColor,
     setMultipleSize,
-    setSlider,
+    handleSliderChange,
+    setCurrentPage,
   }
 }
 

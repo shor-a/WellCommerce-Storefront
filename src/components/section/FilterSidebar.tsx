@@ -20,7 +20,7 @@ interface FilterSidebarProps {
   selectedSize: PCategoryHook["selectedSize"]
   changeColor: PCategoryHook["setMultipleColor"]
   changeSize: PCategoryHook["setMultipleSize"]
-  changeSliderValue: PCategoryHook["setSlider"]
+  changeSliderValue: PCategoryHook["handleSliderChange"]
   onClose?: () => void
 }
 
