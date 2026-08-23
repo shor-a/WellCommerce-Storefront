@@ -18,8 +18,12 @@ interface FilterSidebarProps {
   sliderRange: PCategoryHook["sliderRange"]
   selectedColor: PCategoryHook["selectedColor"]
   selectedSize: PCategoryHook["selectedSize"]
+  selectedCategory: PCategoryHook["selectedCategory"]
+  selectedDressStyle: PCategoryHook["selectedDressStyle"]
   changeColor: PCategoryHook["setMultipleColor"]
   changeSize: PCategoryHook["setMultipleSize"]
+  changeCategory: PCategoryHook["setMultipleCategory"]
+  changeDressStyle: PCategoryHook["setMultipleDressStyle"]
   changeSliderValue: PCategoryHook["handleSliderChange"]
   onClose?: () => void
 }
@@ -28,8 +32,12 @@ export const FilterSidebar = ({
   sliderRange,
   selectedColor,
   selectedSize,
+  selectedCategory,
+  selectedDressStyle,
   changeColor,
   changeSize,
+  changeCategory,
+  changeDressStyle,
   changeSliderValue,
   onClose,
 }: FilterSidebarProps) => {
@@ -40,14 +48,14 @@ export const FilterSidebar = ({
         <span className="text-xl font-bold text-foreground">Filters</span>
         {/* onClose conditional if screen size is SM swap icon to X for close filter pop-up */}
         {onClose ? (
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="icon"
             aria-label="Close filters"
-            className="flex items-center justify-center focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             onClick={onClose}
           >
             <X className="size-5 text-muted-foreground" strokeWidth={1.5} />
-          </button>
+          </Button>
         ) : (
           <SlidersHorizontal
             className="size-5 text-muted-foreground"
@@ -64,7 +72,13 @@ export const FilterSidebar = ({
           <button
             key={cat}
             type="button"
-            className="flex items-center justify-between text-base text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            aria-pressed={selectedCategory.includes(cat)}
+            className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+              selectedCategory.includes(cat)
+                ? "font-semibold text-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+            onClick={() => changeCategory(cat)}
           >
             <span>{cat}</span>
             <ChevronRight className="size-4" strokeWidth={1.5} />
@@ -169,7 +183,13 @@ export const FilterSidebar = ({
             <button
               key={style}
               type="button"
-              className="flex items-center justify-between text-base text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              aria-pressed={selectedDressStyle.includes(style)}
+              className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+                selectedDressStyle.includes(style)
+                  ? "font-semibold text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              onClick={() => changeDressStyle(style)}
             >
               <span>{style}</span>
               <ChevronRight className="size-4" strokeWidth={1.5} />

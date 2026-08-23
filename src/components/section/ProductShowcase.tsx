@@ -3,10 +3,19 @@ import type { ProductDetail } from "@/constants/productDetailConst"
 import { ChevronDown, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import DiscPrice from "@/components/atomic/DiscPrice"
 import { Rating } from "@/components/atomic/Rating"
 import { generatePath, Link } from "react-router-dom"
 import { PageRoutes } from "@/config/routes"
+import {
+  filterSortOptions,
+  type SortOption as SortOptionType,
+} from "@/constants/categoryConst"
 
 interface ProductShowcaseProps {
   categoryName: string
@@ -14,6 +23,8 @@ interface ProductShowcaseProps {
   currentPage: number
   pageSize: number
   totalProducts: number
+  sortOption: SortOptionType
+  onSortChange: (option: SortOptionType) => void
   onOpenFilters?: () => void
 }
 
@@ -23,6 +34,8 @@ export const ProductShowcase = ({
   currentPage,
   pageSize,
   totalProducts,
+  sortOption,
+  onSortChange,
   onOpenFilters,
 }: ProductShowcaseProps) => {
   const rangeStart = totalProducts === 0 ? 0 : (currentPage - 1) * pageSize + 1
@@ -59,14 +72,31 @@ export const ProductShowcase = ({
           )}
           <span className="hidden sm:inline">
             Sort by:
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-auto gap-1 px-2 py-1 font-medium text-foreground"
-            >
-              Most Popular
-              <ChevronDown className="size-4" strokeWidth={1.5} />
-            </Button>
+            <Popover>
+              <PopoverTrigger
+                className="inline-flex h-auto items-center gap-1 rounded px-2 py-1 text-sm font-medium text-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                aria-label={`Sort by: ${sortOption}`}
+              >
+                {sortOption}
+                <ChevronDown className="size-4" strokeWidth={1.5} />
+              </PopoverTrigger>
+              <PopoverContent align="end" side="bottom" className="w-48 p-1">
+                {filterSortOptions.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    className={`w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none ${
+                      option === sortOption
+                        ? "font-semibold text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                    onClick={() => onSortChange(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </PopoverContent>
+            </Popover>
           </span>
         </div>
       </div>

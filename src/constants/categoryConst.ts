@@ -42,3 +42,21 @@ export const pageSize = 9
 export const filterDressStyles: string[] = ["Casual", "Formal", "Party", "Gym"]
 
 export const filterPriceRange = { min: 0, max: 300 } as const
+
+export const SortOption = {
+  MOST_POPULAR: "Most Popular",
+  NEWEST: "Newest",
+  PRICE_LOW_HIGH: "Price: Low to High",
+  PRICE_HIGH_LOW: "Price: High to Low",
+  TOP_RATED: "Top Rated",
+} as const
+
+export type SortOption = (typeof SortOption)[keyof typeof SortOption]
+
+export const filterSortOptions: SortOption[] = [
+  SortOption.MOST_POPULAR,
+  SortOption.NEWEST,
+  SortOption.PRICE_LOW_HIGH,
+  SortOption.PRICE_HIGH_LOW,
+  SortOption.TOP_RATED,
+]

@@ -17,23 +17,32 @@ export const ProductCategorySection = () => {
   const {
     selectedColor,
     selectedSize,
+    selectedCategory,
+    selectedDressStyle,
+    sortOption,
     sliderRange,
     currentPage,
     setMultipleColor,
     setMultipleSize,
+    setMultipleCategory,
+    setMultipleDressStyle,
     handleSliderChange,
+    handleSortChange,
     setCurrentPage,
   } = ProductCategoryHooks()
 
   // Mobile filter sheet open/close
   const [filtersOpen, setFiltersOpen] = useState(false)
 
-  // Filtered products (all pages)
+  // Filtered + sorted products (all pages)
   const filteredProducts = populateFilteredProducts(
     selectedColor,
     selectedSize,
     sliderRange,
-    allProductDetails
+    allProductDetails,
+    selectedCategory,
+    selectedDressStyle,
+    sortOption
   )
 
   const totalProducts = filteredProducts.length
@@ -47,8 +56,12 @@ export const ProductCategorySection = () => {
     sliderRange,
     selectedColor,
     selectedSize,
+    selectedCategory,
+    selectedDressStyle,
     changeColor: setMultipleColor,
     changeSize: setMultipleSize,
+    changeCategory: setMultipleCategory,
+    changeDressStyle: setMultipleDressStyle,
     changeSliderValue: handleSliderChange,
   }
 
@@ -76,6 +89,8 @@ export const ProductCategorySection = () => {
               currentPage={currentPage}
               pageSize={pageSize}
               totalProducts={totalProducts}
+              sortOption={sortOption}
+              onSortChange={handleSortChange}
               onOpenFilters={() => setFiltersOpen(true)}
             />
             <ProductPagination
