@@ -9,9 +9,12 @@ import {
   populateFilteredProducts,
 } from "@/constants/productDetailConst"
 import ProductCategoryHooks from "@/hooks/ProductCategoryHooks"
-import { pageSize } from "@/constants/categoryConst"
-
-const categoryName = "Casual"
+import {
+  allStyles,
+  filterDressStyles,
+  pageSize,
+} from "@/constants/categoryConst"
+import DressStyle from "./DressStyle"
 
 export const ProductCategorySection = () => {
   const {
@@ -29,6 +32,7 @@ export const ProductCategorySection = () => {
     handleSliderChange,
     handleSortChange,
     setCurrentPage,
+    clearAllFilter,
   } = ProductCategoryHooks()
 
   // Mobile filter sheet open/close
@@ -63,6 +67,7 @@ export const ProductCategorySection = () => {
     changeCategory: setMultipleCategory,
     changeDressStyle: setMultipleDressStyle,
     changeSliderValue: handleSliderChange,
+    clearAllFilter: clearAllFilter,
   }
 
   return (
@@ -84,7 +89,11 @@ export const ProductCategorySection = () => {
           {/* Products panel */}
           <div className="flex flex-col gap-6 lg:basis-3/4">
             <ProductShowcase
-              categoryName={categoryName}
+              categoryName={
+                selectedDressStyle.length > 0
+                  ? selectedDressStyle[0]
+                  : allStyles
+              }
               products={pagedProducts}
               currentPage={currentPage}
               pageSize={pageSize}

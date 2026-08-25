@@ -11,15 +11,15 @@ export type PCategoryHook = ReturnType<typeof ProductCategoryHooks>
 const ProductCategoryHooks = () => {
   const [selectedColor, setColor] = useState<string[]>([])
   const [selectedSize, setSize] = useState<ProductSize[]>([])
+  const [sliderRange, setSlider] = useState<[number, number]>([
+    filterPriceRange.min,
+    filterPriceRange.max,
+  ])
   const [selectedCategory, setCategory] = useState<string[]>([])
   const [selectedDressStyle, setDressStyle] = useState<string[]>([])
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOption.MOST_POPULAR
   )
-  const [sliderRange, setSlider] = useState<[number, number]>([
-    filterPriceRange.min,
-    filterPriceRange.max,
-  ])
   const [currentPage, setCurrentPage] = useState(1)
 
   const setMultipleColor = (addColor: string) => {
@@ -64,6 +64,15 @@ const ProductCategoryHooks = () => {
     setSortOption(option)
   }
 
+  const clearAllFilter = () => {
+    setCurrentPage(1)
+    setColor([])
+    setSize([])
+    setSlider([0, 300])
+    setCategory([])
+    setDressStyle([])
+  }
+
   return {
     selectedColor,
     selectedSize,
@@ -79,6 +88,7 @@ const ProductCategoryHooks = () => {
     handleSliderChange,
     handleSortChange,
     setCurrentPage,
+    clearAllFilter,
   }
 }
 

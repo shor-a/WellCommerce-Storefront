@@ -39,6 +39,7 @@ export const filterCategories: string[] = [
 
 export const pageSize = 9
 
+export const allStyles = "All Styles"
 export const filterDressStyles: string[] = ["Casual", "Formal", "Party", "Gym"]
 
 export const filterPriceRange = { min: 0, max: 300 } as const

@@ -1,4 +1,4 @@
-import { ChevronRight, SlidersHorizontal, X } from "lucide-react"
+import { ChevronLeft, SlidersHorizontal, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -13,6 +13,11 @@ import {
   filterSizes,
 } from "@/constants/categoryConst"
 import type { PCategoryHook } from "@/hooks/ProductCategoryHooks"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../ui/collapsible"
 
 interface FilterSidebarProps {
   sliderRange: PCategoryHook["sliderRange"]
@@ -25,6 +30,7 @@ interface FilterSidebarProps {
   changeCategory: PCategoryHook["setMultipleCategory"]
   changeDressStyle: PCategoryHook["setMultipleDressStyle"]
   changeSliderValue: PCategoryHook["handleSliderChange"]
+  clearAllFilter: PCategoryHook["clearAllFilter"]
   onClose?: () => void
 }
 
@@ -39,6 +45,7 @@ export const FilterSidebar = ({
   changeCategory,
   changeDressStyle,
   changeSliderValue,
+  clearAllFilter,
   onClose,
 }: FilterSidebarProps) => {
   return (
@@ -67,140 +74,165 @@ export const FilterSidebar = ({
       <Separator />
 
       {/* Category list */}
-      <div className="flex flex-col gap-5">
-        {filterCategories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            aria-pressed={selectedCategory.includes(cat)}
-            className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
-              selectedCategory.includes(cat)
-                ? "font-semibold text-foreground"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-            onClick={() => changeCategory(cat)}
-          >
-            <span>{cat}</span>
-            <ChevronRight className="size-4" strokeWidth={1.5} />
-          </button>
-        ))}
-      </div>
+      <Collapsible className="group flex flex-col gap-5">
+        <CollapsibleTrigger className="flex w-full items-center justify-between">
+          <span className="text-xl font-bold text-foreground">Category</span>
+          <ChevronLeft
+            className="size-4 text-foreground transition-transform group-data-open:rotate-180"
+            strokeWidth={1.5}
+          />
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="flex flex-col gap-5">
+            {filterCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                aria-pressed={selectedCategory.includes(cat)}
+                className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+                  selectedCategory.includes(cat)
+                    ? "font-semibold text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                onClick={() => changeCategory(cat)}
+              >
+                <span>{cat}</span>
+                <ChevronLeft className="size-4" strokeWidth={1.5} />
+              </button>
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       <Separator />
 
       {/* Price */}
-      <div className="flex flex-col gap-5">
-        <div className="flex items-center justify-between">
+      <Collapsible defaultOpen className="group flex flex-col gap-5">
+        <CollapsibleTrigger className="flex w-full items-center justify-between">
           <span className="text-xl font-bold text-foreground">Price</span>
-          <ChevronRight
-            className="size-4 rotate-180 text-foreground"
+          <ChevronLeft
+            className="size-4 text-foreground transition-transform group-data-open:rotate-180"
             strokeWidth={1.5}
           />
-        </div>
-        <div className="flex flex-col gap-3">
-          <Slider
-            value={sliderRange}
-            min={filterPriceRange.min}
-            max={filterPriceRange.max}
-            step={10}
-            aria-label="Price range"
-            onValueChange={(newRange) =>
-              changeSliderValue(newRange as [number, number])
-            }
-          />
-          <div className="flex justify-between text-sm font-medium text-foreground">
-            <span>${sliderRange[0]}</span>
-            <span>${sliderRange[1]}</span>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="flex flex-col gap-3">
+            <Slider
+              value={sliderRange}
+              min={filterPriceRange.min}
+              max={filterPriceRange.max}
+              step={10}
+              aria-label="Price range"
+              onValueChange={(newRange) =>
+                changeSliderValue(newRange as [number, number])
+              }
+            />
+            <div className="flex justify-between text-sm font-medium text-foreground">
+              <span>${sliderRange[0]}</span>
+              <span>${sliderRange[1]}</span>
+            </div>
           </div>
-        </div>
-      </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       <Separator />
 
       {/* Colors */}
-      <div className="flex flex-col gap-5">
-        <div className="flex items-center justify-between">
+      <Collapsible defaultOpen className="group flex flex-col gap-5">
+        <CollapsibleTrigger className="flex w-full items-center justify-between">
           <span className="text-xl font-bold text-foreground">Colors</span>
-          <ChevronRight
-            className="size-4 rotate-180 text-foreground"
+          <ChevronLeft
+            className="size-4 text-foreground transition-transform group-data-open:rotate-180"
             strokeWidth={1.5}
           />
-        </div>
-        <div className="flex flex-wrap gap-4">
-          {filterColors.map((color) => (
-            <ColorSwatch
-              key={color.colorId}
-              colorId={color.colorId}
-              hex={color.hex}
-              label={color.label}
-              isActive={selectedColor.some(
-                (findColor) => findColor === color.colorId
-              )}
-              size="lg"
-              setColor={changeColor}
-            />
-          ))}
-        </div>
-      </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="flex flex-wrap gap-4">
+            {filterColors.map((color) => (
+              <ColorSwatch
+                key={color.colorId}
+                colorId={color.colorId}
+                hex={color.hex}
+                label={color.label}
+                isActive={selectedColor.some(
+                  (findColor) => findColor === color.colorId
+                )}
+                size="lg"
+                setColor={changeColor}
+              />
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       <Separator />
 
       {/* Size */}
-      <div className="flex flex-col gap-5">
-        <div className="flex items-center justify-between">
+      <Collapsible defaultOpen className="group flex flex-col gap-5">
+        <CollapsibleTrigger className="flex w-full items-center justify-between">
           <span className="text-xl font-bold text-foreground">Size</span>
-          <ChevronRight
-            className="size-4 rotate-180 text-foreground"
+          <ChevronLeft
+            className="size-4 text-foreground transition-transform group-data-open:rotate-180"
             strokeWidth={1.5}
           />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {filterSizes.map((size) => (
-            <SizePill
-              key={size}
-              label={size}
-              isActive={selectedSize.some((findSize) => findSize === size)}
-              className="text-sm"
-              setSize={changeSize}
-            />
-          ))}
-        </div>
-      </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="flex flex-wrap gap-2">
+            {filterSizes.map((size) => (
+              <SizePill
+                key={size}
+                label={size}
+                isActive={selectedSize.some((findSize) => findSize === size)}
+                className="text-sm"
+                setSize={changeSize}
+              />
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       <Separator />
 
       {/* Dress Style */}
-      <div className="flex flex-col gap-5">
-        <div className="flex items-center justify-between">
+      <Collapsible className="group flex flex-col gap-5">
+        <CollapsibleTrigger className="flex w-full items-center justify-between">
           <span className="text-xl font-bold text-foreground">Dress Style</span>
-          <ChevronRight
-            className="size-4 rotate-180 text-foreground"
+          <ChevronLeft
+            className="size-4 text-foreground transition-transform group-data-open:rotate-180"
             strokeWidth={1.5}
           />
-        </div>
-        <div className="flex flex-col gap-5">
-          {filterDressStyles.map((style) => (
-            <button
-              key={style}
-              type="button"
-              aria-pressed={selectedDressStyle.includes(style)}
-              className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
-                selectedDressStyle.includes(style)
-                  ? "font-semibold text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              onClick={() => changeDressStyle(style)}
-            >
-              <span>{style}</span>
-              <ChevronRight className="size-4" strokeWidth={1.5} />
-            </button>
-          ))}
-        </div>
-      </div>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent>
+          <div className="flex flex-col gap-5">
+            {filterDressStyles.map((style) => (
+              <button
+                key={style}
+                type="button"
+                aria-pressed={selectedDressStyle.includes(style)}
+                className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+                  selectedDressStyle.includes(style)
+                    ? "font-semibold text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                onClick={() => changeDressStyle(style)}
+              >
+                <span>{style}</span>
+                <ChevronLeft className="size-4" strokeWidth={1.5} />
+              </button>
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       {/* Apply Filter CTA */}
-      <Button variant="default" size="xl" className="w-full rounded-full">
-        Apply Filter
+      <Button
+        variant="default"
+        size="xl"
+        className="w-full rounded-full"
+        onClick={clearAllFilter}
+      >
+        Clear Filters
       </Button>
     </div>
   )
