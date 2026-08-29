@@ -47,8 +47,6 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
     defaultValues: { email: "", password: "", rememberMe: false },
   })
 
-  const handleTogglePassword = () => setShowPassword((v) => !v)
-
   return (
     <section
       className={cn(
@@ -158,7 +156,7 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
                   />
                   <button
                     type="button"
-                    onClick={handleTogglePassword}
+                    onClick={() => setShowPassword((v) => !v)}
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }
