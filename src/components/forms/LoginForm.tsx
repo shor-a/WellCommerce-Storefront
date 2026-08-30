@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { SiGoogle, SiApple } from "@icons-pack/react-simple-icons"
 
@@ -21,6 +21,7 @@ import loginBg from "@/assets/images/general/login_register.webp"
 import smLoginBg from "@/assets/images/general/sm_login_register.webp"
 import {
   demoEmail,
+  demoLogin,
   demoPassword,
   zodLoginSchema,
   type LoginResponse,
@@ -122,7 +123,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
 
             {/* Form */}
             <form
-              onSubmit={handleSubmit(formSubmit)}
+              onSubmit={handleSubmit((data) => formSubmit(data))}
               noValidate
               className="flex flex-col gap-4 lg:gap-5"
             >
@@ -256,6 +257,9 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
                 type="button"
                 variant="outline"
                 className="h-10 w-full rounded-full border-black/10 bg-background text-base font-normal text-foreground hover:bg-secondary"
+                onClick={() => {
+                  formSubmit(demoLogin)
+                }}
               >
                 <SiGoogle className="size-[18px]" />
                 Continue with Google
@@ -264,6 +268,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
                 type="button"
                 variant="outline"
                 className="h-10 w-full rounded-full border-black/10 bg-background text-base font-normal text-foreground hover:bg-secondary"
+                onClick={() => formSubmit(demoLogin)}
               >
                 <SiApple className="size-[18px]" />
                 Continue with Apple
