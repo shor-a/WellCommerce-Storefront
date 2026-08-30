@@ -1,9 +1,8 @@
 import LoginForm from "@/components/forms/LoginForm"
 import { PageRoutes } from "@/config/routes"
 import {
+  allUsers,
   type LoginResponse,
-  demoEmail,
-  demoPassword,
   type LoginType,
 } from "@/constants/loginConst"
 import { StatusCodes } from "http-status-codes"
@@ -15,7 +14,10 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const handleLogin = async ({ email, password }: LoginType) => {
-    if (email === demoEmail && password === demoPassword) {
+    const matchAccount: boolean = allUsers.some(
+      (user) => user.email === email && user.password === password
+    )
+    if (matchAccount) {
       localStorage.setItem("authenticated", "true")
       setLogin({
         status: StatusCodes.OK,

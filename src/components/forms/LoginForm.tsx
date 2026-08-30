@@ -83,10 +83,10 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
         />
       </div>
 
-      {/* Card — single render, pulls up over mobile hero, pinned left on desktop */}
+      {/* Card — title and welcome*/}
       <div className="relative -mt-6 rounded-t-3xl bg-background px-4 py-8 lg:absolute lg:inset-y-0 lg:mt-0 lg:flex lg:items-center lg:rounded-none lg:bg-transparent lg:px-0 lg:py-0">
         <div className="mx-auto w-full max-w-[390px] lg:mx-0 lg:ml-[100px] lg:max-w-[480px]">
-          <div className="flex w-full flex-col gap-6 rounded-[20px] border border-black/10 bg-white/95 p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md lg:p-10">
+          <div className="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-6 overflow-y-auto rounded-[20px] border border-black/10 bg-white/95 p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md lg:p-10">
             {/* Logo */}
             <div className="text-center">
               <span className="font-heading text-2xl font-bold tracking-tight text-foreground lg:text-3xl lg:leading-none">
@@ -98,16 +98,16 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
             <div className="flex flex-col items-center gap-2 text-center">
               {loginState ? (
                 loginState.status === StatusCodes.OK ? (
-                  <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                  <p className="font-heading text-base text-foreground">
                     {loginState.message}
                   </p>
                 ) : (
-                  <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                  <p className="font-heading text-base text-foreground">
                     {loginState.message}
                   </p>
                 )
               ) : (
-                <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                <p className="font-heading text-lg text-foreground">
                   Welcome Back
                 </p>
               )}

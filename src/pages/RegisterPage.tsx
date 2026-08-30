@@ -1,7 +1,10 @@
 import RegisterForm from "@/components/forms/RegisterForm"
 import { PageRoutes } from "@/config/routes"
 import { allUsers } from "@/constants/loginConst"
-import type { RegisterData, RegisterResponse } from "@/constants/registerConst"
+import type {
+  RegisterResponse,
+  ZodRegisterType,
+} from "@/constants/registerConst"
 import { StatusCodes } from "http-status-codes"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -11,7 +14,7 @@ const RegisterPage = () => {
 
   const [registerState, setRegister] = useState<RegisterResponse>()
 
-  const handleRegister = (regData: RegisterData) => {
+  const handleRegister = (regData: ZodRegisterType) => {
     const regRes: RegisterResponse = {
       status: StatusCodes.OK,
       message: "Registration success",
