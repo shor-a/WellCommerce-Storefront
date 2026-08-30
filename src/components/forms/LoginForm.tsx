@@ -1,8 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { SiGoogle, SiApple } from "@icons-pack/react-simple-icons"
 
@@ -20,21 +19,21 @@ import { PageRoutes } from "@/config/routes"
 
 import loginBg from "@/assets/images/general/login_register.webp"
 import smLoginBg from "@/assets/images/general/sm_login_register.webp"
-
-const loginSchema = z.object({
-  email: z.string().email("Enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-  rememberMe: z.boolean(),
-})
-
-type LoginFormValues = z.infer<typeof loginSchema>
+import {
+  demoEmail,
+  demoPassword,
+  zodLoginSchema,
+  type LoginResponse,
+  type ZodLoginType,
+} from "@/constants/loginConst"
 
 interface LoginFormProps {
   className?: string
-  formSubmit: (data: LoginFormValues) => void
+  loginState?: LoginResponse
+  formSubmit: (data: ZodLoginType) => void
 }
 
-const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
+const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const {
@@ -42,10 +41,18 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "", rememberMe: false },
+  } = useForm<ZodLoginType>({
+    resolver: zodResolver(zodLoginSchema),
+    defaultValues: {
+      email: demoEmail,
+      password: demoPassword,
+      rememberMe: false,
+    },
   })
+
+  useEffect(() => {
+    const focusElement = document.getElementById("email")?.focus()
+  }, [])
 
   return (
     <section
@@ -81,16 +88,29 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
           <div className="flex w-full flex-col gap-6 rounded-[20px] border border-black/10 bg-white/95 p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md lg:p-10">
             {/* Logo */}
             <div className="text-center">
-              <span className="font-heading text-2xl font-bold tracking-tight text-foreground lg:text-4xl lg:leading-none">
+              <span className="font-heading text-2xl font-bold tracking-tight text-foreground lg:text-3xl lg:leading-none">
                 WELLCOMMERCE
               </span>
             </div>
 
             {/* Heading + subtitle */}
             <div className="flex flex-col items-center gap-2 text-center">
-              <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-2xl lg:leading-[57px]">
-                Welcome Back
-              </p>
+              {loginState ? (
+                loginState.status === "200" ? (
+                  <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                    Login successful!
+                  </p>
+                ) : (
+                  <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                    Login failed
+                  </p>
+                )
+              ) : (
+                <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
+                  Welcome Back
+                </p>
+              )}
+
               {/* Different copy per breakpoint — hidden/block is correct here */}
               <p className="text-base text-muted-foreground lg:hidden">
                 Sign in to continue shopping
@@ -182,14 +202,14 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
 
               {/* Remember me + Forgot password */}
               <div className="flex items-center justify-between">
-                <div className="flex-2/6 flex-nowrap">
+                <div className="min-w-24 flex-nowrap lg:min-w-28">
                   <Field orientation="horizontal">
                     <Controller
                       name="rememberMe"
                       control={control}
                       render={({ field }) => (
                         <Checkbox
-                          id="rememberMe"
+                          id="remember-me"
                           checked={field.value}
                           onCheckedChange={field.onChange}
                           className="size-4 rounded-[4px] border-black/10 bg-secondary data-checked:border-foreground data-checked:bg-foreground"
@@ -197,14 +217,14 @@ const LoginForm = ({ className, formSubmit }: LoginFormProps) => {
                       )}
                     />
                     <FieldLabel
-                      htmlFor="rememberMe"
+                      htmlFor="remember-me"
                       className="cursor-pointer text-xs font-normal text-muted-foreground lg:text-sm"
                     >
                       Remember me
                     </FieldLabel>
                   </Field>
                 </div>
-                <div className="flex flex-4/6 justify-end">
+                <div className="flex justify-end">
                   <Link
                     to={PageRoutes.FORGOT_PASSWORD}
                     className="text-xs text-foreground underline-offset-4 transition-colors duration-150 hover:underline lg:text-sm"
