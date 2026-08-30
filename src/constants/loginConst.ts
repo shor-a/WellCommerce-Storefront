@@ -1,3 +1,4 @@
+import type { StatusCodes } from "http-status-codes"
 import z from "zod"
 
 export const zodLoginSchema = z.object({
@@ -18,6 +19,6 @@ export const demoLogin: ZodLoginType = {
 }
 
 export interface LoginResponse {
-  status: string
+  status: StatusCodes
   message: string
 }

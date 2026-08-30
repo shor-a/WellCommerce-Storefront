@@ -9,6 +9,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field"
 import { useEffect, useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { StatusCodes } from "http-status-codes"
 
 const zodLoginSchema = z.object({
   email: z.string().email("Input valid email address"),
@@ -19,7 +20,7 @@ const zodLoginSchema = z.object({
 type ZodLoginType = z.infer<typeof zodLoginSchema>
 
 interface LoginResponse {
-  status: string
+  status: StatusCodes
   message: string
 }
 
@@ -34,13 +35,13 @@ const LoginFormSimple = () => {
     if (email === demoEmail && password === demoPassword) {
       localStorage.setItem("authenticated", "true")
       return setLogin({
-        status: "200",
+        status: StatusCodes.OK,
         message: "Success",
       })
     }
 
     return setLogin({
-      status: "404",
+      status: StatusCodes.UNAUTHORIZED,
       message: "Wrong username or password entered!",
     })
   }
@@ -70,7 +71,7 @@ const LoginFormSimple = () => {
           <div className="flex flex-col flex-wrap gap-10">
             <h1 className="text-3xl">WELLCOMMERCE</h1>
             {loginState ? (
-              loginState.status === "200" ? (
+              loginState.status === StatusCodes.OK ? (
                 <div className="border border-r-2 border-green-400 p-3">
                   <p className="text-md text-green-400">
                     You have successfully logged in

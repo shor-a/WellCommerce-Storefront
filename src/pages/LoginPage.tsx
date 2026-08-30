@@ -6,6 +6,7 @@ import {
   demoEmail,
   demoPassword,
 } from "@/constants/loginConst"
+import { StatusCodes } from "http-status-codes"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -17,7 +18,7 @@ const LoginPage = () => {
     if (email === demoEmail && password === demoPassword) {
       localStorage.setItem("authenticated", "true")
       setLogin({
-        status: "200",
+        status: StatusCodes.OK,
         message: "Success",
       })
 
@@ -25,7 +26,7 @@ const LoginPage = () => {
     }
 
     return setLogin({
-      status: "404",
+      status: StatusCodes.UNAUTHORIZED,
       message: "Wrong username or password entered!",
     })
   }

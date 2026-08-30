@@ -27,6 +27,7 @@ import {
   type LoginResponse,
   type ZodLoginType,
 } from "@/constants/loginConst"
+import { StatusCodes } from "http-status-codes"
 
 interface LoginFormProps {
   className?: string
@@ -97,7 +98,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
             {/* Heading + subtitle */}
             <div className="flex flex-col items-center gap-2 text-center">
               {loginState ? (
-                loginState.status === "200" ? (
+                loginState.status === StatusCodes.OK ? (
                   <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
                     Login successful!
                   </p>
