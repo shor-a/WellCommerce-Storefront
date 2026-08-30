@@ -1,10 +1,10 @@
 import LoginForm from "@/components/forms/LoginForm"
 import { PageRoutes } from "@/config/routes"
 import {
-  type ZodLoginType,
   type LoginResponse,
   demoEmail,
   demoPassword,
+  type LoginType,
 } from "@/constants/loginConst"
 import { StatusCodes } from "http-status-codes"
 import { useState } from "react"
@@ -14,12 +14,12 @@ const LoginPage = () => {
   const [loginState, setLogin] = useState<LoginResponse>()
   const navigate = useNavigate()
 
-  const handleLogin = async ({ email, password }: ZodLoginType) => {
+  const handleLogin = async ({ email, password }: LoginType) => {
     if (email === demoEmail && password === demoPassword) {
       localStorage.setItem("authenticated", "true")
       setLogin({
         status: StatusCodes.OK,
-        message: "Success",
+        message: "Login successful!",
       })
 
       return navigate(PageRoutes.HOME)
@@ -27,7 +27,7 @@ const LoginPage = () => {
 
     return setLogin({
       status: StatusCodes.UNAUTHORIZED,
-      message: "Wrong username or password entered!",
+      message: "Login failed, check credentials!",
     })
   }
 

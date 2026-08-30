@@ -12,11 +12,11 @@ export type ZodLoginType = z.infer<typeof zodLoginSchema>
 export const demoEmail = "demo@wellcommerce.com"
 export const demoPassword = "D3m0P4$$"
 
-export const demoLogin: ZodLoginType = {
-  email: demoEmail,
-  password: demoPassword,
-  rememberMe: false,
-}
+export type LoginType = Omit<ZodLoginType, "rememberMe">
+
+export const allUsers: LoginType[] = [
+  { email: demoEmail, password: demoPassword },
+]
 
 export interface LoginResponse {
   status: StatusCodes

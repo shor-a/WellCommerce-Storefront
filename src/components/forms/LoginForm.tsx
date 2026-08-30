@@ -20,11 +20,10 @@ import { PageRoutes } from "@/config/routes"
 import loginBg from "@/assets/images/general/login_register.webp"
 import smLoginBg from "@/assets/images/general/sm_login_register.webp"
 import {
-  demoEmail,
-  demoLogin,
-  demoPassword,
+  allUsers,
   zodLoginSchema,
   type LoginResponse,
+  type LoginType,
   type ZodLoginType,
 } from "@/constants/loginConst"
 import { StatusCodes } from "http-status-codes"
@@ -32,7 +31,7 @@ import { StatusCodes } from "http-status-codes"
 interface LoginFormProps {
   className?: string
   loginState?: LoginResponse
-  formSubmit: (data: ZodLoginType) => void
+  formSubmit: (data: LoginType) => void
 }
 
 const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
@@ -46,14 +45,14 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
   } = useForm<ZodLoginType>({
     resolver: zodResolver(zodLoginSchema),
     defaultValues: {
-      email: demoEmail,
-      password: demoPassword,
+      email: allUsers[0].email,
+      password: allUsers[0].password,
       rememberMe: false,
     },
   })
 
   useEffect(() => {
-    const focusElement = document.getElementById("email")?.focus()
+    const _focusElement = document.getElementById("email")?.focus()
   }, [])
 
   return (
@@ -100,11 +99,11 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
               {loginState ? (
                 loginState.status === StatusCodes.OK ? (
                   <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
-                    Login successful!
+                    {loginState.message}
                   </p>
                 ) : (
                   <p className="font-heading text-lg leading-[42px] font-normal text-foreground lg:text-xl lg:leading-[57px]">
-                    Login failed
+                    {loginState.message}
                   </p>
                 )
               ) : (
@@ -259,7 +258,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
                 variant="outline"
                 className="h-10 w-full rounded-full border-black/10 bg-background text-base font-normal text-foreground hover:bg-secondary"
                 onClick={() => {
-                  formSubmit(demoLogin)
+                  formSubmit(allUsers[0])
                 }}
               >
                 <SiGoogle className="size-[18px]" />
@@ -269,7 +268,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
                 type="button"
                 variant="outline"
                 className="h-10 w-full rounded-full border-black/10 bg-background text-base font-normal text-foreground hover:bg-secondary"
-                onClick={() => formSubmit(demoLogin)}
+                onClick={() => formSubmit(allUsers[0])}
               >
                 <SiApple className="size-[18px]" />
                 Continue with Apple
