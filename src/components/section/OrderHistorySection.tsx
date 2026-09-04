@@ -1,17 +1,24 @@
-import { ChevronRightIcon, DownloadIcon } from "lucide-react"
+import { ChevronDown, ChevronRightIcon, DownloadIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { OrderStatusBadge } from "@/components/atomic/OrderStatusBadge"
 import { OrderTrackingBar } from "@/components/atomic/OrderTrackingBar"
 import { OrderItemRow } from "@/components/atomic/OrderItemRow"
-import { ProductPagination } from "@/components/atomic/ProductPagination"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   OrderStatus,
-  TOTAL_ORDER_PAGES,
+  ORDERS_PER_PAGE,
+  orderSortOptions,
   type Order,
   type OrderStatus as OrderStatusType,
+  type OrderSortOption as OrderSortOptionType,
 } from "@/constants/orderHistoryConst"
+import ProductPagination from "../atomic/ProductPagination"
 
 // ─── Props
 
@@ -20,12 +27,16 @@ interface OrderHistorySectionProps {
   orders: Order[]
   expandedOrderId: string | null
   currentPage: number
-  totalPages?: number
+  totalPages: number
+  totalOrders: number
+  sortOption: OrderSortOptionType
+  onSortChange: (option: OrderSortOptionType) => void
   onToggleOrder: (orderId: string) => void
   onViewInvoice: (orderId: string) => void
   onRequestReturn: (orderId: string) => void
   onReorderItems: (orderId: string) => void
   onTrackOrder: (orderId: string) => void
+  onCancelOrder: (orderId: string) => void
   onPageChange: (page: number) => void
 }
 
@@ -39,7 +50,7 @@ interface CollapsedCardProps {
 
 const actionLabel: Partial<Record<OrderStatusType, string>> = {
   [OrderStatus.SHIPPED]: "Track",
-  [OrderStatus.PROCESSING]: undefined,
+  [OrderStatus.PROCESSING]: "Cancel",
   [OrderStatus.CANCELLED]: "Reorder",
   [OrderStatus.RETURNED]: "Details",
 }
@@ -133,6 +144,7 @@ interface ExpandedCardProps {
   onRequestReturn: () => void
   onReorderItems: () => void
   onTrackOrder: () => void
+  onCancelOrder: () => void
 }
 
 const ExpandedCard = ({
@@ -142,6 +154,7 @@ const ExpandedCard = ({
   onRequestReturn,
   onReorderItems,
   onTrackOrder,
+  onCancelOrder,
 }: ExpandedCardProps) => (
   <div
     className={cn(
@@ -240,59 +253,128 @@ const ExpandedCard = ({
 
     {/* ── actions ── */}
     <div className="flex flex-wrap items-center justify-end gap-4 px-6 py-6">
-      <Button
-        variant="outline"
-        size="sm"
-        className="rounded-full"
-        onClick={onRequestReturn}
-      >
-        Request Return
-      </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        className="rounded-full"
-        onClick={onReorderItems}
-      >
-        Reorder Items
-      </Button>
-      <Button
-        variant="default"
-        size="lg"
-        className="rounded-full"
-        onClick={onTrackOrder}
-      >
-        Track Order
-      </Button>
+      {order.status === OrderStatus.PROCESSING && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-full"
+          onClick={onCancelOrder}
+        >
+          Cancel Order
+        </Button>
+      )}
+      {order.status === OrderStatus.DELIVERED && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-full"
+          onClick={onRequestReturn}
+        >
+          Request Return
+        </Button>
+      )}
+      {(order.status === OrderStatus.DELIVERED ||
+        order.status === OrderStatus.CANCELLED) && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-full"
+          onClick={onReorderItems}
+        >
+          Reorder Items
+        </Button>
+      )}
+      {order.status === OrderStatus.SHIPPED && (
+        <Button
+          variant="default"
+          size="lg"
+          className="rounded-full"
+          onClick={onTrackOrder}
+        >
+          Track Order
+        </Button>
+      )}
     </div>
   </div>
 )
 
-// ─── Section
-
 export const OrderHistorySection = ({
-  className,
   orders,
   expandedOrderId,
   currentPage,
-  totalPages = TOTAL_ORDER_PAGES,
+  totalPages,
+  totalOrders,
+  sortOption,
+  onSortChange,
   onToggleOrder,
   onViewInvoice,
   onRequestReturn,
   onReorderItems,
   onTrackOrder,
+  onCancelOrder,
   onPageChange,
 }: OrderHistorySectionProps) => {
   const handleActionForCollapsed = (order: Order) => {
     if (order.status === OrderStatus.SHIPPED)
       return () => onTrackOrder(order.orderId)
+    if (order.status === OrderStatus.PROCESSING)
+      return () => onCancelOrder(order.orderId)
     if (order.status === OrderStatus.CANCELLED)
       return () => onReorderItems(order.orderId)
     return () => onToggleOrder(order.orderId)
   }
 
+  const rangeStart =
+    totalOrders === 0 ? 0 : (currentPage - 1) * ORDERS_PER_PAGE + 1
+  const rangeEnd = Math.min(currentPage * ORDERS_PER_PAGE, totalOrders)
+
   return (
-    <section className={cn("w-full bg-background", className)}>
+    <section className={cn("w-full bg-background lg:basis-3/4")}>
+      {/* ── top bar: title + count + sort ── */}
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="font-heading text-3xl font-bold text-foreground">
+          Order History
+        </h1>
+
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+          {totalOrders === 0 ? (
+            <span>No orders found</span>
+          ) : (
+            <span>
+              Showing {rangeStart}–{rangeEnd} of {totalOrders} Orders
+            </span>
+          )}
+          <span className="hidden sm:inline">
+            Sort by:
+            <Popover>
+              <PopoverTrigger
+                className="inline-flex h-auto items-center gap-1 rounded px-2 py-1 text-sm font-medium text-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                aria-label={`Sort by: ${sortOption}`}
+              >
+                {sortOption}
+                <ChevronDown className="size-4" strokeWidth={1.5} />
+              </PopoverTrigger>
+              <PopoverContent align="end" side="bottom" className="w-48 p-1">
+                {orderSortOptions.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    className={`w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none ${
+                      option === sortOption
+                        ? "font-semibold text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                    onClick={() => onSortChange(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </PopoverContent>
+            </Popover>
+          </span>
+        </div>
+      </div>
+
       {orders.length === 0 ? (
         <p className="py-16 text-center text-muted-foreground">
           No orders found.
@@ -309,6 +391,7 @@ export const OrderHistorySection = ({
                 onRequestReturn={() => onRequestReturn(order.orderId)}
                 onReorderItems={() => onReorderItems(order.orderId)}
                 onTrackOrder={() => onTrackOrder(order.orderId)}
+                onCancelOrder={() => onCancelOrder(order.orderId)}
               />
             ) : (
               <CollapsedCard

@@ -4,7 +4,6 @@ import {
   SlidersHorizontalIcon,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
   Collapsible,
@@ -23,7 +22,6 @@ interface OrderFiltersAsideProps {
   searchQuery: string
   onStatusChange: (status: OrderStatusType) => void
   onSearchChange: (query: string) => void
-  onApplyFilters: () => void
 }
 
 export const OrderFiltersAside = ({
@@ -32,7 +30,6 @@ export const OrderFiltersAside = ({
   searchQuery,
   onStatusChange,
   onSearchChange,
-  onApplyFilters,
 }: OrderFiltersAsideProps) => {
   const statusCounts: Partial<Record<OrderStatusType, number>> = {
     [OrderStatus.ALL]: 5,
@@ -111,50 +108,6 @@ export const OrderFiltersAside = ({
             </div>
           </CollapsibleContent>
         </Collapsible>
-
-        <Separator />
-
-        {/* Date Range — collapsible */}
-        <Collapsible className="group flex flex-col gap-5">
-          <CollapsibleTrigger className="flex w-full items-center justify-between">
-            <span className="text-xl font-bold text-foreground">
-              Date Range
-            </span>
-            <ChevronDownIcon
-              className="size-4 text-foreground transition-transform group-data-open:rotate-180"
-              strokeWidth={1.5}
-            />
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <p className="text-sm text-muted-foreground">Coming soon</p>
-          </CollapsibleContent>
-        </Collapsible>
-
-        <Separator />
-
-        {/* Sort By — collapsible */}
-        <Collapsible className="group flex flex-col gap-5">
-          <CollapsibleTrigger className="flex w-full items-center justify-between">
-            <span className="text-xl font-bold text-foreground">Sort By</span>
-            <ChevronDownIcon
-              className="size-4 text-foreground transition-transform group-data-open:rotate-180"
-              strokeWidth={1.5}
-            />
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <p className="text-sm text-muted-foreground">Coming soon</p>
-          </CollapsibleContent>
-        </Collapsible>
-
-        {/* Apply — matches FilterSidebar CTA button */}
-        <Button
-          variant="default"
-          size="xl"
-          className="w-full rounded-full"
-          onClick={onApplyFilters}
-        >
-          Apply Filters
-        </Button>
       </div>
     </aside>
   )

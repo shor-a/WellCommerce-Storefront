@@ -184,5 +184,21 @@ export const orderHistory: Order[] = [
   },
 ]
 
-export const ORDERS_PER_PAGE = 5
-export const TOTAL_ORDER_PAGES = 4
+export const ORDERS_PER_PAGE = 3
+
+export const OrderSortOption = {
+  NEWEST: "Newest",
+  OLDEST: "Oldest",
+  HIGHEST_TOTAL: "Highest Total",
+  LOWEST_TOTAL: "Lowest Total",
+} as const
+
+export type OrderSortOption =
+  (typeof OrderSortOption)[keyof typeof OrderSortOption]
+
+export const orderSortOptions: OrderSortOption[] = [
+  OrderSortOption.NEWEST,
+  OrderSortOption.OLDEST,
+  OrderSortOption.HIGHEST_TOTAL,
+  OrderSortOption.LOWEST_TOTAL,
+]

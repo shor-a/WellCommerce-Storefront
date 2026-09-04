@@ -7,9 +7,12 @@ import { OrderFiltersAside } from "@/components/section/OrderFiltersAside"
 import { OrderHistorySection } from "@/components/section/OrderHistorySection"
 import {
   OrderStatus,
+  OrderSortOption,
+  ORDERS_PER_PAGE,
   orderStatusFilters,
   orderHistory,
   type OrderStatus as OrderStatusType,
+  type OrderSortOption as OrderSortOptionType,
 } from "@/constants/orderHistoryConst"
 import NavigationText from "@/components/section/NavigationText"
 
@@ -80,39 +83,79 @@ const OrderHistoryPage = () => {
     OrderStatus.ALL
   )
   const [searchQuery, setSearchQuery] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
-  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(
-    orderHistory[0]?.orderId ?? null
+  const [sortOption, setSortOption] = useState<OrderSortOptionType>(
+    OrderSortOption.NEWEST
   )
+  const [currentPage, setCurrentPage] = useState(1)
+  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null)
 
-  const filteredOrders = orderHistory.filter((order) => {
-    const matchesStatus =
-      activeStatus === OrderStatus.ALL
-        ? true
-        : activeStatus === OrderStatus.ACTIVE
-          ? order.status === OrderStatus.PROCESSING ||
-            order.status === OrderStatus.SHIPPED
-          : order.status === activeStatus
+  const filteredOrders = orderHistory
+    .filter((order) => {
+      const matchesStatus =
+        activeStatus === OrderStatus.ALL
+          ? true
+          : activeStatus === OrderStatus.ACTIVE
+            ? order.status === OrderStatus.PROCESSING ||
+              order.status === OrderStatus.SHIPPED
+            : order.status === activeStatus
 
-    const matchesSearch =
-      searchQuery.trim() === "" ||
-      order.orderId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.items.some((i) =>
-        i.itemName.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        order.orderId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.items.some((i) =>
+          i.itemName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
 
-    return matchesStatus && matchesSearch
-  })
+      return matchesStatus && matchesSearch
+    })
+    .sort((a, b) => {
+      switch (sortOption) {
+        case OrderSortOption.OLDEST:
+          return (
+            new Date(a.placedDate).getTime() - new Date(b.placedDate).getTime()
+          )
+        case OrderSortOption.HIGHEST_TOTAL:
+          return b.total - a.total
+        case OrderSortOption.LOWEST_TOTAL:
+          return a.total - b.total
+        case OrderSortOption.NEWEST:
+        default:
+          return (
+            new Date(b.placedDate).getTime() - new Date(a.placedDate).getTime()
+          )
+      }
+    })
 
   const handleToggleOrder = (orderId: string) => {
     setExpandedOrderId((prev) => (prev === orderId ? null : orderId))
+  }
+
+  const handleStatusChange = (status: OrderStatusType) => {
+    setActiveStatus(status)
+    setCurrentPage(1)
+  }
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+    setCurrentPage(1)
   }
 
   const handleViewInvoice = (_orderId: string) => {}
   const handleRequestReturn = (_orderId: string) => {}
   const handleReorderItems = (_orderId: string) => {}
   const handleTrackOrder = (_orderId: string) => {}
-  const handleApplyFilters = () => {}
+  const handleCancelOrder = (_orderId: string) => {}
+  const handleSortChange = (option: OrderSortOptionType) => {
+    setSortOption(option)
+    setCurrentPage(1)
+  }
+
+  const totalOrders = filteredOrders.length
+  const totalPages = Math.max(1, Math.ceil(totalOrders / ORDERS_PER_PAGE))
+  const pagedOrders = filteredOrders.slice(
+    (currentPage - 1) * ORDERS_PER_PAGE,
+    currentPage * ORDERS_PER_PAGE
+  )
 
   return (
     <>
@@ -129,8 +172,8 @@ const OrderHistoryPage = () => {
             <MobileFilters
               activeStatus={activeStatus}
               searchQuery={searchQuery}
-              onStatusChange={setActiveStatus}
-              onSearchChange={setSearchQuery}
+              onStatusChange={handleStatusChange}
+              onSearchChange={handleSearchChange}
             />
           </div>
 
@@ -144,23 +187,26 @@ const OrderHistoryPage = () => {
               <OrderFiltersAside
                 activeStatus={activeStatus}
                 searchQuery={searchQuery}
-                onStatusChange={setActiveStatus}
-                onSearchChange={setSearchQuery}
-                onApplyFilters={handleApplyFilters}
+                onStatusChange={handleStatusChange}
+                onSearchChange={handleSearchChange}
               />
             </aside>
 
             {/* order list */}
             <OrderHistorySection
-              className="lg:basis-3/4"
-              orders={filteredOrders}
+              orders={pagedOrders}
               expandedOrderId={expandedOrderId}
               currentPage={currentPage}
+              totalPages={totalPages}
+              totalOrders={totalOrders}
+              sortOption={sortOption}
+              onSortChange={handleSortChange}
               onToggleOrder={handleToggleOrder}
               onViewInvoice={handleViewInvoice}
               onRequestReturn={handleRequestReturn}
               onReorderItems={handleReorderItems}
               onTrackOrder={handleTrackOrder}
+              onCancelOrder={handleCancelOrder}
               onPageChange={setCurrentPage}
             />
           </div>
