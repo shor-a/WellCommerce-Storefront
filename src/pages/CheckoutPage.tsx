@@ -5,7 +5,7 @@ import Navbar from "@/components/section/Navbar"
 import Footer from "@/components/section/Footer"
 import { PaymentMethodSection } from "@/components/section/PaymentMethodSection"
 import { OrderSummarySection } from "@/components/section/OrderSummarySection"
-import { BillingAddressSection } from "@/components/section/BillingAddressSection"
+import { ShippingAddressSection } from "@/components/section/ShippingAddressSection"
 import {
   PaymentMethod,
   defaultCardFormValues,
@@ -13,10 +13,19 @@ import {
   DISCOUNT_RATE,
   type CardFormValues,
 } from "@/constants/checkoutConst"
+import { type ShippingAddress } from "@/constants/orderHistoryConst"
 import { useCartStore } from "@/hooks/cartStores"
 import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
 import { PageRoutes } from "@/config/routes"
 import NavigationText from "@/components/section/NavigationText"
+
+const defaultShippingAddress: ShippingAddress = {
+  name: "John Doe",
+  line1: "123 Fashion Ave, Apt 4B",
+  city: "New York, NY 10001",
+  country: "United States",
+  phone: "+1 (555) 123-4567",
+}
 
 export const CheckoutPage = () => {
   const cart = useCartStore((state) => state.cart)
@@ -29,7 +38,11 @@ export const CheckoutPage = () => {
   const [cardValues, setCardValues] = useState<CardFormValues>(
     defaultCardFormValues
   )
-  const [sameAsShipping, setSameAsShipping] = useState(true)
+  const [shippingValues, setShippingValues] = useState<ShippingAddress>(
+    defaultShippingAddress
+  )
+  const [isEditingShipping, setIsEditingShipping] = useState(false)
+  const [submitAttempted, setSubmitAttempted] = useState(false)
 
   const handleCardChange = (
     field: keyof CardFormValues,
@@ -38,14 +51,42 @@ export const CheckoutPage = () => {
     setCardValues((prev) => ({ ...prev, [field]: value }))
   }
 
+  const handleShippingChange = (
+    field: keyof ShippingAddress,
+    value: string
+  ) => {
+    setShippingValues((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const isShippingValid = (): boolean => {
+    const required: (keyof ShippingAddress)[] = [
+      "name",
+      "line1",
+      "city",
+      "country",
+      "phone",
+    ]
+    return required.every((f) => shippingValues[f].trim() !== "")
+  }
+
+  const isPaymentValid = (): boolean => {
+    if (selectedMethod === PaymentMethod.CREDIT_CARD) {
+      return (
+        cardValues.cardholderName.trim() !== "" &&
+        cardValues.cardNumber.trim() !== "" &&
+        cardValues.expiryDate.trim() !== "" &&
+        cardValues.cvv.trim() !== ""
+      )
+    }
+    return true
+  }
+
   const handlePayNow = () => {
+    setSubmitAttempted(true)
+    if (!isPaymentValid() || !isShippingValid()) return
     if (cart.length === 0) return
     placeOrder(cart)
     navigate(PageRoutes.HOME)
-  }
-
-  const handleEditBilling = () => {
-    setSameAsShipping(false)
   }
 
   return (
@@ -65,13 +106,21 @@ export const CheckoutPage = () => {
               <PaymentMethodSection
                 selectedMethod={selectedMethod}
                 cardValues={cardValues}
-                onSelectMethod={setSelectedMethod}
+                submitAttempted={submitAttempted}
+                onSelectMethod={(method) => {
+                  setSelectedMethod(method)
+                  setSubmitAttempted(false)
+                }}
                 onCardChange={handleCardChange}
               />
 
-              <BillingAddressSection
-                sameAsShipping={sameAsShipping}
-                onEdit={handleEditBilling}
+              <ShippingAddressSection
+                shippingValues={shippingValues}
+                isEditing={isEditingShipping}
+                submitAttempted={submitAttempted}
+                onEdit={() => setIsEditingShipping(true)}
+                onSave={() => setIsEditingShipping(false)}
+                onShippingChange={handleShippingChange}
               />
             </div>
 
