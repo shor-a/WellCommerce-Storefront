@@ -1,5 +1,6 @@
 import type { StatusCodes } from "http-status-codes"
 import z from "zod"
+import type { ZodRegisterType } from "./registerConst"
 
 export const zodLoginSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -14,8 +15,15 @@ export const demoPassword = "D3m0P4$$"
 
 export type LoginType = Omit<ZodLoginType, "rememberMe">
 
-export const allUsers: LoginType[] = [
-  { email: demoEmail, password: demoPassword },
+type RegisteredUser = Omit<ZodRegisterType, "confirmPassword" | "newsletter">
+
+export const allUsers: RegisteredUser[] = [
+  {
+    fullName: "Demo User",
+    email: demoEmail,
+    password: demoPassword,
+    phone: "08888888",
+  },
 ]
 
 export interface LoginResponse {

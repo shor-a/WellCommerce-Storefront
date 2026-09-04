@@ -14,11 +14,12 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const handleLogin = async ({ email, password }: LoginType) => {
-    const matchAccount: boolean = allUsers.some(
+    const matchAccount = allUsers.filter(
       (user) => user.email === email && user.password === password
     )
     if (matchAccount) {
       localStorage.setItem("authenticated", "true")
+      localStorage.setItem("authUser", matchAccount[0].fullName)
       setLogin({
         status: StatusCodes.OK,
         message: "Login successful!",
