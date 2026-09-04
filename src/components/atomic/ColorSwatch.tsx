@@ -24,7 +24,7 @@ export const ColorSwatch = ({
     aria-label={`Select color ${label}`}
     aria-pressed={isActive}
     className={cn(
-      "inline-flex items-center justify-center rounded-full border-2 transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+      "inline-flex items-center justify-center rounded-full border-2 transition-all hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
       size === "lg" ? "size-9" : "size-6",
       isActive ? "border-foreground" : "border-foreground/15"
     )}
@@ -37,7 +37,7 @@ export const ColorSwatch = ({
           size === "lg" ? "size-4" : "size-3",
           colorId === ProductColor.WHITE.colorId ? "text-black" : "text-white"
         )}
-        strokeWidth={2.5}
+        strokeWidth={3}
       />
     )}
   </button>

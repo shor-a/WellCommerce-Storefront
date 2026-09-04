@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage"
 import ScrollToTop from "./hooks/scrollToTop"
 import RegisterPage from "./pages/RegisterPage"
 import OrderHistoryPage from "./pages/OrderHistoryPage"
+import CheckoutPage from "./pages/CheckoutPage"
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
         <Route path={PageRoutes.LOGIN} element={<LoginPage />} />
         <Route path={PageRoutes.REGISTER} element={<RegisterPage />} />
         <Route path={PageRoutes.ORDER_HISTORY} element={<OrderHistoryPage />} />
+        <Route path={PageRoutes.CHECKOUT} element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   )

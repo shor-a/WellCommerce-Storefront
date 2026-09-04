@@ -1,9 +1,12 @@
 import { CartPageItemRow } from "@/components/atomic/CartPageItemRow"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Tag, ArrowRight } from "lucide-react"
+import { Tag, ArrowRight, ShoppingCart } from "lucide-react"
 import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/cartConst"
 import { useCartStore } from "@/hooks/cartStores"
+import { Link } from "react-router-dom"
+import { PageRoutes } from "@/config/routes"
+import { cn } from "@/lib/utils"
 
 export const CartSection = () => {
   const cartItems = useCartStore((state) => state.cart)
@@ -24,7 +27,9 @@ export const CartSection = () => {
 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
           {/* ── Cart items list ── */}
-          <div className="lg:basis-7/12">
+          <div
+            className={cn(cartItems.length > 0 ? "lg:basis-7/12" : "lg:flex-1")}
+          >
             <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
               {cartItems.length > 0 ? (
                 cartItems.map((item, index) => (
@@ -36,86 +41,96 @@ export const CartSection = () => {
                   </div>
                 ))
               ) : (
-                <h2 className="text-2xl font-bold">No items in cart</h2>
+                <div className="flex min-h-32 flex-col items-center justify-center gap-5">
+                  <ShoppingCart size={60} />
+                  <h2 className="text-2xl font-bold">
+                    There are no items in cart
+                  </h2>
+                </div>
               )}
             </div>
           </div>
 
           {/* ── Order Summary ── */}
-          <div className="lg:basis-5/12">
-            <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
-              <h2 className="text-2xl font-bold">Order Summary</h2>
+          {cartItems.length > 0 ? (
+            <div className="lg:basis-5/12">
+              <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
+                <h2 className="text-2xl font-bold">Order Summary</h2>
 
-              {/* Line items */}
-              <div className="flex flex-col gap-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xl text-muted-foreground">
-                    Subtotal
-                  </span>
-                  <span className="text-xl font-bold">${subtotal}</span>
+                {/* Line items */}
+                <div className="flex flex-col gap-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl text-muted-foreground">
+                      Subtotal
+                    </span>
+                    <span className="text-xl font-bold">${subtotal}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl text-muted-foreground">
+                      Discount (-{DISCOUNT_RATE}%)
+                    </span>
+                    <span className="text-xl font-bold text-destructive">
+                      -${discountAmt}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl text-muted-foreground">
+                      Delivery Fee
+                    </span>
+                    <span className="text-xl font-bold">${deliveryFee}</span>
+                  </div>
+
+                  <Separator />
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl">Total</span>
+                    <span className="text-2xl font-bold">${total}</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-xl text-muted-foreground">
-                    Discount (-{DISCOUNT_RATE}%)
-                  </span>
-                  <span className="text-xl font-bold text-destructive">
-                    -${discountAmt}
-                  </span>
+                {/* Promo code row */}
+                <div className="flex gap-3">
+                  <div className="flex flex-1 items-center gap-3 rounded-full bg-secondary px-4 py-3">
+                    <Tag
+                      className="size-5 shrink-0 text-muted-foreground"
+                      strokeWidth={1.5}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Add promo code"
+                      aria-label="Promo code"
+                      className="min-w-0 flex-1 bg-transparent text-base text-muted-foreground placeholder:text-muted-foreground focus:outline-none"
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    variant="default"
+                    className="shrink-0 rounded-full px-6"
+                    aria-label="Apply promo code"
+                  >
+                    Apply
+                  </Button>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-xl text-muted-foreground">
-                    Delivery Fee
-                  </span>
-                  <span className="text-xl font-bold">${deliveryFee}</span>
-                </div>
-
-                <Separator />
-
-                <div className="flex items-center justify-between">
-                  <span className="text-xl">Total</span>
-                  <span className="text-2xl font-bold">${total}</span>
-                </div>
-              </div>
-
-              {/* Promo code row */}
-              <div className="flex gap-3">
-                <div className="flex flex-1 items-center gap-3 rounded-full bg-secondary px-4 py-3">
-                  <Tag
-                    className="size-5 shrink-0 text-muted-foreground"
-                    strokeWidth={1.5}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Add promo code"
-                    aria-label="Promo code"
-                    className="min-w-0 flex-1 bg-transparent text-base text-muted-foreground placeholder:text-muted-foreground focus:outline-none"
-                  />
-                </div>
+                {/* Checkout CTA */}
                 <Button
+                  render={<Link to={PageRoutes.CHECKOUT} />}
                   type="button"
                   variant="default"
-                  className="shrink-0 rounded-full px-6"
-                  aria-label="Apply promo code"
+                  size="xl"
+                  className="w-full rounded-full text-base"
+                  aria-label="Go to checkout"
                 >
-                  Apply
+                  Go to Checkout
+                  <ArrowRight className="size-5" strokeWidth={2} />
                 </Button>
               </div>
-
-              {/* Checkout CTA */}
-              <Button
-                type="button"
-                variant="default"
-                size="lg"
-                className="w-full rounded-full text-base"
-                aria-label="Go to checkout"
-              >
-                Go to Checkout
-                <ArrowRight className="size-5" strokeWidth={2} />
-              </Button>
             </div>
-          </div>
+          ) : (
+            <> </>
+          )}
         </div>
       </div>
     </section>

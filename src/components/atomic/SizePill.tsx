@@ -20,7 +20,7 @@ export const SizePill = ({
     aria-pressed={isActive}
     variant={isActive ? "default" : "secondary"}
     className={cn(
-      "h-auto rounded-full px-5 py-3 text-base font-normal",
+      "h-auto rounded-full px-5 py-3 text-base font-normal hover:cursor-pointer",
       className
     )}
     onClick={() => setSize?.(label)}

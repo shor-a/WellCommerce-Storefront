@@ -1,7 +1,4 @@
 import { allProductDetails } from "@/constants/productDetailConst"
-import { ProductColor } from "@/constants/colorConst"
-import { ProductSize } from "@/constants/sizeConst"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Rating } from "@/components/atomic/Rating"
@@ -9,12 +6,14 @@ import { ColorSwatch } from "@/components/atomic/ColorSwatch"
 import { SizePill } from "@/components/atomic/SizePill"
 import { QuantityStepper } from "@/components/atomic/QuantityStepper"
 import { ProductImageThumb } from "@/components/atomic/ProductImageThumb"
+import DiscPrice from "@/components/atomic/DiscPrice"
 
 import { useCartStore } from "@/hooks/cartStores"
 
 import { useState } from "react"
 import { constructCID } from "@/constants/cartConst"
 import { useParams } from "react-router-dom"
+import type { ProductSize } from "@/constants/sizeConst"
 
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
@@ -28,8 +27,10 @@ export const ProductSection = () => {
       (productDetail.itemPrice * productDetail.discount) / 100
   )
 
-  const [selectedColor, setColor] = useState<string>(ProductColor.OLIVE.colorId)
-  const [selectedSize, setSize] = useState<ProductSize>(ProductSize.MEDIUM)
+  const [selectedColor, setColor] = useState<string>(
+    productDetail.colors[0].colorId
+  )
+  const [selectedSize, setSize] = useState<ProductSize>(productDetail.sizes[0])
   const [activeImgIndex, setActiveImg] = useState(0)
   const [quantity, setQty] = useState(1)
 
@@ -89,20 +90,11 @@ export const ProductSection = () => {
             </div>
 
             {/* Price row */}
-            <div className="flex items-center gap-3">
-              <span className="font-heading text-3xl font-bold">
-                ${discountedPrice}
-              </span>
-              <span className="font-heading text-3xl font-bold text-foreground/40 line-through">
-                ${productDetail.itemPrice}
-              </span>
-              <Badge
-                variant="destructive"
-                className="h-auto rounded-full px-3 py-1 text-sm"
-              >
-                -{productDetail.discount}%
-              </Badge>
-            </div>
+            <DiscPrice
+              itemPrice={productDetail.itemPrice}
+              discount={productDetail.discount}
+              fontSize="text-3xl"
+            />
 
             {/* Description */}
             <p className="text-sm leading-relaxed text-muted-foreground">
@@ -125,6 +117,7 @@ export const ProductSection = () => {
                     label={color.label}
                     isActive={selectedColor === color.colorId}
                     setColor={setColor}
+                    size="lg"
                   />
                 ))}
               </div>

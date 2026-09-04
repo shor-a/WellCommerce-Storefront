@@ -10,10 +10,10 @@ import {
   OrderSortOption,
   ORDERS_PER_PAGE,
   orderStatusFilters,
-  orderHistory,
   type OrderStatus as OrderStatusType,
   type OrderSortOption as OrderSortOptionType,
 } from "@/constants/orderHistoryConst"
+import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
 import NavigationText from "@/components/section/NavigationText"
 
 // ─── Mobile filter strip
@@ -79,6 +79,7 @@ const MobileFilters = ({
 // ─── Page
 
 const OrderHistoryPage = () => {
+  const orderHistory = useOrderHistoryStore((state) => state.orders)
   const [activeStatus, setActiveStatus] = useState<OrderStatusType>(
     OrderStatus.ALL
   )
