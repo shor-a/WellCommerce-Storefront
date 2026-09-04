@@ -8,6 +8,7 @@ import ProductDetailPage from "./pages/ProductDetailPage"
 import LoginPage from "./pages/LoginPage"
 import ScrollToTop from "./hooks/scrollToTop"
 import RegisterPage from "./pages/RegisterPage"
+import OrderHistoryPage from "./pages/OrderHistoryPage"
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
         <Route path={PageRoutes.CART} element={<ShoppingCartPage />} />
         <Route path={PageRoutes.LOGIN} element={<LoginPage />} />
         <Route path={PageRoutes.REGISTER} element={<RegisterPage />} />
+        <Route path={PageRoutes.ORDER_HISTORY} element={<OrderHistoryPage />} />
       </Routes>
     </BrowserRouter>
   )

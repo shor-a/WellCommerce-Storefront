@@ -6,4 +6,5 @@ export const PageRoutes = {
   LOGIN: "/login",
   REGISTER: "/register",
   FORGOT_PASSWORD: "/forgot-password",
+  ORDER_HISTORY: "/order-history",
 } as const

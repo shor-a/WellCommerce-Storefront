@@ -29,7 +29,12 @@ interface NavbarUserIconProps {
 }
 
 const authMenuItems = [
-  { id: "orders", label: "Order History", icon: Package, to: PageRoutes.HOME },
+  {
+    id: "orders",
+    label: "Order History",
+    icon: Package,
+    to: PageRoutes.ORDER_HISTORY,
+  },
   { id: "wishlist", label: "My Wishlist", icon: Heart, to: PageRoutes.HOME },
   { id: "settings", label: "Settings", icon: Settings, to: PageRoutes.HOME },
 ] as const
