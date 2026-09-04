@@ -215,6 +215,36 @@ const ExpandedCard = ({
       </div>
     </div>
 
+    {/* ── order summary ── */}
+    <div className="border-b border-border px-6 py-6">
+      <p className="mb-4 text-base font-bold text-foreground">Order Summary</p>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>Subtotal</span>
+          <span className="font-medium text-foreground">
+            ${order.subtotal.toFixed(2)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>Discount (-{order.discountRate}%)</span>
+          <span className="font-medium text-destructive">
+            -${((order.subtotal * order.discountRate) / 100).toFixed(2)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>Delivery Fee</span>
+          <span className="font-medium text-foreground">
+            ${order.deliveryFee.toFixed(2)}
+          </span>
+        </div>
+        <Separator />
+        <div className="flex items-center justify-between text-base font-bold text-foreground">
+          <span>Total</span>
+          <span>${order.total.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>
+
     {/* ── shipping & payment ── */}
     <div className="flex flex-col gap-6 border-b border-border bg-secondary/30 px-6 py-6 lg:flex-row">
       {/* shipping address */}

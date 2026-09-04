@@ -1,4 +1,5 @@
 import { allProductDetails } from "@/constants/productDetailConst"
+import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/cartConst"
 
 export const OrderStatus = {
   ALL: "All Orders",
@@ -67,6 +68,9 @@ export interface Order {
   orderId: string
   status: OrderStatus
   placedDate: string
+  subtotal: number
+  discountRate: number
+  deliveryFee: number
   total: number
   items: OrderItem[]
   currentStep: TrackingStep
@@ -115,10 +119,19 @@ export const orderHistory: Order[] = [
     shippingAddress: defaultShipping,
     paymentMethod: defaultPayment,
     items: [fromProduct(6, 0, 1, 1), fromProduct(0, 1, 2, 1)],
-    get total() {
+    discountRate: DISCOUNT_RATE,
+    deliveryFee: DELIVERY_FEE,
+    get subtotal() {
       return this.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
+      )
+    },
+    get total() {
+      return (
+        this.subtotal -
+        (this.subtotal * this.discountRate) / 100 +
+        this.deliveryFee
       )
     },
   },
@@ -130,10 +143,19 @@ export const orderHistory: Order[] = [
     shippingAddress: defaultShipping,
     paymentMethod: defaultPayment,
     items: [fromProduct(5, 1, 0, 1)],
-    get total() {
+    discountRate: DISCOUNT_RATE,
+    deliveryFee: DELIVERY_FEE,
+    get subtotal() {
       return this.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
+      )
+    },
+    get total() {
+      return (
+        this.subtotal -
+        (this.subtotal * this.discountRate) / 100 +
+        this.deliveryFee
       )
     },
   },
@@ -145,10 +167,19 @@ export const orderHistory: Order[] = [
     shippingAddress: defaultShipping,
     paymentMethod: defaultPayment,
     items: [fromProduct(10, 0, 1, 1)],
-    get total() {
+    discountRate: DISCOUNT_RATE,
+    deliveryFee: DELIVERY_FEE,
+    get subtotal() {
       return this.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
+      )
+    },
+    get total() {
+      return (
+        this.subtotal -
+        (this.subtotal * this.discountRate) / 100 +
+        this.deliveryFee
       )
     },
   },
@@ -160,10 +191,19 @@ export const orderHistory: Order[] = [
     shippingAddress: defaultShipping,
     paymentMethod: defaultPayment,
     items: [fromProduct(4, 1, 1, 1)],
-    get total() {
+    discountRate: DISCOUNT_RATE,
+    deliveryFee: DELIVERY_FEE,
+    get subtotal() {
       return this.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
+      )
+    },
+    get total() {
+      return (
+        this.subtotal -
+        (this.subtotal * this.discountRate) / 100 +
+        this.deliveryFee
       )
     },
   },
@@ -175,10 +215,19 @@ export const orderHistory: Order[] = [
     shippingAddress: defaultShipping,
     paymentMethod: defaultPayment,
     items: [fromProduct(11, 1, 2, 1), fromProduct(9, 0, 2, 1)],
-    get total() {
+    discountRate: DISCOUNT_RATE,
+    deliveryFee: DELIVERY_FEE,
+    get subtotal() {
       return this.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
+      )
+    },
+    get total() {
+      return (
+        this.subtotal -
+        (this.subtotal * this.discountRate) / 100 +
+        this.deliveryFee
       )
     },
   },
