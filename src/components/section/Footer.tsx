@@ -1,150 +1,109 @@
 import NewsLetter from "./NewsLetter"
 
 import { Separator } from "@/components/ui/separator"
+import { paymentMethods } from "@/constants/footerConst"
+import { footerLinks, socialLinks } from "@/constants/footerConst"
+import { cn } from "@/lib/utils"
 
-import visa from "@/assets/images/general/visa.png"
-import mastercard from "@/assets/images/general/mastercard.png"
-import paypal from "@/assets/images/general/paypal.png"
-import applePay from "@/assets/images/general/applepay.png"
-import googlePay from "@/assets/images/general/googlepay.png"
+interface FooterProps {
+  className?: string
+}
 
-import {
-  SiFacebook,
-  SiX,
-  SiGithub,
-  SiInstagram,
-} from "@icons-pack/react-simple-icons"
+const FooterLinkColumn = ({
+  title,
+  links,
+}: {
+  title: string
+  links: { label: string; href: string }[]
+}) => (
+  <div className="flex flex-col gap-4">
+    <p className="text-sm font-medium tracking-[3px] text-foreground md:text-base">
+      {title}
+    </p>
+    <ul className="flex flex-col gap-3">
+      {links.map((link) => (
+        <li key={link.label}>
+          <a
+            href={link.href}
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground md:text-base"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)
 
-function Footer() {
+export const Footer = ({ className }: FooterProps) => {
   return (
     <>
-      <div className="-mt-10 flex justify-center">
-        <NewsLetter className="relative top-23" />
+      {/* Newsletter Section - Positioned to overlap footer */}
+      <div className="flex justify-center px-4 lg:px-0">
+        <NewsLetter className="relative top-[90px] z-10 lg:top-[89px]" />
       </div>
-      <footer className="footer bg-secondary pt-30 pb-10">
-        <div className="container mx-auto px-10">
-          <div className="flex w-full flex-row items-start gap-30">
-            <div className="basis-[20%]">
-              <h2 className="mb-5 text-2xl">WELLCOMMERCE</h2>
-              <p className="mb-5 text-sm">
+
+      {/* Footer */}
+      <footer className={cn("w-full bg-secondary", className)}>
+        <div className="container mx-auto px-4 pt-28 pb-8 md:px-6 lg:px-[100px] lg:pt-36 lg:pb-10">
+          {/* Main Footer Content */}
+          <div className="flex flex-col gap-8 lg:flex-row lg:gap-0">
+            {/* Brand Section */}
+            <div className="flex flex-col gap-5 lg:basis-[20%] lg:pr-6">
+              <h2 className="font-heading text-[26px] leading-tight font-bold lg:text-[33px]">
+                WELLCOMMERCE
+              </h2>
+              <p className="max-w-[248px] text-sm leading-relaxed text-muted-foreground">
                 We have clothes that suits your style and which you're proud to
                 wear. From women to men.
               </p>
-              <div className="flex justify-start">
-                <div className="grid grid-cols-5 gap-1">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
-                    <SiX className="size-4" />
-                  </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
-                    <SiFacebook className="size-4" />
-                  </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
-                    <SiInstagram className="size-4" />
-                  </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-2xl border bg-background">
-                    <SiGithub className="size-4" />
-                  </div>
-                </div>
+              <div className="flex gap-3">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      aria-label={social.label}
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-background transition-colors hover:bg-foreground hover:text-background"
+                    >
+                      <Icon className="size-3.5" />
+                    </a>
+                  )
+                })}
               </div>
             </div>
-            <div className="basis-[20%]">
-              <p className="mb-5 text-lg font-bold">COMPANY</p>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <a href="/">About</a>
-                </li>
-                <li>
-                  <a href="/">Features</a>
-                </li>
-                <li>
-                  <a href="/">Works</a>
-                </li>
-                <li>
-                  <a href="/">Careers</a>
-                </li>
-              </ul>
-            </div>
-            <div className="basis-[20%]">
-              <p className="mb-5 text-lg font-bold">HELP</p>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <a href="/">About</a>
-                </li>
-                <li>
-                  <a href="/">Features</a>
-                </li>
-                <li>
-                  <a href="/">Works</a>
-                </li>
-                <li>
-                  <a href="/">Careers</a>
-                </li>
-              </ul>
-            </div>
-            <div className="basis-[20%]">
-              <p className="mb-5 text-lg font-bold">FAQ</p>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <a href="/">About</a>
-                </li>
-                <li>
-                  <a href="/">Features</a>
-                </li>
-                <li>
-                  <a href="/">Works</a>
-                </li>
-                <li>
-                  <a href="/">Careers</a>
-                </li>
-              </ul>
-            </div>
-            <div className="basis-[20%]">
-              <p className="mb-5 text-lg font-bold">RESOURCES</p>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <a href="/">About</a>
-                </li>
-                <li>
-                  <a href="/">Features</a>
-                </li>
-                <li>
-                  <a href="/">Works</a>
-                </li>
-                <li>
-                  <a href="/">Careers</a>
-                </li>
-              </ul>
+
+            {/* Footer Links - Grid Layout */}
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:flex lg:flex-1 lg:justify-between lg:gap-0">
+              <FooterLinkColumn {...footerLinks.company} />
+              <FooterLinkColumn {...footerLinks.help} />
+              <FooterLinkColumn {...footerLinks.faq} />
+              <FooterLinkColumn {...footerLinks.resources} />
             </div>
           </div>
-          {/* Because the parent is not flex we use w-full */}
-          <div className="mb-5 flex w-full flex-col">
-            <Separator className="my-5" />
-            {/* Because the parent is flex we use basis-full */}
-            <div className="flex basis-full">
-              <div className="basis-8/12">
-                <p className="text-sm">
-                  WellCommerce 2026, All Rights Reserved
-                </p>
-              </div>
-              <div className="flex basis-6/12 justify-end">
-                <div className="grid grid-cols-5 gap-1">
-                  <div className="flex items-center justify-center rounded border bg-background p-2">
-                    <img className="h-3 w-6" src={visa} alt="" />
-                  </div>
-                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
-                    <img className="h-3 w-6" src={mastercard} alt="" />
-                  </div>
-                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
-                    <img className="h-3 w-6" src={paypal} alt="" />
-                  </div>
-                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
-                    <img className="h-3 w-6" src={applePay} alt="" />
-                  </div>
-                  <div className="flex h-8 w-12 items-center justify-center rounded border bg-background">
-                    <img className="h-3 w-6" src={googlePay} alt="" />
-                  </div>
+
+          {/* Separator */}
+          <Separator className="my-6 lg:my-8" />
+
+          {/* Bottom Bar */}
+          <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
+            <p className="text-sm text-muted-foreground">
+              WellCommerce 2026, All Rights Reserved
+            </p>
+            <div className="flex gap-3">
+              {paymentMethods.map((payment) => (
+                <div
+                  key={payment.alt}
+                  className="flex h-8 w-12 items-center justify-center rounded border border-border bg-background"
+                >
+                  <img
+                    className="h-full w-full object-contain p-1.5"
+                    src={payment.src}
+                    alt={payment.alt}
+                  />
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

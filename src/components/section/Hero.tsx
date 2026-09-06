@@ -1,11 +1,7 @@
 import { Button } from "../ui/button"
 
-import vector1 from "@/assets/images/general/vector1.png"
-import vector2 from "@/assets/images/general/vector2.png"
-import vector3 from "@/assets/images/general/vector3.png"
-import vector4 from "@/assets/images/general/vector4.png"
-import vector5 from "@/assets/images/general/vector5.png"
 import { PageRoutes } from "@/config/routes"
+import { brandsImage } from "@/constants/homepageConst"
 import { Link } from "react-router-dom"
 
 const Hero = () => {
@@ -62,11 +58,18 @@ const Hero = () => {
 
         <div className="brands bg-primary">
           <div className="container mx-auto mt-15 grid h-25 grid-cols-5 items-center justify-items-center gap-10">
-            <img className="h-10 w-40" src={vector1} alt="logo-1" />
-            <img className="h-10 w-40" src={vector2} alt="logo-2" />
-            <img className="h-10 w-40" src={vector3} alt="logo-3" />
-            <img className="h-10 w-40" src={vector4} alt="logo-4" />
-            <img className="h-10 w-40" src={vector5} alt="logo-5" />
+            {brandsImage.map((bImg) => (
+              <div
+                key={bImg.alt}
+                className="flex h-25 w-40 items-center justify-center rounded"
+              >
+                <img
+                  className="h-full w-full object-contain"
+                  src={bImg.src}
+                  alt={bImg.alt}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
