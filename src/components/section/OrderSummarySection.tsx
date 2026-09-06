@@ -30,7 +30,7 @@ export const OrderSummarySection = ({
   return (
     <section className={cn("w-full bg-background", className)}>
       <div className="flex flex-col gap-4 rounded-[20px] border border-black/10 bg-background p-6">
-        <h2 className="text-xl font-bold text-foreground">Your Order</h2>
+        <h2 className="text-xl font-bold text-foreground">Checkout</h2>
 
         {items.length === 0 ? (
           <p className="py-8 text-center text-sm text-muted-foreground">

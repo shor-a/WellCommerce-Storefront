@@ -218,7 +218,7 @@ const RegisterForm = ({
                       {...register("phone")}
                     />
                   </div>
-                  {errors.email && (
+                  {errors.phone && (
                     <FieldError id="phone-error">
                       {errors.phone?.message}
                     </FieldError>

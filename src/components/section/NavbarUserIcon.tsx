@@ -40,7 +40,7 @@ const authMenuItems = [
 ] as const
 
 export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
-  const isAuthenticated = Boolean(localStorage.getItem("authenticated"))
+  const isAuthenticated = localStorage.getItem("authenticated")
   const authUser = localStorage.getItem("authUser") ?? ""
 
   const [userOpen, setUserOpen] = useState(false)

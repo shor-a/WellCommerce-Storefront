@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 import Navbar from "@/components/section/Navbar"
 import Footer from "@/components/section/Footer"
-import { PaymentMethodSection } from "@/components/section/PaymentMethodSection"
+import { CheckoutTabsSection } from "@/components/section/CheckoutTabsSection"
 import { OrderSummarySection } from "@/components/section/OrderSummarySection"
-import { ShippingAddressSection } from "@/components/section/ShippingAddressSection"
 import {
   PaymentMethod,
   defaultCardFormValues,
@@ -94,33 +93,24 @@ export const CheckoutPage = () => {
       <Navbar />
 
       <main className="w-full bg-background">
+        <NavigationText />
         <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-          <NavigationText />
-
-          <span className="font-heading text-3xl font-black tracking-tight text-foreground">
-            CHECKOUT
-          </span>
-
           <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
-            <div className="flex flex-col gap-6 lg:basis-2/3">
-              <PaymentMethodSection
+            <div className="lg:basis-2/3">
+              <CheckoutTabsSection
                 selectedMethod={selectedMethod}
                 cardValues={cardValues}
+                shippingValues={shippingValues}
+                isEditingShipping={isEditingShipping}
                 submitAttempted={submitAttempted}
                 onSelectMethod={(method) => {
                   setSelectedMethod(method)
                   setSubmitAttempted(false)
                 }}
                 onCardChange={handleCardChange}
-              />
-
-              <ShippingAddressSection
-                shippingValues={shippingValues}
-                isEditing={isEditingShipping}
-                submitAttempted={submitAttempted}
-                onEdit={() => setIsEditingShipping(true)}
-                onSave={() => setIsEditingShipping(false)}
                 onShippingChange={handleShippingChange}
+                onEditShipping={() => setIsEditingShipping(true)}
+                onSaveShipping={() => setIsEditingShipping(false)}
               />
             </div>
 

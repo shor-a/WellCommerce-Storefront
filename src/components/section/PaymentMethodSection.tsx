@@ -50,8 +50,6 @@ export const PaymentMethodSection = ({
   return (
     <section className={cn("w-full bg-background", className)}>
       <div className="flex flex-col gap-6 rounded-2xl border border-black/10 bg-background p-8">
-        <h2 className="text-xl font-bold text-foreground">Payment Method</h2>
-
         {/* Method selector tabs */}
         <div className="flex gap-4">
           {paymentMethods.map((method) => {

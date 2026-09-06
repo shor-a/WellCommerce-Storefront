@@ -51,13 +51,10 @@ export const ShippingAddressSection = ({
 
   return (
     <section className={cn("w-full bg-background", className)}>
-      <div className="flex flex-col gap-6 rounded-2xl border border-black/10 bg-background p-8">
+      <div className="flex flex-col gap-1 rounded-2xl border border-black/10 bg-background px-8 py-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="flex flex-col gap-3">
-            <h2 className="text-xl font-bold text-foreground">
-              Shipping Address
-            </h2>
+          <div className="flex flex-col pb-4">
             <p className="text-sm text-muted-foreground">
               {isEditing
                 ? "Edit your shipping details"
@@ -256,9 +253,10 @@ export const ShippingAddressSection = ({
               <Button
                 variant="default"
                 onClick={onSave}
+                size="lg"
                 className="mt-2 w-1/4 rounded-full font-bold"
               >
-                <Check className="size-4" strokeWidth={2} />
+                <Check strokeWidth={2} />
                 Save Address
               </Button>
             </div>

@@ -13,9 +13,12 @@ export const zodRegisterSchema = z
         "First name can only contain letters, spaces, hyphens, and apostrophes"
       ),
     email: z.string().email("Enter a valid email address"),
-    phone: z.string().min(11).regex(/^\d+$/, "Must contain only digits"),
+    phone: z
+      .string()
+      .min(11, "Minimum phone is 11 numbers")
+      .regex(/^\d+$/, "Must contain only digits"),
     password: z.string().min(8, "Minimum password is 8 characters"),
-    confirmPassword: z.string().min(8),
+    confirmPassword: z.string().min(8, "Minimum password is 8 characters"),
     newsletter: z.boolean(),
   })
   .refine((data) => data.password === data.confirmPassword, {
