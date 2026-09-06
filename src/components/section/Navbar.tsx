@@ -29,8 +29,8 @@ import { PageRoutes } from "@/config/routes"
 import { allProducts } from "@/constants/productConst"
 import Rating from "../atomic/Rating"
 import { cn } from "@/lib/utils"
-import NavbarCartIcon from "./NavbarCartIcon"
-import NavbarUserIcon from "./NavbarUserIcon"
+import NavbarCartIcon from "../subsection/NavbarCartIcon"
+import NavbarUserIcon from "../subsection/NavbarUserIcon"
 
 const Navbar = () => {
   // Search bar hooks

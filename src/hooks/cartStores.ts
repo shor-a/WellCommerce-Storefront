@@ -1,6 +1,7 @@
 import { create } from "zustand"
 
 import { type Cart } from "@/constants/cartConst"
+import { createJSONStorage, persist } from "zustand/middleware"
 
 interface CartStore {
   cart: Cart[]
@@ -10,52 +11,60 @@ interface CartStore {
   countSubTotal: () => number
 }
 
-export const useCartStore = create<CartStore>((set, get) => ({
-  cart: [],
-  // addToCart just calls set((state)) and do nothing / returns void
-  // the return statements bellow is for callback function of set((state)) / set new value for state
-  addToCart: (qty, cartItem) =>
-    set((state) => {
-      const itemExist = state.cart.some(
-        (item) => item.cartItemID === cartItem.cartItemID
-      )
+export const useCartStore = create<CartStore>()(
+  persist(
+    (set, get) => ({
+      cart: [],
+      // addToCart just calls set((state)) and do nothing / returns void
+      // the return statements bellow is for callback function of set((state)) / set new value for state
+      addToCart: (qty, cartItem) =>
+        set((state) => {
+          const itemExist = state.cart.some(
+            (item) => item.cartItemID === cartItem.cartItemID
+          )
 
-      if (itemExist) {
-        return {
-          cart: state.cart.map((item) =>
-            item.cartItemID === cartItem.cartItemID
-              ? { ...item, itemQty: item.itemQty + qty }
-              : item
-          ),
-        }
-      }
-      return {
-        cart: [...state.cart, { ...cartItem, itemQty: qty }],
-      }
+          if (itemExist) {
+            return {
+              cart: state.cart.map((item) =>
+                item.cartItemID === cartItem.cartItemID
+                  ? { ...item, itemQty: item.itemQty + qty }
+                  : item
+              ),
+            }
+          }
+          return {
+            cart: [...state.cart, { ...cartItem, itemQty: qty }],
+          }
+        }),
+      removeFromCart: (qty, cartItemID, removeAll = false) =>
+        set((state) => {
+          if (removeAll) {
+            return {
+              cart: state.cart.filter((item) => item.cartItemID !== cartItemID),
+            }
+          } else {
+            return {
+              cart: state.cart.map((item) =>
+                item.cartItemID === cartItemID
+                  ? {
+                      ...item,
+                      itemQty: item.itemQty - qty < 1 ? 1 : item.itemQty - qty,
+                    }
+                  : item
+              ),
+            }
+          }
+        }),
+      countItems: () => get().cart.reduce((sum, item) => sum + item.itemQty, 0),
+      countSubTotal: () =>
+        get().cart.reduce(
+          (sum, cartItem) => cartItem.finalPrice * cartItem.itemQty + sum,
+          0
+        ),
     }),
-  removeFromCart: (qty, cartItemID, removeAll = false) =>
-    set((state) => {
-      if (removeAll) {
-        return {
-          cart: state.cart.filter((item) => item.cartItemID !== cartItemID),
-        }
-      } else {
-        return {
-          cart: state.cart.map((item) =>
-            item.cartItemID === cartItemID
-              ? {
-                  ...item,
-                  itemQty: item.itemQty - qty < 1 ? 1 : item.itemQty - qty,
-                }
-              : item
-          ),
-        }
-      }
-    }),
-  countItems: () => get().cart.reduce((sum, item) => sum + item.itemQty, 0),
-  countSubTotal: () =>
-    get().cart.reduce(
-      (sum, cartItem) => cartItem.finalPrice * cartItem.itemQty + sum,
-      0
-    ),
-}))
+    {
+      name: "cart-items-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+)
