@@ -7,6 +7,7 @@ interface CartStore {
   cart: Cart[]
   addToCart: (qty: number, cartItem: Cart) => void
   removeFromCart: (qty: number, cartItemID: string, removeAll: boolean) => void
+  clearCart: () => void
   countItems: () => number
   countSubTotal: () => number
 }
@@ -55,6 +56,7 @@ export const useCartStore = create<CartStore>()(
             }
           }
         }),
+      clearCart: () => set({ cart: [] }),
       countItems: () => get().cart.reduce((sum, item) => sum + item.itemQty, 0),
       countSubTotal: () =>
         get().cart.reduce(

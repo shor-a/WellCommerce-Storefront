@@ -225,6 +225,7 @@ export const PaymentMethodSection = ({
 
             <label className="flex cursor-pointer items-center gap-2">
               <Checkbox
+                className={"border border-stone-600"}
                 checked={cardValues.saveCard}
                 onCheckedChange={handleSaveCardChange}
               />

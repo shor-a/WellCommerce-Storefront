@@ -12,7 +12,10 @@ import {
   DISCOUNT_RATE,
   type CardFormValues,
 } from "@/constants/checkoutConst"
-import { type ShippingAddress } from "@/constants/orderHistoryConst"
+import {
+  type ShippingAddress,
+  type PaymentMethod as PaymentMethodInfo,
+} from "@/constants/orderHistoryConst"
 import { useCartStore } from "@/hooks/cartStores"
 import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
 import { PageRoutes } from "@/config/routes"
@@ -27,6 +30,7 @@ const defaultShippingAddress: ShippingAddress = {
 
 export const CheckoutPage = () => {
   const cart = useCartStore((state) => state.cart)
+  const clearCart = useCartStore((state) => state.clearCart)
   const placeOrder = useOrderHistoryStore((state) => state.placeOrder)
   const navigate = useNavigate()
 
@@ -83,7 +87,29 @@ export const CheckoutPage = () => {
     setSubmitAttempted(true)
     if (!isPaymentValid() || !isShippingValid()) return
     if (cart.length === 0) return
-    placeOrder(cart)
+
+    const paymentByMethod: Record<PaymentMethod, PaymentMethodInfo> = {
+      [PaymentMethod.CREDIT_CARD]: {
+        brand: "Credit Card",
+        last4: cardValues.cardNumber.replace(/\s/g, "").slice(-4),
+        note: "Billing address same as shipping",
+      },
+      [PaymentMethod.PAYPAL]: {
+        brand: "PayPal",
+        last4: "",
+        note: "Paid via PayPal",
+      },
+      [PaymentMethod.GPAY]: {
+        brand: "Google Pay",
+        last4: "",
+        note: "Paid via Google Pay",
+      },
+    }
+
+    const payment = paymentByMethod[selectedMethod]
+
+    placeOrder(cart, shippingValues, payment)
+    clearCart()
     navigate(PageRoutes.HOME)
   }
 

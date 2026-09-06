@@ -6,6 +6,8 @@ import {
   orderHistory,
   type Order,
   type OrderItem,
+  type ShippingAddress,
+  type PaymentMethod,
 } from "@/constants/orderHistoryConst"
 import type { Cart } from "@/constants/cartConst"
 import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/cartConst"
@@ -13,7 +15,11 @@ import { createJSONStorage, persist } from "zustand/middleware"
 
 interface OrderHistoryStore {
   orders: Order[]
-  placeOrder: (cart: Cart[]) => string
+  placeOrder: (
+    cart: Cart[],
+    shipping: ShippingAddress,
+    payment: PaymentMethod
+  ) => string
 }
 
 const buildOrderId = (): string => {
@@ -30,7 +36,7 @@ export const useOrderHistoryStore = create<OrderHistoryStore>()(
     (set) => ({
       orders: orderHistory,
 
-      placeOrder: (cart) => {
+      placeOrder: (cart, shipping, payment) => {
         const items: OrderItem[] = cart.map((cartItem) => ({
           itemId: parseInt(cartItem.cartItemID) || 0,
           itemName: cartItem.itemName,
@@ -55,18 +61,8 @@ export const useOrderHistoryStore = create<OrderHistoryStore>()(
             year: "numeric",
           }),
           currentStep: TrackingStep.ORDER_PLACED,
-          shippingAddress: {
-            name: "",
-            line1: "",
-            city: "",
-            country: "",
-            phone: "",
-          },
-          paymentMethod: {
-            brand: "",
-            last4: "",
-            note: "",
-          },
+          shippingAddress: shipping,
+          paymentMethod: payment,
           items,
           discountRate: DISCOUNT_RATE,
           deliveryFee: DELIVERY_FEE,
