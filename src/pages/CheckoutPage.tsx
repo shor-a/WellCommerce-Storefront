@@ -16,7 +16,6 @@ import { type ShippingAddress } from "@/constants/orderHistoryConst"
 import { useCartStore } from "@/hooks/cartStores"
 import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
 import { PageRoutes } from "@/config/routes"
-import NavigationText from "@/components/section/NavigationText"
 
 const defaultShippingAddress: ShippingAddress = {
   name: "John Doe",
@@ -93,7 +92,6 @@ export const CheckoutPage = () => {
       <Navbar />
 
       <main className="w-full bg-background">
-        <NavigationText />
         <div className="container mx-auto px-4 sm:px-6 lg:px-10">
           <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
             <div className="lg:basis-2/3">

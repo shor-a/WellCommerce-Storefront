@@ -9,12 +9,7 @@ import {
   populateFilteredProducts,
 } from "@/constants/productDetailConst"
 import ProductCategoryHooks from "@/hooks/ProductCategoryHooks"
-import {
-  allStyles,
-  filterDressStyles,
-  pageSize,
-} from "@/constants/categoryConst"
-import DressStyle from "./DressStyle"
+import { allStyles, pageSize } from "@/constants/categoryConst"
 
 export const ProductCategorySection = () => {
   const {

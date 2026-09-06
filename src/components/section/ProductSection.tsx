@@ -42,7 +42,7 @@ export const ProductSection = () => {
 
   return (
     <section aria-label="Product detail" className="w-full bg-background">
-      <div className="container mx-auto px-4 py-3 sm:px-6 lg:px-10 lg:py-5">
+      <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
           {/* ── Gallery block ── */}
           <div className="flex flex-col gap-3 lg:shrink-0 lg:basis-5/12">

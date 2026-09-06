@@ -15,6 +15,12 @@ import {
 } from "@/constants/orderHistoryConst"
 import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
 import NavigationText from "@/components/section/NavigationText"
+import { PageRoutes } from "@/config/routes"
+
+const orderHistoryCrumbs = [
+  { label: "Home", href: PageRoutes.HOME },
+  { label: "Order History", href: null },
+]
 
 // ─── Mobile filter strip
 
@@ -163,7 +169,7 @@ const OrderHistoryPage = () => {
       <Navbar />
 
       {/* breadcrumb — matches NavigationText styling */}
-      <NavigationText />
+      <NavigationText crumbs={orderHistoryCrumbs} />
 
       {/* main content — matches ProductCategorySection container */}
       <section aria-label="Order history" className="w-full bg-background">
