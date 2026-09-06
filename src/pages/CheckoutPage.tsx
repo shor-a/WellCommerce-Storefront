@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "@/components/section/Navbar"
 import Footer from "@/components/section/Footer"
 import { CheckoutTabsSection } from "@/components/section/CheckoutTabsSection"
-import { OrderSummarySection } from "@/components/section/OrderSummarySection"
+import { CheckoutOrderSummary } from "@/components/subsection/CheckoutOrderSummary"
 import {
   PaymentMethod,
   defaultCardFormValues,
@@ -92,9 +92,10 @@ export const CheckoutPage = () => {
       <Navbar />
 
       <main className="w-full bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
-            <div className="lg:basis-2/3">
+        <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
+          <h1 className="mb-6 text-3xl lg:text-3xl">Checkout</h1>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+            <div className="lg:basis-7/12">
               <CheckoutTabsSection
                 selectedMethod={selectedMethod}
                 cardValues={cardValues}
@@ -112,8 +113,8 @@ export const CheckoutPage = () => {
               />
             </div>
 
-            <div className="lg:basis-1/3">
-              <OrderSummarySection
+            <div className="lg:basis-5/12">
+              <CheckoutOrderSummary
                 items={cart}
                 discountRate={DISCOUNT_RATE}
                 deliveryFee={DELIVERY_FEE}
