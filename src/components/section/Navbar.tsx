@@ -23,7 +23,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 
-import { Search, AlignLeft, CircleUserRound } from "lucide-react"
+import { Search, AlignLeft } from "lucide-react"
 import { generatePath, Link } from "react-router-dom"
 import { PageRoutes } from "@/config/routes"
 import { allProducts } from "@/constants/productConst"
@@ -88,7 +88,7 @@ const Navbar = () => {
             className="font-heading text-xl font-bold tracking-tight lg:text-2xl"
             to={PageRoutes.HOME}
           >
-            <span>WELLCOMMERCE</span>
+            <span className="text-2xl">WELLCOMMERCE</span>
           </Link>
 
           {/* Desktop nav links */}

@@ -26,7 +26,7 @@ const HappyCustomers = (): React.ReactNode => {
     <section className="happy-customers w-full overflow-clip bg-background pt-30 pb-20">
       <div className="container mx-auto px-10">
         <header className="mb-10 flex w-full max-w-[1280px] items-end justify-between gap-6 px-6">
-          <h2 className="mt-[-1px] text-3xl leading-none font-bold tracking-[0] text-black sm:text-5xl">
+          <h2 className="text-4xl leading-none tracking-[0]">
             OUR HAPPY CUSTOMERS
           </h2>
           <nav

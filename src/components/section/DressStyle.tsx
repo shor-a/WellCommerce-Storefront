@@ -63,7 +63,7 @@ const DressStyle = () => {
         >
           <h2
             id="browse-by-dress-title"
-            className="px-4 text-center leading-[normal] font-bold tracking-[0] text-black"
+            className="px-4 text-center leading-[normal] tracking-[0]"
           >
             BROWSE BY DRESS STYLE
           </h2>
