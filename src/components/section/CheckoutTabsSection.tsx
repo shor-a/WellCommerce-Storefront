@@ -5,17 +5,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { PaymentMethodSection } from "@/components/section/PaymentMethodSection"
 import { ShippingAddressSection } from "@/components/section/ShippingAddressSection"
 import {
+  CheckoutTab,
   type PaymentMethod,
   type CardFormValues,
 } from "@/constants/checkoutConst"
 import { type ShippingAddress } from "@/constants/orderHistoryConst"
-
-const CheckoutTab = {
-  PAYMENT: "payment",
-  SHIPPING: "shipping",
-} as const
-
-type CheckoutTab = (typeof CheckoutTab)[keyof typeof CheckoutTab]
 
 interface CheckoutTabsSectionProps {
   className?: string

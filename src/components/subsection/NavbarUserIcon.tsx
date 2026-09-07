@@ -105,7 +105,7 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
             align="end"
             sideOffset={10}
             className={cn(
-              "w-64 overflow-hidden p-0",
+              "w-52 overflow-hidden p-0",
               "rounded-[20px]",
               "border border-border/60",
               "bg-background/95 backdrop-blur-md",

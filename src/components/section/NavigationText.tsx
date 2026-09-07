@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Link } from "react-router-dom"
 
 export interface NavigationCrumb {
   label: string
@@ -33,12 +34,12 @@ export const NavigationText = ({ className, crumbs }: NavigationTextProps) => (
                   {crumb.label}
                 </span>
               ) : (
-                <a
-                  href={crumb.href ?? "#"}
+                <Link
+                  to={crumb.href ?? "#"}
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {crumb.label}
-                </a>
+                </Link>
               )}
             </li>
           )

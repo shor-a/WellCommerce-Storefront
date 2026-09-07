@@ -32,6 +32,13 @@ export const defaultCardFormValues: CardFormValues = {
 
 export { DELIVERY_FEE, DISCOUNT_RATE }
 
+export const CheckoutTab = {
+  PAYMENT: "payment",
+  SHIPPING: "shipping",
+} as const
+
+export type CheckoutTab = (typeof CheckoutTab)[keyof typeof CheckoutTab]
+
 import type { ShippingAddress } from "@/constants/orderHistoryConst"
 
 export const defaultShippingAddress: ShippingAddress = {

@@ -17,8 +17,6 @@ import ProductPagination from "../atomic/ProductPagination"
 import { OrderHistoryCollapsed } from "@/components/subsection/OrderHistoryCollapsed"
 import { OrderHistoryExpanded } from "@/components/subsection/OrderHistoryExpanded"
 
-// ─── Props
-
 interface OrderHistorySectionProps {
   className?: string
   orders: Order[]
@@ -98,11 +96,12 @@ export const OrderHistorySection = ({
                   <button
                     key={option}
                     type="button"
-                    className={`w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none ${
+                    className={cn(
+                      "w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none",
                       option === sortOption
                         ? "font-semibold text-foreground"
                         : "text-muted-foreground"
-                    }`}
+                    )}
                     onClick={() => onSortChange(option)}
                   >
                     {option}

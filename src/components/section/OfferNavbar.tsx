@@ -1,4 +1,6 @@
+import { PageRoutes } from "@/config/routes"
 import { X } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const OfferNavbar = () => {
   return (
@@ -9,9 +11,9 @@ const OfferNavbar = () => {
             <p className="mx-1 text-sm">
               Sign up and get 20% off to you first order.
             </p>
-            <a className="text-sm" href="/">
+            <Link className="text-sm" to={PageRoutes.REGISTER}>
               <u>Sign Up Now</u>
-            </a>
+            </Link>
           </div>
 
           <div className="flex basis-1/12 items-center justify-center">
