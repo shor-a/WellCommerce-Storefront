@@ -31,3 +31,13 @@ export const defaultCardFormValues: CardFormValues = {
 }
 
 export { DELIVERY_FEE, DISCOUNT_RATE }
+
+import type { ShippingAddress } from "@/constants/orderHistoryConst"
+
+export const defaultShippingAddress: ShippingAddress = {
+  name: "John Doe",
+  line1: "123 Fashion Ave, Apt 4B",
+  city: "New York, NY 10001",
+  country: "United States",
+  phone: "+1 (555) 123-4567",
+}

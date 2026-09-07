@@ -1,117 +1,25 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-
 import Navbar from "@/components/section/Navbar"
 import Footer from "@/components/section/Footer"
 import { CheckoutTabsSection } from "@/components/section/CheckoutTabsSection"
 import { CheckoutOrderSummary } from "@/components/subsection/CheckoutOrderSummary"
-import {
-  PaymentMethod,
-  defaultCardFormValues,
-  DELIVERY_FEE,
-  DISCOUNT_RATE,
-  type CardFormValues,
-} from "@/constants/checkoutConst"
-import {
-  type ShippingAddress,
-  type PaymentMethod as PaymentMethodInfo,
-} from "@/constants/orderHistoryConst"
-import { useCartStore } from "@/hooks/cartStores"
-import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
-import { PageRoutes } from "@/config/routes"
-
-const defaultShippingAddress: ShippingAddress = {
-  name: "John Doe",
-  line1: "123 Fashion Ave, Apt 4B",
-  city: "New York, NY 10001",
-  country: "United States",
-  phone: "+1 (555) 123-4567",
-}
+import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/checkoutConst"
+import { useCheckout } from "@/hooks/checkoutHooks"
 
 export const CheckoutPage = () => {
-  const cart = useCartStore((state) => state.cart)
-  const clearCart = useCartStore((state) => state.clearCart)
-  const placeOrder = useOrderHistoryStore((state) => state.placeOrder)
-  const navigate = useNavigate()
-
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>(
-    PaymentMethod.CREDIT_CARD
-  )
-  const [cardValues, setCardValues] = useState<CardFormValues>(
-    defaultCardFormValues
-  )
-  const [shippingValues, setShippingValues] = useState<ShippingAddress>(
-    defaultShippingAddress
-  )
-  const [isEditingShipping, setIsEditingShipping] = useState(false)
-  const [submitAttempted, setSubmitAttempted] = useState(false)
-
-  const handleCardChange = (
-    field: keyof CardFormValues,
-    value: string | boolean
-  ) => {
-    setCardValues((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleShippingChange = (
-    field: keyof ShippingAddress,
-    value: string
-  ) => {
-    setShippingValues((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const isShippingValid = (): boolean => {
-    const required: (keyof ShippingAddress)[] = [
-      "name",
-      "line1",
-      "city",
-      "country",
-      "phone",
-    ]
-    return required.every((f) => shippingValues[f].trim() !== "")
-  }
-
-  const isPaymentValid = (): boolean => {
-    if (selectedMethod === PaymentMethod.CREDIT_CARD) {
-      return (
-        cardValues.cardholderName.trim() !== "" &&
-        cardValues.cardNumber.trim() !== "" &&
-        cardValues.expiryDate.trim() !== "" &&
-        cardValues.cvv.trim() !== ""
-      )
-    }
-    return true
-  }
-
-  const handlePayNow = () => {
-    setSubmitAttempted(true)
-    if (!isPaymentValid() || !isShippingValid()) return
-    if (cart.length === 0) return
-
-    const paymentByMethod: Record<PaymentMethod, PaymentMethodInfo> = {
-      [PaymentMethod.CREDIT_CARD]: {
-        brand: "Credit Card",
-        last4: cardValues.cardNumber.replace(/\s/g, "").slice(-4),
-        note: "Billing address same as shipping",
-      },
-      [PaymentMethod.PAYPAL]: {
-        brand: "PayPal",
-        last4: "",
-        note: "Paid via PayPal",
-      },
-      [PaymentMethod.GPAY]: {
-        brand: "Google Pay",
-        last4: "",
-        note: "Paid via Google Pay",
-      },
-    }
-
-    const payment = paymentByMethod[selectedMethod]
-
-    placeOrder(cart, shippingValues, payment)
-    clearCart()
-    navigate(PageRoutes.HOME)
-  }
+  const {
+    cart,
+    selectedMethod,
+    cardValues,
+    shippingValues,
+    isEditingShipping,
+    submitAttempted,
+    handleCardChange,
+    handleShippingChange,
+    handlePayNow,
+    onSelectMethod,
+    onEditShipping,
+    onSaveShipping,
+  } = useCheckout()
 
   return (
     <>
@@ -128,14 +36,11 @@ export const CheckoutPage = () => {
                 shippingValues={shippingValues}
                 isEditingShipping={isEditingShipping}
                 submitAttempted={submitAttempted}
-                onSelectMethod={(method) => {
-                  setSelectedMethod(method)
-                  setSubmitAttempted(false)
-                }}
+                onSelectMethod={onSelectMethod}
                 onCardChange={handleCardChange}
                 onShippingChange={handleShippingChange}
-                onEditShipping={() => setIsEditingShipping(true)}
-                onSaveShipping={() => setIsEditingShipping(false)}
+                onEditShipping={onEditShipping}
+                onSaveShipping={onSaveShipping}
               />
             </div>
 
