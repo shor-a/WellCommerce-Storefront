@@ -51,7 +51,7 @@ export const CartOrderSummary = ({
         </div>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         <div className="flex flex-1 items-center gap-3 rounded-full bg-secondary px-4 py-3">
           <Tag
             className="size-5 shrink-0 text-muted-foreground"

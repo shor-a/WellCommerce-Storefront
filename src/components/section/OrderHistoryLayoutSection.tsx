@@ -51,7 +51,10 @@ export const OrderHistoryLayoutSection = ({
   onCancelOrder,
   onPageChange,
 }: OrderHistoryLayoutSectionProps) => (
-  <section aria-label="Order history" className={cn("w-full bg-background", className)}>
+  <section
+    aria-label="Order history"
+    className={cn("w-full bg-background", className)}
+  >
     <div className="container mx-auto px-4 sm:px-6 lg:px-10">
       <div className="mb-6 lg:hidden">
         <OrderHistoryMobileFilters

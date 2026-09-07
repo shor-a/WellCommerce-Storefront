@@ -130,7 +130,7 @@ export const OrderHistoryExpanded = ({
       <div className="flex flex-col gap-3 lg:basis-1/2 lg:pl-16">
         <p className="text-base font-bold text-foreground">Payment Method</p>
         <div className="flex items-center gap-3">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded border border-border bg-card px-1">
+          <div className="flex h-8 w-12 shrink-0 items-center justify-center rounded border border-border bg-card px-1">
             <span className="text-xs font-bold text-foreground">
               {order.paymentMethod.brand}
             </span>

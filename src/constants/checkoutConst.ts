@@ -48,3 +48,12 @@ export const defaultShippingAddress: ShippingAddress = {
   country: "United States",
   phone: "+1 (555) 123-4567",
 }
+
+export const PaymentStep = {
+  VALIDATING: 0,
+  PROCESSING: 1,
+  CONFIRMED: 2,
+  COMPLETE: 3,
+} as const
+
+export type PaymentStep = (typeof PaymentStep)[keyof typeof PaymentStep]
