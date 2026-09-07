@@ -235,6 +235,23 @@ export const orderHistory: Order[] = [
 
 export const ORDERS_PER_PAGE = 3
 
+// Payment method helpers
+
+export const WALLET_PAYMENT_BRANDS = [
+  "paypal",
+  "gpay",
+  "google pay",
+  "apple pay",
+] as const
+
+export const isWalletBrand = (brand: string): boolean =>
+  WALLET_PAYMENT_BRANDS.includes(
+    brand.toLowerCase() as (typeof WALLET_PAYMENT_BRANDS)[number]
+  )
+
+export const getPaymentLabel = (brand: string, last4: string): string =>
+  isWalletBrand(brand) ? brand : `${brand} ending in ${last4}`
+
 export const OrderSortOption = {
   NEWEST: "Newest",
   OLDEST: "Oldest",

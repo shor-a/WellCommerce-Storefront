@@ -20,6 +20,10 @@ const OrderHistoryPage = () => {
     pagedOrders,
     totalOrders,
     totalPages,
+    statusCounts,
+    modalType,
+    modalOrder,
+    closeModal,
     handleToggleOrder,
     handleStatusChange,
     handleSearchChange,
@@ -29,6 +33,8 @@ const OrderHistoryPage = () => {
     handleReorderItems,
     handleTrackOrder,
     handleCancelOrder,
+    handleConfirmCancel,
+    handleConfirmReorder,
     setCurrentPage,
   } = useOrderHistoryFilters()
 
@@ -46,6 +52,12 @@ const OrderHistoryPage = () => {
         activeStatus={activeStatus}
         searchQuery={searchQuery}
         sortOption={sortOption}
+        statusCounts={statusCounts}
+        modalType={modalType}
+        modalOrder={modalOrder}
+        onCloseModal={closeModal}
+        onConfirmCancel={handleConfirmCancel}
+        onConfirmReorder={handleConfirmReorder}
         onStatusChange={handleStatusChange}
         onSearchChange={handleSearchChange}
         onSortChange={handleSortChange}

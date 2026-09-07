@@ -8,6 +8,8 @@ import {
 interface OrderHistoryMobileFiltersProps {
   activeStatus: OrderStatusType
   searchQuery: string
+  /** Per-status counts from the full (unfiltered) order list */
+  statusCounts?: Partial<Record<OrderStatusType, number>>
   onStatusChange: (s: OrderStatusType) => void
   onSearchChange: (q: string) => void
 }
@@ -15,6 +17,7 @@ interface OrderHistoryMobileFiltersProps {
 export const OrderHistoryMobileFilters = ({
   activeStatus,
   searchQuery,
+  statusCounts,
   onStatusChange,
   onSearchChange,
 }: OrderHistoryMobileFiltersProps) => (
@@ -40,13 +43,14 @@ export const OrderHistoryMobileFilters = ({
     <div className="flex [scrollbar-width:none] gap-3 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
       {orderStatusFilters.map((status) => {
         const isActive = status === activeStatus
+        const count = statusCounts?.[status]
         return (
           <button
             key={status}
             aria-pressed={isActive}
             onClick={() => onStatusChange(status)}
             className={cn(
-              "shrink-0 rounded-full px-6 py-2 text-sm font-normal transition-all duration-150",
+              "inline-flex shrink-0 items-center gap-1.5 rounded-full px-5 py-2 text-sm font-normal transition-all duration-150",
               "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
               isActive
                 ? "bg-primary text-primary-foreground shadow-[0_2px_4px_-2px_rgb(0_0_0/0.1),0_4px_6px_-1px_rgb(0_0_0/0.1)]"
@@ -54,6 +58,11 @@ export const OrderHistoryMobileFilters = ({
             )}
           >
             {status}
+            {isActive && count !== undefined && count > 0 && (
+              <span className="flex min-w-[18px] items-center justify-center rounded-full bg-background/20 px-1 text-[10px] font-bold text-primary-foreground">
+                {count}
+              </span>
+            )}
           </button>
         )
       })}

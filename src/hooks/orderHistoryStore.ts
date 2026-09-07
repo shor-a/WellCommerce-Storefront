@@ -20,6 +20,8 @@ interface OrderHistoryStore {
     shipping: ShippingAddress,
     payment: PaymentMethod
   ) => string
+  cancelOrder: (orderId: string) => void
+  removeOrder: (orderId: string) => void
 }
 
 const buildOrderId = (): string => {
@@ -76,6 +78,18 @@ export const useOrderHistoryStore = create<OrderHistoryStore>()(
         set((state) => ({ orders: [newOrder, ...state.orders] }))
         return newOrder.orderId
       },
+
+      cancelOrder: (orderId) =>
+        set((state) => ({
+          orders: state.orders.map((o) =>
+            o.orderId === orderId ? { ...o, status: OrderStatus.CANCELLED } : o
+          ),
+        })),
+
+      removeOrder: (orderId) =>
+        set((state) => ({
+          orders: state.orders.filter((o) => o.orderId !== orderId),
+        })),
     }),
     {
       name: "order-history-storage",

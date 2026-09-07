@@ -5,7 +5,11 @@ import { Separator } from "@/components/ui/separator"
 import { OrderStatusBadge } from "@/components/atomic/OrderStatusBadge"
 import { OrderTrackingBar } from "@/components/atomic/OrderTrackingBar"
 import { OrderItemRow } from "@/components/atomic/OrderItemRow"
-import { OrderStatus, type Order } from "@/constants/orderHistoryConst"
+import {
+  OrderStatus,
+  getPaymentLabel,
+  type Order,
+} from "@/constants/orderHistoryConst"
 
 interface OrderHistoryExpandedProps {
   order: Order
@@ -32,6 +36,7 @@ export const OrderHistoryExpanded = ({
       "shadow-[0_1px_2px_0_rgb(0_0_0/0.05)]"
     )}
   >
+    {/* ── header / toggle row ── */}
     <button
       onClick={onToggle}
       aria-expanded={true}
@@ -69,10 +74,12 @@ export const OrderHistoryExpanded = ({
       </Button>
     </button>
 
+    {/* ── tracking bar ── */}
     <div className="border-b border-border px-8 py-8">
       <OrderTrackingBar currentStep={order.currentStep} />
     </div>
 
+    {/* ── items ── */}
     <div className="border-b border-border px-6 py-6">
       <p className="mb-4 text-base font-bold text-foreground">Items</p>
       <div className="flex flex-col gap-4">
@@ -82,6 +89,7 @@ export const OrderHistoryExpanded = ({
       </div>
     </div>
 
+    {/* ── order summary ── */}
     <div className="border-b border-border px-6 py-6">
       <p className="mb-4 text-base font-bold text-foreground">Order Summary</p>
       <div className="flex flex-col gap-3">
@@ -111,6 +119,7 @@ export const OrderHistoryExpanded = ({
       </div>
     </div>
 
+    {/* ── shipping + payment ── */}
     <div className="flex flex-col gap-6 border-b border-border bg-secondary/30 px-6 py-6 lg:flex-row">
       <div className="flex flex-col gap-3 lg:basis-1/2">
         <p className="text-base font-bold text-foreground">Shipping Address</p>
@@ -136,7 +145,10 @@ export const OrderHistoryExpanded = ({
             </span>
           </div>
           <p className="text-sm leading-5 text-muted-foreground">
-            {order.paymentMethod.brand} ending in {order.paymentMethod.last4}
+            {getPaymentLabel(
+              order.paymentMethod.brand,
+              order.paymentMethod.last4
+            )}
             <br />
             {order.paymentMethod.note}
           </p>
@@ -144,6 +156,7 @@ export const OrderHistoryExpanded = ({
       </div>
     </div>
 
+    {/* ── action buttons ── */}
     <div className="flex flex-wrap items-center justify-end gap-4 px-6 py-6">
       {order.status === OrderStatus.PROCESSING && (
         <Button
