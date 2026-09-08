@@ -16,12 +16,12 @@ export const NewsLetter = ({ className }: NewsProp) => {
         `w-full max-w-[1100px] overflow-hidden rounded-[20px] border-0 bg-black text-white shadow-none`
       )}
     >
-      <CardContent className="flex flex-col gap-7 px-6 py-8 sm:px-10 md:flex-row md:items-center md:justify-between md:gap-10 md:px-16 md:py-6">
-        <h2 className="max-w-[551px] text-[32px] leading-[36px] font-bold tracking-[0] sm:text-[36px] sm:leading-[50px]">
+      <CardContent className="flex flex-col gap-7 px-6 py-8 md:flex-row md:items-center md:justify-between md:gap-10 md:px-16 md:py-6">
+        <h2 className="text-[32px] leading-[35px] font-bold tracking-[0] md:max-w-[551px] md:text-[36px] md:leading-[50px]">
           STAY UPTO DATE ABOUT OUR LATEST OFFERS
         </h2>
         <form
-          className="flex w-full max-w-[349px] shrink-0 flex-col gap-3.5"
+          className="flex w-full shrink-0 flex-col gap-3.5 md:max-w-[349px]"
           onSubmit={(event) => event.preventDefault()}
         >
           <label className="sr-only" htmlFor="newsletter-email">
