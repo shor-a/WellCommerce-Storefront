@@ -26,9 +26,9 @@ const ShortShowcase = ({
   return (
     <>
       <section className={cn("showcase", className)}>
-        <div className={`container mx-auto px-10 ${className}`}>
-          <h2 className="text-center text-4xl">{title}</h2>
-          <div className="flex w-full flex-row justify-between gap-5 pt-10 pb-5">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-10">
+          <h2 className="text-center text-3xl lg:text-4xl">{title}</h2>
+          <div className="grid grid-cols-2 gap-4 pt-10 pb-5 lg:grid-cols-4">
             {product.map((p) => (
               <Link
                 key={p.itemId}
@@ -36,28 +36,22 @@ const ShortShowcase = ({
                   productid: String(p.itemId),
                 })}
               >
-                <div className="basis-3/12">
-                  <Card className="pt-3 sm:min-h-58 lg:min-h-90">
-                    <CardContent className="flex flex-col gap-3 pt-2">
-                      <div className="flex justify-center bg-secondary">
-                        <img
-                          className="sm:h-30 sm:w-40 lg:h-60 lg:w-70"
-                          src={p.itemImg}
-                          alt={`product-${p.itemId}`}
-                        />
-                      </div>
-                      <p className="text-md font-bold">{p.itemName}</p>
-
-                      {<Rating starValue={p.itemRating} />}
-                      {
-                        <DiscPrice
-                          itemPrice={p.itemPrice}
-                          discount={p.discount}
-                        />
-                      }
-                    </CardContent>
-                  </Card>
-                </div>
+                <Card className="h-full">
+                  <CardContent className="flex flex-col gap-3 pt-2">
+                    <div className="flex justify-center overflow-hidden rounded-md bg-secondary">
+                      <img
+                        className="h-40 w-full object-contain sm:h-44 lg:h-60"
+                        src={p.itemImg}
+                        alt={`product-${p.itemId}`}
+                      />
+                    </div>
+                    <p className="lg:text-md text-sm leading-snug font-bold">
+                      {p.itemName}
+                    </p>
+                    <Rating starValue={p.itemRating} />
+                    <DiscPrice itemPrice={p.itemPrice} discount={p.discount} />
+                  </CardContent>
+                </Card>
               </Link>
             ))}
           </div>
@@ -66,7 +60,7 @@ const ShortShowcase = ({
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
-                className="px-18 py-5"
+                className="w-full px-18 py-5 lg:w-auto"
                 variant="outline"
               >
                 View All
