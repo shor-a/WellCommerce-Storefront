@@ -1,84 +1,53 @@
-import { Card, CardContent } from "@/components/ui/card"
+import type { DressStyle } from "@/constants/homepageConst"
 
-import image15 from "@/assets/images/general/image15.webp"
-import image16 from "@/assets/images/general/image16.webp"
-import image17 from "@/assets/images/general/image17.webp"
-import image18 from "@/assets/images/general/image18.webp"
+import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom"
 import { PageRoutes } from "@/config/routes"
 
-const DressStyle = () => {
-  const dressStyles = [
-    {
-      title: "Casual",
-      image: image15,
-      imageClassName: "left-0 w-full",
-      cardClassName: "aspect-[407/289]",
-    },
-    {
-      title: "Formal",
-      image: image16,
-      imageClassName: "left-0 w-full",
-      cardClassName: "aspect-[684/289]",
-    },
-    {
-      title: "Party",
-      image: image17,
-      imageClassName: "left-[6.14%] w-[93.86%]",
-      cardClassName: "aspect-[684/289]",
-    },
-    {
-      title: "Gym",
-      image: image18,
-      imageClassName: "left-[13.02%] w-[86.98%]",
-      cardClassName: "aspect-[407/289]",
-    },
-  ]
-
-  const renderDressCard = (dressStyle: (typeof dressStyles)[number]) => (
-    <Link key={dressStyle.title} to={PageRoutes.BROWSE}>
-      <Card
-        className={`h-full w-full overflow-hidden rounded-[20px] border-0 bg-white p-0 shadow-none ${dressStyle.cardClassName}`}
-      >
-        <CardContent className="relative h-full p-0">
-          <img
-            className={`absolute top-0 h-full object-cover ${dressStyle.imageClassName}`}
-            alt="Image"
-            src={dressStyle.image}
-          />
-          <span className="relative z-10 flex pt-[8.65%] pl-[8.85%] text-[clamp(1.25rem,2.91vw,2.25rem)] leading-[normal] font-bold tracking-[0] text-black">
-            {dressStyle.title}
-          </span>
-        </CardContent>
-      </Card>
-    </Link>
-  )
-
-  return (
-    <section className="dresss bg-background pt-5">
-      <div className="container mx-auto flex justify-center gap-10 px-10">
-        <div
-          className="w-full max-w-[1100px] overflow-hidden rounded-[40px] bg-[#efefef] pt-[5.68%] pb-[6.14%]"
-          aria-labelledby="browse-by-dress-title"
-        >
-          <h2
-            id="browse-by-dress-title"
-            className="px-4 text-center leading-[normal] tracking-[0]"
-          >
-            BROWSE BY DRESS STYLE
-          </h2>
-          <div className="mt-[5.16%] px-[5.16%]">
-            <div className="grid grid-cols-[minmax(0,407fr)_minmax(0,684fr)] gap-3">
-              {dressStyles.slice(0, 2).map(renderDressCard)}
-            </div>
-            <div className="mt-[1.61%] grid grid-cols-[minmax(0,684fr)_minmax(0,407fr)] gap-3">
-              {dressStyles.slice(2).map(renderDressCard)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+interface BrowseStyleSectionProps {
+  styles: DressStyle[]
 }
 
-export default DressStyle
+export const BrowseStyleSection = ({ styles }: BrowseStyleSectionProps) => (
+  <section className={cn("w-full bg-background py-12 lg:py-16")}>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-[100px]">
+      {/* Outer rounded container matching Lunacy's bg-secondary rounded-[40px] */}
+      <div className="flex flex-col gap-8 rounded-[40px] bg-secondary px-8 py-10 lg:px-16 lg:py-[70px]">
+        <h1 className="text-left font-heading text-3xl font-bold text-foreground lg:text-5xl">
+          BROWSE BY DRESS STYLE
+        </h1>
+
+        {/* 3-col grid: narrow=1col, wide=2col — two rows */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {styles.map((style) => (
+            <Link
+              key={style.label}
+              to={PageRoutes.BROWSE}
+              className={cn(
+                "group relative overflow-hidden rounded-[20px] bg-background",
+                // wide cards span 2 columns on lg, narrow span 1
+                style.wide ? "lg:col-span-2" : "lg:col-span-1"
+              )}
+            >
+              {/* fixed height container — image fills it */}
+              <div className="relative h-[190px] w-full overflow-hidden md:h-[230px] lg:h-[289px]">
+                <img
+                  src={style.image}
+                  alt={style.label}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* label top-left */}
+                <span className="absolute top-6 left-6 font-heading text-2xl font-bold text-foreground lg:text-[36px]">
+                  {style.label}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)
+
+export default BrowseStyleSection

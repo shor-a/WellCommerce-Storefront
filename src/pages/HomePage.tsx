@@ -4,7 +4,9 @@ import HappyCustomers from "@/components/section/HappyCustomers"
 import Hero from "@/components/section/Hero"
 import Navbar from "@/components/section/Navbar"
 import ShortShowcase from "@/components/section/ShortShowcase"
+import { dressStyles } from "@/constants/homepageConst"
 import { allProducts } from "@/constants/productConst"
+import reviews from "@/constants/testimonyConst"
 
 const HomePage = () => {
   return (
@@ -22,8 +24,8 @@ const HomePage = () => {
           product={allProducts.slice(4, 8)}
           className="py-0"
         />
-        <DressStyle />
-        <HappyCustomers />
+        <DressStyle styles={dressStyles} />
+        <HappyCustomers testimonies={reviews} />
         <Footer />
       </div>
     </>

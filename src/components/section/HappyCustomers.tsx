@@ -1,96 +1,113 @@
-import { ArrowLeft, ArrowRight, Check } from "lucide-react"
-import { useState } from "react"
+import { useRef, useState, useCallback, useEffect } from "react"
+
+import { BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+import { cn } from "@/lib/utils"
+
 import { Card, CardContent } from "@/components/ui/card"
-import reviews from "@/constants/testimonyConst"
 import Rating from "../atomic/Rating"
+import type { Testimony } from "@/constants/testimonyConst"
 
-const HappyCustomers = (): React.ReactNode => {
-  const [activeReview, setActiveReview] = useState(2)
+interface HappyCustomersProps {
+  className?: string
+  testimonies: Testimony[]
+}
 
-  const showPreviousReview = () => {
-    setActiveReview((current) => Math.max(0, current - 1))
+export const HappyCustomers = ({ testimonies }: HappyCustomersProps) => {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  const CARD_WIDTH = 376 // card width + gap
+
+  const updateScrollState = useCallback(() => {
+    const el = trackRef.current
+    if (!el) return
+    setCanScrollLeft(el.scrollLeft > 4)
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+  }, [])
+
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el) return
+    updateScrollState()
+    el.addEventListener("scroll", updateScrollState, { passive: true })
+    return () => el.removeEventListener("scroll", updateScrollState)
+  }, [updateScrollState])
+
+  const handlePrev = () => {
+    trackRef.current?.scrollBy({ left: -CARD_WIDTH, behavior: "smooth" })
   }
 
-  const showNextReview = () => {
-    setActiveReview((current) => Math.min(reviews.length - 1, current + 1))
-  }
-
-  const removeBlur = (): boolean => {
-    return activeReview === 2 || activeReview === reviews.length - 2
-      ? true
-      : false
+  const handleNext = () => {
+    trackRef.current?.scrollBy({ left: CARD_WIDTH, behavior: "smooth" })
   }
 
   return (
-    <section className="happy-customers w-full overflow-clip bg-background pt-30 pb-20">
-      <div className="container mx-auto px-10">
-        <header className="mb-10 flex w-full max-w-[1280px] items-end justify-between gap-6 px-6">
-          <h2 className="text-4xl leading-none tracking-[0]">
+    <section className={cn("w-full bg-background py-12 lg:py-16")}>
+      <div className="container mx-auto flex flex-col gap-8 px-4 sm:px-6 lg:px-[100px]">
+        {/* Header row with prev/next buttons */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-left font-heading text-3xl font-bold text-foreground lg:text-5xl">
             OUR HAPPY CUSTOMERS
-          </h2>
-          <nav
-            aria-label="Customer review carousel controls"
-            className="flex items-center gap-[30px]"
-          >
+          </h1>
+          <div className="flex items-center gap-2">
             <Button
-              type="button"
               variant="ghost"
               size="icon"
-              onClick={showPreviousReview}
-              disabled={activeReview === 0}
-              aria-label="Show previous customer review"
-              className="h-6 w-6 rounded-none p-0 text-black hover:bg-transparent disabled:opacity-40"
+              aria-label="Previous testimonials"
+              aria-pressed={false}
+              disabled={!canScrollLeft}
+              onClick={handlePrev}
+              className="size-9 rounded-full border border-border disabled:opacity-30"
             >
-              <ArrowLeft className="h-6 w-6 stroke-[1.5]" />
+              <ChevronLeft className="size-4" strokeWidth={2} />
             </Button>
             <Button
-              type="button"
               variant="ghost"
               size="icon"
-              onClick={showNextReview}
-              disabled={activeReview === reviews.length - 1}
-              aria-label="Show next customer review"
-              className="h-6 w-6 rounded-none p-0 text-black hover:bg-transparent disabled:opacity-40"
+              aria-label="Next testimonials"
+              aria-pressed={false}
+              disabled={!canScrollRight}
+              onClick={handleNext}
+              className="size-9 rounded-full border border-border disabled:opacity-30"
             >
-              <ArrowRight className="h-6 w-6 stroke-[1.5]" />
+              <ChevronRight className="size-4" strokeWidth={2} />
             </Button>
-          </nav>
-        </header>
+          </div>
+        </div>
+
+        {/* Scrollable card track */}
         <div
-          className="flex w-max items-start gap-5 transition-transform duration-300 ease-out"
-          style={{
-            transform: `translateX(calc(60vw - ${activeReview * 420 + 200}px))`,
-          }}
+          ref={trackRef}
+          className="flex scrollbar-none gap-4 overflow-x-auto pb-2 lg:gap-5"
+          style={{ scrollbarWidth: "none" }}
         >
-          {reviews.map((review, reviewIndex: number) => (
+          {testimonies.map((testimony) => (
             <Card
-              key={`${review.name}-${reviewIndex}`}
-              className={`h-[225px] w-[400px] rounded-[20px] border-primary bg-background shadow-none ring-2 ${
-                removeBlur() && review.blurred ? "blur-[2px]" : ""
-              }`}
+              key={testimony.name}
+              className="w-[360px] shrink-0 rounded-[20px] border border-border bg-card shadow-none md:w-[400px]"
             >
-              <CardContent className="flex flex-col items-start gap-[10px] px-8 py-3">
-                <Rating starValue={5} className="size-5" />
-                <div className="flex w-full flex-col items-start gap-3">
-                  <div className="inline-flex items-center gap-1">
-                    <h3 className="text-xl leading-[22px] font-bold tracking-[0] text-black">
-                      {review.name}
-                    </h3>
-                    <span
-                      className="flex h-6 w-6 items-center justify-center rounded-full bg-green-400 text-white"
-                      aria-label="Verified customer"
-                    >
-                      <Check
-                        aria-hidden="true"
-                        className="h-4 w-4 stroke-[3]"
-                      />
-                    </span>
-                  </div>
-                  <p className="text-base leading-[22px] font-normal tracking-[0] text-[#00000099]">
-                    {review.review}
-                  </p>
+              <CardContent className="flex flex-col gap-4 p-7">
+                <Rating
+                  starValue={testimony.starValue ?? 5}
+                  className="size-5"
+                />
+                <div className="flex items-center gap-1.5">
+                  <span className="text-base font-bold text-foreground">
+                    {testimony.name}
+                  </span>
+                  {testimony.verified && (
+                    <BadgeCheck
+                      className="size-5 text-[#01AB31]"
+                      aria-label="Verified buyer"
+                    />
+                  )}
                 </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {testimony.review}
+                </p>
               </CardContent>
             </Card>
           ))}
