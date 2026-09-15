@@ -1,8 +1,16 @@
 .hero {
-  background-image: url(../assets/images/general/rectangle2.webp);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 70% 0%;
+  /* Mobile: no background image — hero-sm.webp renders as an <img> element */
+  background-image: none;
   height: 100%;
   width: 100%;
+}
+
+/* Desktop: restore the background image at lg (1024px+) */
+@media (min-width: 1024px) {
+  .hero {
+    background-image: url(../assets/images/general/hero-lg.webp);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 70% 0%;
+  }
 }

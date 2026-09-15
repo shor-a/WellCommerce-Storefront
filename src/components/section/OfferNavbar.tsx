@@ -6,8 +6,10 @@ const OfferNavbar = () => {
   return (
     <>
       <div className="offernav bg-primary p-2 text-primary-foreground">
-        <div className="container mx-auto flex items-center justify-between gap-5 px-2">
-          <div className="flex basis-11/12 items-center justify-center">
+        <div className="container mx-auto flex items-center px-4 sm:px-6 lg:px-10">
+          {/* Left spacer — mirrors the X button width to keep text truly centered */}
+
+          <div className="flex flex-1 items-center justify-center">
             <p className="mx-1 text-sm">
               Sign up and get 20% off to you first order.
             </p>
@@ -16,9 +18,7 @@ const OfferNavbar = () => {
             </Link>
           </div>
 
-          <div className="flex basis-1/12 items-center justify-center">
-            <X className="size-5" strokeWidth={3} />
-          </div>
+          <X className="size-5 shrink-0" strokeWidth={3} />
         </div>
       </div>
     </>

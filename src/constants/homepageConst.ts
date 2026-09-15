@@ -10,11 +10,11 @@ import vector4 from "@/assets/images/general/vector4.png"
 import vector5 from "@/assets/images/general/vector5.png"
 
 export const brandsImage: { src: string; alt: string }[] = [
-  { src: vector1, alt: "Versace" },
-  { src: vector2, alt: "Zara" },
-  { src: vector3, alt: "Gucci" },
   { src: vector4, alt: "Prada" },
+  { src: vector1, alt: "Versace" },
+  { src: vector3, alt: "Gucci" },
   { src: vector5, alt: "Calvin Klein" },
+  { src: vector2, alt: "Zara" },
 ]
 
 export interface DressStyle {

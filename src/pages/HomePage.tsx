@@ -15,7 +15,7 @@ const HomePage = () => {
         <Navbar />
         <Hero />
         <ShortShowcase
-          title="NEW ARRIVALS"  
+          title="NEW ARRIVALS"
           product={allProducts.slice(0, 4)}
           className="pt-10 pb-5"
         />

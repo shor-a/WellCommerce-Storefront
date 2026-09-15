@@ -1,3 +1,4 @@
+import heroSm from "@/assets/images/general/hero-sm.webp"
 import { Button } from "../ui/button"
 
 import { PageRoutes } from "@/config/routes"
@@ -7,64 +8,76 @@ import { Link } from "react-router-dom"
 const Hero = () => {
   return (
     <>
-      <div className="hero bg-secondary pt-20 pb-0">
-        <div className="container mx-auto gap-10 px-10">
-          {/* Because the parent is not flex then we use w-full
-              If the parent is flex we can use basis-full */}
-          <div className="flex w-full flex-row justify-start">
-            <div className="basis-7/12">
-              <h1 className="mb-4 text-5xl">
+      <div className="hero bg-secondary pt-10 pb-0 lg:pt-20">
+        <div className="container mx-auto gap-10 px-4 lg:px-10">
+          {/* Mobile: stacked column — text then image. Desktop: side-by-side row */}
+          <div className="flex w-full flex-col lg:flex-row lg:justify-start">
+            <div className="lg:basis-7/12">
+              <h1 className="mb-4 text-4xl lg:text-5xl">
                 FIND CLOTHES THAT MATCHES YOUR STYLE
               </h1>
-              <p className="mb-6 text-muted-foreground">
+              <p className="mb-0 text-sm text-muted-foreground lg:mb-6 lg:text-base">
                 Browse through our diverse range of meticulously crafted
                 garments, designed to bring out your individually and cater to
                 your sense of style.
               </p>
 
+              {/* Mobile: full-width image flush into button; Desktop: hidden (bg-image handles it) */}
+              <div className="-mx-4 flex justify-center lg:hidden">
+                <img
+                  src={heroSm}
+                  alt="Hero fashion models"
+                  fetchPriority="high"
+                  className="w-md"
+                />
+              </div>
+
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
-                className="mb-10"
+                className="-mt-0.5 mb-8 w-full lg:mt-0 lg:mb-10 lg:w-auto"
                 size="xl"
               >
                 Shop Now
               </Button>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div className="border-r-2">
-                  <p className="text-4xl font-bold text-foreground">200+</p>
-                  <p className="text-md mt-3 text-muted-foreground">
+              {/* Mobile: flex row with dividers; Desktop: grid 3-cols with dividers */}
+              <div className="mb-8 flex flex-row items-start justify-between lg:mb-0 lg:grid lg:grid-cols-3 lg:gap-4">
+                <div className="flex-1 border-r border-border pr-4 text-center lg:border-r-2 lg:pr-0 lg:text-left">
+                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                    200+
+                  </p>
+                  <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">
                     International Brands
                   </p>
                 </div>
-                <div className="border-r-2">
-                  <p className="text-4xl font-bold text-foreground">2.000+</p>
-                  <p className="text-md mt-3 text-muted-foreground">
+                <div className="flex-1 border-r border-border px-4 text-center lg:border-r-2 lg:px-0 lg:text-left">
+                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                    2,000+
+                  </p>
+                  <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">
                     High-Quality Products
                   </p>
                 </div>
-                <div>
-                  <p className="text-4xl font-bold text-foreground">30.000+</p>
-                  <p className="text-md mt-3 text-muted-foreground">
+                <div className="flex-1 pl-4 text-center lg:pl-0 lg:text-left">
+                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                    30,000+
+                  </p>
+                  <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">
                     Happy Customers
                   </p>
                 </div>
               </div>
             </div>
-            <div className="basis-5/12"></div>
           </div>
         </div>
 
         <div className="brands bg-primary">
-          <div className="container mx-auto mt-15 grid h-25 grid-cols-5 items-center justify-items-center gap-10">
+          <div className="container mx-auto grid grid-cols-5 items-center justify-items-center gap-2 px-3 py-5 lg:mt-10 lg:h-25 lg:gap-10 lg:px-10 lg:py-0">
             {brandsImage.map((bImg) => (
-              <div
-                key={bImg.alt}
-                className="flex h-25 w-40 items-center justify-center rounded"
-              >
+              <div key={bImg.alt} className="flex items-center justify-center">
                 <img
-                  className="h-full w-full object-contain"
+                  className="h-4 w-auto object-contain lg:h-10"
                   src={bImg.src}
                   alt={bImg.alt}
                 />
