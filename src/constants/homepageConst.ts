@@ -13,8 +13,8 @@ export const brandsImage: { src: string; alt: string }[] = [
   { src: vector4, alt: "Prada" },
   { src: vector1, alt: "Versace" },
   { src: vector3, alt: "Gucci" },
-  { src: vector5, alt: "Calvin Klein" },
   { src: vector2, alt: "Zara" },
+  { src: vector5, alt: "Calvin Klein" },
 ]
 
 export interface DressStyle {

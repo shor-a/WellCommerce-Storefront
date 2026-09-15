@@ -35,7 +35,7 @@ const Hero = () => {
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
-                className="-mt-0.5 mb-8 w-full lg:mt-0 lg:mb-10 lg:w-auto"
+                className="-mt-0.5 mb-8 w-full border-2 border-white/15 lg:mt-0 lg:mb-10 lg:w-auto lg:border-0"
                 size="xl"
               >
                 Shop Now

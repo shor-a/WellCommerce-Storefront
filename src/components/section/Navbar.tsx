@@ -1,5 +1,6 @@
 import { useState } from "react"
-import OfferNavbar from "./OfferNavbar"
+import { Link } from "react-router-dom"
+import { AlignLeft, Search, X } from "lucide-react"
 
 import {
   NavigationMenu,
@@ -10,182 +11,140 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command"
-
 import { Button } from "@/components/ui/button"
-
-import { Search, AlignLeft } from "lucide-react"
-import { generatePath, Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes"
-import { allProducts } from "@/constants/productConst"
-import Rating from "../atomic/Rating"
 import { cn } from "@/lib/utils"
-import NavbarCartIcon from "../subsection/NavbarCartIcon"
-import NavbarUserIcon from "../subsection/NavbarUserIcon"
 
-const Navbar = () => {
-  // Search bar hooks
-  const [search, setSearch] = useState<string>("")
+import { PageRoutes } from "@/config/routes"
+import { navDropdownLinks, navLinks } from "@/constants/navbarConst"
 
-  const populateSearch = (): React.ReactNode => {
-    /* Custom search filter (to use disable shadcn fuzzy filter <Command shouldFilter={false})
-    const filteredRes = allProducts.filter((product) =>
-      product.itemName.toLowerCase().includes(search.toLowerCase())
-    )
-  */
-    return (
-      <>
-        {allProducts.map((product) => (
-          <Link
-            key={product.itemId}
-            to={generatePath(PageRoutes.PRODUCT, {
-              productid: String(product.itemId),
-            })}
-          >
-            <CommandItem className="hover:cursor-pointer" key={product.itemId}>
-              <div className="flex w-full">
-                <div className="-mr-5 flex basis-2/6 justify-start">
-                  <img src={product.itemImg} className="size-14" />
-                </div>
-                <div className="flex basis-4/6 flex-col items-start justify-center gap-2">
-                  <p>{product.itemName}</p>
-                  <Rating starValue={product.itemRating} className="size-3" />
-                </div>
-              </div>
-            </CommandItem>
-          </Link>
-        ))}
-      </>
-    )
-  }
+import OfferNavbar from "./OfferNavbar"
+import NavbarCartIcon from "@/components/subsection/NavbarCartIcon"
+import NavbarUserIcon from "@/components/subsection/NavbarUserIcon"
+import NavbarMobileMenu from "@/components/subsection/NavbarMobileMenu"
+import NavbarSearchBar from "@/components/subsection/NavbarSearchBar"
+
+interface NavbarProps {
+  className?: string
+}
+
+export const Navbar = ({ className }: NavbarProps) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+
+  const handleOpenMenu = () => setMobileMenuOpen(true)
+  const handleCloseMenu = () => setMobileMenuOpen(false)
+  const handleToggleSearch = () => setMobileSearchOpen((v) => !v)
+  const handleCloseSearch = () => setMobileSearchOpen(false)
 
   return (
     <>
       <OfferNavbar />
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
-        <div className="container mx-auto flex items-center gap-6 px-4 py-4 sm:px-6 lg:gap-10 lg:px-10">
-          {/* Mobile: hamburger */}
+
+      <header
+        className={cn(
+          "sticky top-0 z-40 w-full border-b border-border bg-background",
+          className
+        )}
+      >
+        {/* ── Main navbar row ── */}
+        <div className="container mx-auto flex items-center gap-4 px-4 py-4 sm:px-6 lg:gap-10 lg:px-10">
+          {/* Hamburger — sm/md only */}
           <Button
             variant="ghost"
             size="icon"
             aria-label="Open menu"
-            className="lg:hidden"
+            aria-expanded={mobileMenuOpen}
+            onClick={handleOpenMenu}
+            className="shrink-0 cursor-pointer lg:hidden"
           >
-            <AlignLeft strokeWidth={2} />
+            <AlignLeft strokeWidth={2} className="size-5" />
           </Button>
 
           {/* Brand */}
           <Link
-            className="font-heading text-xl font-bold tracking-tight lg:text-2xl"
+            className="font-heading text-xl font-bold tracking-tight text-foreground lg:text-2xl"
             to={PageRoutes.HOME}
           >
-            <span className="text-2xl">WELLCOMMERCE</span>
+            WELLCOMMERCE
           </Link>
 
           {/* Desktop nav links */}
           <div className="hidden lg:flex lg:flex-1">
             <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>
-                    Browse Collections
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                {navDropdownLinks.map((dropdown) => (
+                  <NavigationMenuItem key={dropdown.id}>
+                    <NavigationMenuTrigger>
+                      {dropdown.trigger}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      {dropdown.items.map((item) => (
+                        <NavigationMenuLink
+                          key={item.id}
+                          render={<Link to={item.to} />}
+                        >
+                          {item.label}
+                        </NavigationMenuLink>
+                      ))}
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+
+                {navLinks.map((link) => (
+                  <NavigationMenuItem key={link.id}>
                     <NavigationMenuLink
-                      render={<Link to={PageRoutes.BROWSE} />}
+                      render={<Link to={link.to} />}
+                      className={navigationMenuTriggerStyle()}
                     >
-                      Fancy T-Shirts
+                      {link.label}
                     </NavigationMenuLink>
-                    <NavigationMenuLink
-                      render={<Link to={PageRoutes.BROWSE} />}
-                    >
-                      Sports Pants
-                    </NavigationMenuLink>
-                    <NavigationMenuLink
-                      render={<Link to={PageRoutes.BROWSE} />}
-                    >
-                      Unique Shorts
-                    </NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    render={<Link to={PageRoutes.BROWSE} />}
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    On Sale
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    render={<Link to={PageRoutes.BROWSE} />}
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    New Arrivals
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    render={<Link to={PageRoutes.BROWSE} />}
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    Brands
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
+                  </NavigationMenuItem>
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
 
-          {/* Search bar */}
-          <div className="relative hidden flex-1 lg:flex">
-            <Command className="h-10 w-full">
-              <CommandInput
-                placeholder="Search for products..."
-                value={search}
-                onValueChange={(searchVal) => {
-                  setSearch(searchVal)
-                }}
-              />
-              <CommandList
-                className={cn(
-                  search ? `` : `hidden`,
-                  "absolute top-full left-2 z-50 mt-1 w-full rounded-sm border bg-background shadow-lg"
-                )}
-              >
-                <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Product search results">
-                  {populateSearch()}
-                  <CommandSeparator />
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </div>
+          {/* Desktop search bar */}
+          <NavbarSearchBar className="hidden lg:flex" />
 
           {/* Action icons */}
-          <div className="ml-auto flex items-center gap-3 lg:ml-0">
+          <div className="ml-auto flex items-center gap-2 lg:ml-0 lg:gap-3">
+            {/* Mobile search toggle */}
             <Button
               variant="ghost"
               size="icon"
-              aria-label="Search"
-              className="lg:hidden"
+              aria-label={mobileSearchOpen ? "Close search" : "Open search"}
+              aria-expanded={mobileSearchOpen}
+              onClick={handleToggleSearch}
+              className="shrink-0 cursor-pointer lg:hidden"
             >
-              <Search strokeWidth={2} />
+              {mobileSearchOpen ? (
+                <X strokeWidth={2} className="size-5" />
+              ) : (
+                <Search strokeWidth={2} className="size-5" />
+              )}
             </Button>
 
             <NavbarCartIcon />
             <NavbarUserIcon />
           </div>
         </div>
+
+        {/* ── Mobile / tablet search bar — expands below the main row ── */}
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-300 ease-in-out lg:hidden",
+            mobileSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
+          <div className="px-4 pb-3 sm:px-6">
+            <NavbarSearchBar fullWidth onBlurClose={handleCloseSearch} />
+          </div>
+        </div>
       </header>
+
+      {/* Mobile drawer */}
+      <NavbarMobileMenu isOpen={mobileMenuOpen} onClose={handleCloseMenu} />
     </>
   )
 }
