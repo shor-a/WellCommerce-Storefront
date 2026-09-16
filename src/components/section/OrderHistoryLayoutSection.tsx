@@ -7,11 +7,20 @@ import type {
   Order,
   OrderStatus as OrderStatusType,
   OrderSortOption as OrderSortOptionType,
+  OrderHistoryView as OrderHistoryViewType,
+  WishlistMenu as WishlistMenuType,
+  OrderModalType,
 } from "@/constants/orderHistoryConst"
-import type { OrderModalType } from "@/hooks/useOrderActionModal"
+import type { WishlistItem } from "@/hooks/wishlistStores"
 
 interface OrderHistoryLayoutSectionProps {
   className?: string
+  // view
+  activeView: OrderHistoryViewType
+  activeWishlistMenu: WishlistMenuType
+  onViewChange: (view: OrderHistoryViewType) => void
+  onWishlistMenuChange: (item: WishlistMenuType) => void
+  // orders
   orders: Order[]
   expandedOrderId: string | null
   currentPage: number
@@ -27,7 +36,7 @@ interface OrderHistoryLayoutSectionProps {
   onCloseModal: () => void
   onConfirmCancel: (orderId: string) => void
   onConfirmReorder: (orderId: string) => void
-  // handlers
+  // order handlers
   onStatusChange: (status: OrderStatusType) => void
   onSearchChange: (query: string) => void
   onSortChange: (option: OrderSortOptionType) => void
@@ -38,10 +47,19 @@ interface OrderHistoryLayoutSectionProps {
   onTrackOrder: (orderId: string) => void
   onCancelOrder: (orderId: string) => void
   onPageChange: (page: number) => void
+  // wishlist
+  wishlistItems: WishlistItem[]
+  onWishlistAddToCart: (productId: string) => void
+  onWishlistRemove: (productId: string) => void
+  onWishlistUpdateQty: (productId: string, qty: number) => void
 }
 
 export const OrderHistoryLayoutSection = ({
   className,
+  activeView,
+  activeWishlistMenu,
+  onViewChange,
+  onWishlistMenuChange,
   orders,
   expandedOrderId,
   currentPage,
@@ -66,6 +84,10 @@ export const OrderHistoryLayoutSection = ({
   onTrackOrder,
   onCancelOrder,
   onPageChange,
+  wishlistItems,
+  onWishlistAddToCart,
+  onWishlistRemove,
+  onWishlistUpdateQty,
 }: OrderHistoryLayoutSectionProps) => (
   <section
     aria-label="Order history"
@@ -90,16 +112,22 @@ export const OrderHistoryLayoutSection = ({
           className="hidden lg:sticky lg:top-8 lg:block lg:shrink-0 lg:basis-1/4"
         >
           <OrderFiltersAside
+            activeView={activeView}
             activeStatus={activeStatus}
+            activeWishlistMenu={activeWishlistMenu}
             searchQuery={searchQuery}
             statusCounts={statusCounts}
+            wishlistCount={wishlistItems.length}
             onStatusChange={onStatusChange}
             onSearchChange={onSearchChange}
+            onViewChange={onViewChange}
+            onWishlistMenuChange={onWishlistMenuChange}
           />
         </aside>
 
         {/* main content */}
         <OrderHistorySection
+          activeView={activeView}
           orders={orders}
           expandedOrderId={expandedOrderId}
           currentPage={currentPage}
@@ -114,11 +142,15 @@ export const OrderHistoryLayoutSection = ({
           onTrackOrder={onTrackOrder}
           onCancelOrder={onCancelOrder}
           onPageChange={onPageChange}
+          wishlistItems={wishlistItems}
+          onWishlistAddToCart={onWishlistAddToCart}
+          onWishlistRemove={onWishlistRemove}
+          onWishlistUpdateQty={onWishlistUpdateQty}
         />
       </div>
     </div>
 
-    {/* modals — rendered at section level to avoid z-index issues */}
+    {/* modals */}
     <OrderActionModals
       modalType={modalType}
       modalOrder={modalOrder}

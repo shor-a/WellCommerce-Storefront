@@ -35,8 +35,18 @@ const authMenuItems = [
     icon: Package,
     to: PageRoutes.ORDER_HISTORY,
   },
-  { id: "wishlist", label: "My Wishlist", icon: Heart, to: PageRoutes.HOME },
-  { id: "settings", label: "Settings", icon: Settings, to: PageRoutes.HOME },
+  {
+    id: "wishlist",
+    label: "My Wishlist",
+    icon: Heart,
+    to: PageRoutes.WISHLIST,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    to: PageRoutes.SETTINGS,
+  },
 ] as const
 
 export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {

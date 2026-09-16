@@ -1,13 +1,5 @@
 import { useState, useCallback } from "react"
-import type { Order } from "@/constants/orderHistoryConst"
-
-export type OrderModalType =
-  | "view-invoice"
-  | "track-order"
-  | "cancel-order"
-  | "request-return"
-  | "reorder-items"
-  | null
+import type { Order, OrderModalType } from "@/constants/orderHistoryConst"
 
 interface OrderActionModalState {
   type: OrderModalType
@@ -20,9 +12,12 @@ export const useOrderActionModal = () => {
     order: null,
   })
 
-  const open = useCallback((type: Exclude<OrderModalType, null>, order: Order) => {
-    setModal({ type, order })
-  }, [])
+  const open = useCallback(
+    (type: Exclude<OrderModalType, null>, order: Order) => {
+      setModal({ type, order })
+    },
+    []
+  )
 
   const close = useCallback(() => {
     setModal({ type: null, order: null })

@@ -12,7 +12,7 @@ import {
   type PaymentMethod as PaymentMethodInfo,
 } from "@/constants/orderHistoryConst"
 import { useCartStore } from "@/hooks/cartStores"
-import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
+import { useOrderHistoryStore } from "@/hooks/orderHistoryStores"
 
 import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/checkoutConst"
 

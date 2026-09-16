@@ -9,14 +9,18 @@ import { ProductImageThumb } from "@/components/atomic/ProductImageThumb"
 import DiscPrice from "@/components/atomic/DiscPrice"
 
 import { useCartStore } from "@/hooks/cartStores"
+import { useWishlistStore, buildWishlistItem } from "@/hooks/wishlistStores"
 
 import { useState } from "react"
+import { Heart } from "lucide-react"
 import { constructCID } from "@/constants/cartConst"
 import { useParams } from "react-router-dom"
+import { cn } from "@/lib/utils"
 import type { ProductSize } from "@/constants/sizeConst"
 
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
+  const { toggleWishlist, isWishlisted } = useWishlistStore()
 
   const { productid } = useParams()
   const productDetail =
@@ -33,6 +37,23 @@ export const ProductSection = () => {
   const [selectedSize, setSize] = useState<ProductSize>(productDetail.sizes[0])
   const [activeImgIndex, setActiveImg] = useState(0)
   const [quantity, setQty] = useState(1)
+
+  const wishlisted = isWishlisted(String(productDetail.itemId))
+
+  const handleToggleWishlist = () => {
+    const colorObj = productDetail.colors.find(
+      (c) => c.colorId === selectedColor
+    )
+    toggleWishlist(
+      buildWishlistItem(
+        productDetail,
+        selectedColor,
+        colorObj?.hex ?? "#000000",
+        selectedSize,
+        quantity
+      )
+    )
+  }
 
   const changeQty = (increment: boolean): void => {
     return void (increment
@@ -142,7 +163,7 @@ export const ProductSection = () => {
 
             <Separator />
 
-            {/* CTA row — quantity stepper + Add to Cart */}
+            {/* CTA row — quantity stepper + Add to Cart + Wishlist */}
             <div className="flex gap-3">
               <QuantityStepper quantity={quantity} changeQty={changeQty} />
               <Button
@@ -167,6 +188,32 @@ export const ProductSection = () => {
                 }}
               >
                 Add to Cart
+              </Button>
+
+              {/* Wishlist toggle */}
+              <Button
+                variant="outline"
+                size="xl"
+                aria-label={
+                  wishlisted ? "Remove from wishlist" : "Add to wishlist"
+                }
+                aria-pressed={wishlisted}
+                onClick={handleToggleWishlist}
+                className={cn(
+                  "shrink-0 rounded-full transition-colors duration-200",
+                  wishlisted
+                    ? "border-destructive/40 bg-destructive/5 text-destructive hover:bg-destructive/10"
+                    : "hover:border-destructive/40 hover:bg-destructive/5 hover:text-destructive"
+                )}
+              >
+                <Heart
+                  strokeWidth={1.75}
+                  className={cn(
+                    "size-5 transition-all duration-200",
+                    wishlisted ? "fill-destructive stroke-destructive" : ""
+                  )}
+                />
+                Wishlist
               </Button>
             </div>
           </div>

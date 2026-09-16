@@ -20,8 +20,8 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { OrderTrackingBar } from "@/components/atomic/OrderTrackingBar"
 import { OrderStatusBadge } from "@/components/atomic/OrderStatusBadge"
-import type { OrderModalType } from "@/hooks/useOrderActionModal"
-import { getPaymentLabel, type Order } from "@/constants/orderHistoryConst"
+import type { OrderModalType, Order } from "@/constants/orderHistoryConst"
+import { getPaymentLabel } from "@/constants/orderHistoryConst"
 
 const InvoiceModal = ({
   order,

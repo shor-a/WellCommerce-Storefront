@@ -9,7 +9,7 @@ interface BrowseStyleSectionProps {
 }
 
 export const BrowseStyleSection = ({ styles }: BrowseStyleSectionProps) => (
-  <section className={cn("w-full bg-background py-12 lg:py-16")}>
+  <section className={cn("w-full bg-background pt-15 lg:pt-20")}>
     <div className="container mx-auto px-4 sm:px-6 lg:px-[100px]">
       {/* Outer rounded container matching Lunacy's bg-secondary rounded-[40px] */}
       <div className="flex flex-col gap-8 rounded-[40px] bg-secondary px-8 py-10 lg:px-16 lg:py-[70px]">

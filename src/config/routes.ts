@@ -7,5 +7,7 @@ export const PageRoutes = {
   REGISTER: "/register",
   FORGOT_PASSWORD: "#",
   ORDER_HISTORY: "/order-history",
+  WISHLIST: "/order-history/wishlist",
+  SETTINGS: "/settings",
   CHECKOUT: "/checkout",
 } as const

@@ -268,3 +268,28 @@ export const orderSortOptions: OrderSortOption[] = [
   OrderSortOption.HIGHEST_TOTAL,
   OrderSortOption.LOWEST_TOTAL,
 ]
+
+// Wishlist filter menu label
+export const WishlistMenu = {
+  MY_WISHLIST: "My Wishlist",
+} as const
+
+export type WishlistMenu = (typeof WishlistMenu)[keyof typeof WishlistMenu]
+
+export const wishlistMenuItems: WishlistMenu[] = [WishlistMenu.MY_WISHLIST]
+
+export const OrderHistoryView = {
+  ORDERS: "orders",
+  WISHLIST: "wishlist",
+} as const
+
+export type OrderHistoryView =
+  (typeof OrderHistoryView)[keyof typeof OrderHistoryView]
+
+export type OrderModalType =
+  | "view-invoice"
+  | "track-order"
+  | "cancel-order"
+  | "request-return"
+  | "reorder-items"
+  | null

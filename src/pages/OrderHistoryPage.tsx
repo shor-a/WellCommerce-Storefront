@@ -12,6 +12,12 @@ const orderHistoryCrumbs = [
 
 const OrderHistoryPage = () => {
   const {
+    // view
+    activeView,
+    activeWishlistMenu,
+    handleViewChange,
+    handleWishlistMenuChange,
+    // orders
     activeStatus,
     searchQuery,
     sortOption,
@@ -36,6 +42,11 @@ const OrderHistoryPage = () => {
     handleConfirmCancel,
     handleConfirmReorder,
     setCurrentPage,
+    // wishlist
+    wishlistItems,
+    handleWishlistAddToCart,
+    handleWishlistRemove,
+    handleWishlistUpdateQty,
   } = useOrderHistoryFilters()
 
   return (
@@ -44,6 +55,12 @@ const OrderHistoryPage = () => {
       <NavigationText crumbs={orderHistoryCrumbs} />
       <OrderHistoryLayoutSection
         className="py-6 lg:py-8"
+        // view
+        activeView={activeView}
+        activeWishlistMenu={activeWishlistMenu}
+        onViewChange={handleViewChange}
+        onWishlistMenuChange={handleWishlistMenuChange}
+        // orders
         orders={pagedOrders}
         expandedOrderId={expandedOrderId}
         currentPage={currentPage}
@@ -68,6 +85,11 @@ const OrderHistoryPage = () => {
         onTrackOrder={handleTrackOrder}
         onCancelOrder={handleCancelOrder}
         onPageChange={setCurrentPage}
+        // wishlist
+        wishlistItems={wishlistItems}
+        onWishlistAddToCart={handleWishlistAddToCart}
+        onWishlistRemove={handleWishlistRemove}
+        onWishlistUpdateQty={handleWishlistUpdateQty}
       />
       <Footer />
     </>

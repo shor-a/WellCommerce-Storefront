@@ -45,7 +45,7 @@ export const HappyCustomers = ({ testimonies }: HappyCustomersProps) => {
   }
 
   return (
-    <section className={cn("w-full bg-background pt-12 lg:pt-16")}>
+    <section className={cn("w-full bg-background pt-15 lg:pt-20")}>
       <div className="container mx-auto flex flex-col gap-8 px-4 sm:px-6 lg:px-[100px]">
         {/* Header row with prev/next buttons */}
         <div className="flex items-center justify-between">

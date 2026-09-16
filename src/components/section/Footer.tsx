@@ -39,8 +39,8 @@ export const Footer = ({ className }: FooterProps) => {
   return (
     <>
       {/* Newsletter Section - Positioned to overlap footer */}
-      <div className="flex w-full justify-center px-4 sm:px-6 lg:px-10">
-        <NewsLetter className="relative top-[90px] z-10 lg:top-[89px]" />
+      <div className="-mt-5 flex w-full justify-center px-4 sm:px-6 lg:px-10">
+        <NewsLetter className="relative top-[90px] z-10" />
       </div>
 
       {/* Footer */}

@@ -1,22 +1,60 @@
 import { useState, useCallback } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import {
   OrderStatus,
   OrderSortOption,
+  OrderHistoryView,
+  WishlistMenu,
   ORDERS_PER_PAGE,
   type OrderStatus as OrderStatusType,
   type OrderSortOption as OrderSortOptionType,
+  type OrderHistoryView as OrderHistoryViewType,
+  type WishlistMenu as WishlistMenuType,
   type Order,
 } from "@/constants/orderHistoryConst"
-import { useOrderHistoryStore } from "@/hooks/orderHistoryStore"
+import { useOrderHistoryStore } from "@/hooks/orderHistoryStores"
 import { useOrderActionModal } from "@/hooks/useOrderActionModal"
 import { useCartStore } from "@/hooks/cartStores"
+import { useWishlistStore } from "@/hooks/wishlistStores"
 import type { Cart } from "@/constants/cartConst"
+import { PageRoutes } from "@/config/routes"
 
 export const useOrderHistoryFilters = () => {
   const orderHistory = useOrderHistoryStore((state) => state.orders)
   const cancelOrder = useOrderHistoryStore((state) => state.cancelOrder)
   const addToCart = useCartStore((state) => state.addToCart)
+  const wishlistItems = useWishlistStore((state) => state.items)
+  const removeFromWishlist = useWishlistStore((state) => state.removeItem)
+  const updateWishlistQty = useWishlistStore((state) => state.updateQuantity)
 
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  // View mode — driven purely by the URL path
+  const activeView: OrderHistoryViewType =
+    pathname === PageRoutes.WISHLIST
+      ? OrderHistoryView.WISHLIST
+      : OrderHistoryView.ORDERS
+
+  const [activeWishlistMenu, setActiveWishlistMenu] =
+    useState<WishlistMenuType>(WishlistMenu.MY_WISHLIST)
+
+  const handleViewChange = useCallback(
+    (view: OrderHistoryViewType) => {
+      if (view === OrderHistoryView.WISHLIST) {
+        navigate(PageRoutes.WISHLIST)
+      } else {
+        navigate(PageRoutes.ORDER_HISTORY)
+      }
+    },
+    [navigate]
+  )
+
+  const handleWishlistMenuChange = useCallback((item: WishlistMenuType) => {
+    setActiveWishlistMenu(item)
+  }, [])
+
+  // Orders filters
   const [activeStatus, setActiveStatus] = useState<OrderStatusType>(
     OrderStatus.ALL
   )
@@ -169,6 +207,43 @@ export const useOrderHistoryFilters = () => {
     [orderHistory, addToCart]
   )
 
+  // Wishlist actions
+  const handleWishlistAddToCart = useCallback(
+    (productId: string) => {
+      const item = wishlistItems.find((i) => i.productId === productId)
+      if (!item) return
+      const finalPrice = Math.round(
+        item.itemPrice - (item.itemPrice * item.discount) / 100
+      )
+      const cartItem: Cart = {
+        cartItemID: `${item.productId}${item.selectedColor.substring(0, 1)}${item.selectedSize.substring(0, 1)}`,
+        itemName: item.itemName,
+        itemImg: item.itemImg,
+        itemColor: item.selectedColor,
+        itemSize: item.selectedSize,
+        itemQty: item.quantity,
+        finalPrice,
+      }
+      addToCart(item.quantity, cartItem)
+    },
+    [wishlistItems, addToCart]
+  )
+
+  const handleWishlistRemove = useCallback(
+    (productId: string) => {
+      removeFromWishlist(productId)
+    },
+    [removeFromWishlist]
+  )
+
+  const handleWishlistUpdateQty = useCallback(
+    (productId: string, qty: number) => {
+      updateWishlistQty(productId, qty)
+    },
+    [updateWishlistQty]
+  )
+
+  // Pagination
   const totalOrders = filteredOrders.length
   const totalPages = Math.max(1, Math.ceil(totalOrders / ORDERS_PER_PAGE))
   const pagedOrders = filteredOrders.slice(
@@ -177,6 +252,12 @@ export const useOrderHistoryFilters = () => {
   )
 
   return {
+    // view
+    activeView,
+    activeWishlistMenu,
+    handleViewChange,
+    handleWishlistMenuChange,
+    // orders
     activeStatus,
     searchQuery,
     sortOption,
@@ -201,5 +282,10 @@ export const useOrderHistoryFilters = () => {
     handleConfirmCancel,
     handleConfirmReorder,
     setCurrentPage,
+    // wishlist
+    wishlistItems,
+    handleWishlistAddToCart,
+    handleWishlistRemove,
+    handleWishlistUpdateQty,
   }
 }
