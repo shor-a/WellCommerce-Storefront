@@ -17,12 +17,12 @@ const HomePage = () => {
         <ShortShowcase
           title="NEW ARRIVALS"
           product={allProducts.slice(0, 4)}
-          className="pt-10 pb-5"
+          className="pt-10 pb-6"
         />
         <ShortShowcase
           title="TOP SELLING"
           product={allProducts.slice(4, 8)}
-          className="py-0"
+          className="pt-0 pb-6"
         />
         <DressStyle styles={dressStyles} />
         <HappyCustomers testimonies={reviews} />

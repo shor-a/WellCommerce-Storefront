@@ -9,6 +9,7 @@ import {
   type CardFormValues,
 } from "@/constants/checkoutConst"
 import { SiPaypal, SiGooglepay } from "@icons-pack/react-simple-icons"
+import { formatCardNumber, formatExpiry, formatCvv } from "@/lib/cardFormatters"
 
 interface PaymentMethodSectionProps {
   className?: string
@@ -41,6 +42,15 @@ export const PaymentMethodSection = ({
 }: PaymentMethodSectionProps) => {
   const handleSaveCardChange = (checked: boolean) =>
     onCardChange("saveCard", checked)
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onCardChange("cardNumber", formatCardNumber(e.target.value))
+
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onCardChange("expiryDate", formatExpiry(e.target.value))
+
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onCardChange("cvv", formatCvv(e.target.value))
 
   const cardErr = (field: keyof Omit<CardFormValues, "saveCard">) =>
     submitAttempted && cardValues[field].toString().trim() === ""
@@ -141,9 +151,10 @@ export const PaymentMethodSection = ({
                 <Input
                   id="cardNumber"
                   type="text"
+                  inputMode="numeric"
                   placeholder="0000 0000 0000 0000"
                   value={cardValues.cardNumber}
-                  onChange={(e) => onCardChange("cardNumber", e.target.value)}
+                  onChange={handleCardNumberChange}
                   aria-invalid={!!cardErr("cardNumber")}
                   className={cn(
                     "h-11 rounded-full border-black/10 bg-secondary pr-4 pl-12 placeholder:text-muted-foreground",
@@ -175,9 +186,10 @@ export const PaymentMethodSection = ({
                   <Input
                     id="expiryDate"
                     type="text"
+                    inputMode="numeric"
                     placeholder="MM/YY"
                     value={cardValues.expiryDate}
-                    onChange={(e) => onCardChange("expiryDate", e.target.value)}
+                    onChange={handleExpiryChange}
                     aria-invalid={!!cardErr("expiryDate")}
                     className={cn(
                       "h-11 rounded-full border-black/10 bg-secondary pr-4 pl-12 placeholder:text-muted-foreground",
@@ -207,16 +219,17 @@ export const PaymentMethodSection = ({
                   <Input
                     id="cvv"
                     type="password"
+                    inputMode="numeric"
                     placeholder="•••"
                     value={cardValues.cvv}
-                    onChange={(e) => onCardChange("cvv", e.target.value)}
+                    onChange={handleCvvChange}
                     aria-invalid={!!cardErr("cvv")}
                     className={cn(
                       "h-11 rounded-full border-black/10 bg-secondary pr-4 pl-12 placeholder:text-muted-foreground",
                       cardErr("cvv") &&
                         "border-destructive focus-visible:ring-destructive"
                     )}
-                    maxLength={4}
+                    maxLength={3}
                   />
                 </div>
                 {cardErr("cvv") && <FieldError message={cardErr("cvv")} />}

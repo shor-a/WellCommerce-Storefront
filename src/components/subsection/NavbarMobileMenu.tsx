@@ -1,6 +1,15 @@
 import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { X, ChevronRight } from "lucide-react"
+import {
+  X,
+  ChevronRight,
+  Package,
+  Heart,
+  Settings,
+  LogOut,
+  LogIn,
+  UserPlus,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
@@ -12,8 +21,31 @@ interface NavbarMobileMenuProps {
   onClose: () => void
 }
 
-export const NavbarMobileMenu = ({ isOpen, onClose }: NavbarMobileMenuProps) => {
+const authMenuItems = [
+  {
+    id: "orders",
+    label: "Order History",
+    icon: Package,
+    to: PageRoutes.ORDER_HISTORY,
+  },
+  { id: "wishlist", label: "My Wishlist", icon: Heart, to: PageRoutes.HOME },
+  { id: "settings", label: "Settings", icon: Settings, to: PageRoutes.HOME },
+] as const
+
+export const NavbarMobileMenu = ({
+  isOpen,
+  onClose,
+}: NavbarMobileMenuProps) => {
   const drawerRef = useRef<HTMLDivElement>(null)
+  const isAuthenticated = !!localStorage.getItem("authenticated")
+  const authUser = localStorage.getItem("authUser") ?? ""
+
+  const handleSignOut = () => {
+    localStorage.removeItem("authenticated")
+    localStorage.removeItem("authUser")
+    onClose()
+    window.location.reload()
+  }
 
   // Close on outside click
   useEffect(() => {
@@ -29,11 +61,7 @@ export const NavbarMobileMenu = ({ isOpen, onClose }: NavbarMobileMenuProps) => 
 
   // Lock body scroll when open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = ""
-    }
+    document.body.style.overflow = isOpen ? "hidden" : ""
     return () => {
       document.body.style.overflow = ""
     }
@@ -56,7 +84,9 @@ export const NavbarMobileMenu = ({ isOpen, onClose }: NavbarMobileMenuProps) => 
         aria-hidden="true"
         className={cn(
           "fixed inset-0 z-40 bg-foreground/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         )}
         onClick={onClose}
       />
@@ -103,10 +133,10 @@ export const NavbarMobileMenu = ({ isOpen, onClose }: NavbarMobileMenuProps) => 
               to={link.to}
               onClick={onClose}
               className={cn(
-                "flex items-center justify-between px-5 py-3.5",
+                "flex items-center justify-between px-5 py-3",
                 "text-sm font-medium text-foreground",
                 "transition-colors duration-150 hover:bg-secondary",
-                "focus-visible:bg-secondary outline-none cursor-pointer"
+                "cursor-pointer outline-none focus-visible:bg-secondary"
               )}
             >
               {link.label}
@@ -116,29 +146,87 @@ export const NavbarMobileMenu = ({ isOpen, onClose }: NavbarMobileMenuProps) => 
               />
             </Link>
           ))}
+
+          {/* Auth section separator */}
+          <Separator className="my-2" />
+
+          {isAuthenticated ? (
+            <>
+              {/* Welcome */}
+              <div className="px-5 py-2">
+                <p className="py-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                  Welcome back
+                </p>
+                <p className="font-heading text-sm font-bold tracking-tight text-foreground">
+                  {authUser}
+                </p>
+              </div>
+
+              {authMenuItems.map(({ id, label, icon: Icon, to }) => (
+                <Link
+                  key={id}
+                  to={to}
+                  onClick={onClose}
+                  className={cn(
+                    "flex items-center gap-3 px-5 py-3",
+                    "text-sm font-medium text-foreground",
+                    "transition-colors duration-150 hover:bg-secondary",
+                    "cursor-pointer outline-none focus-visible:bg-secondary"
+                  )}
+                >
+                  <Icon
+                    strokeWidth={1.75}
+                    className="size-4 shrink-0 text-muted-foreground"
+                  />
+                  {label}
+                </Link>
+              ))}
+
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className={cn(
+                  "flex w-full items-center gap-3 px-5 py-3",
+                  "text-sm font-medium text-destructive",
+                  "transition-colors duration-150 hover:bg-secondary",
+                  "cursor-pointer outline-none focus-visible:bg-secondary"
+                )}
+              >
+                <LogOut strokeWidth={1.75} className="size-4 shrink-0" />
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <div className="flex flex-col gap-2.5 px-5 py-3">
+              <Button
+                render={<Link to={PageRoutes.LOGIN} onClick={onClose} />}
+                nativeButton={false}
+                variant="default"
+                className="h-10 w-full cursor-pointer rounded-full"
+              >
+                <LogIn
+                  strokeWidth={2}
+                  className="size-4"
+                  data-icon="inline-start"
+                />
+                Sign In
+              </Button>
+              <Button
+                render={<Link to={PageRoutes.REGISTER} onClick={onClose} />}
+                nativeButton={false}
+                variant="outline"
+                className="h-10 w-full cursor-pointer rounded-full"
+              >
+                <UserPlus
+                  strokeWidth={2}
+                  className="size-4"
+                  data-icon="inline-start"
+                />
+                Create Account
+              </Button>
+            </div>
+          )}
         </nav>
-
-        <Separator />
-
-        {/* Footer CTA */}
-        <div className="flex flex-col gap-3 px-5 py-5">
-          <Button
-            render={<Link to={PageRoutes.LOGIN} onClick={onClose} />}
-            nativeButton={false}
-            variant="default"
-            className="h-11 w-full rounded-full cursor-pointer"
-          >
-            Sign In
-          </Button>
-          <Button
-            render={<Link to={PageRoutes.REGISTER} onClick={onClose} />}
-            nativeButton={false}
-            variant="outline"
-            className="h-11 w-full rounded-full cursor-pointer"
-          >
-            Create Account
-          </Button>
-        </div>
       </div>
     </>
   )

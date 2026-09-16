@@ -169,11 +169,13 @@ const CancelOrderModal = ({
 
     <div className="rounded-xl border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
       <p className="mb-2 font-medium text-foreground">Order Summary</p>
-      {order.items.map((item) => (
-        <p key={item.itemId}>
-          {item.quantity}&times; {item.itemName} ({item.size} / {item.color})
-        </p>
-      ))}
+      <div className="flex flex-col gap-1.5">
+        {order.items.map((item) => (
+          <p key={item.itemId}>
+            {item.quantity}&times; {item.itemName} ({item.size} / {item.color})
+          </p>
+        ))}
+      </div>
       <Separator className="my-3" />
       <div className="flex justify-between font-bold text-foreground">
         <span>Total</span>

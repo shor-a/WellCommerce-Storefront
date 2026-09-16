@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { AlignLeft, Search, X } from "lucide-react"
+import { AlignLeft, SearchX, Search } from "lucide-react"
 
 import {
   NavigationMenu,
@@ -119,7 +119,7 @@ export const Navbar = ({ className }: NavbarProps) => {
               className="shrink-0 cursor-pointer lg:hidden"
             >
               {mobileSearchOpen ? (
-                <X strokeWidth={2} className="size-5" />
+                <SearchX strokeWidth={2} className="size-5" />
               ) : (
                 <Search strokeWidth={2} className="size-5" />
               )}
@@ -133,8 +133,10 @@ export const Navbar = ({ className }: NavbarProps) => {
         {/* ── Mobile / tablet search bar — expands below the main row ── */}
         <div
           className={cn(
-            "overflow-hidden transition-all duration-300 ease-in-out lg:hidden",
-            mobileSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+            "transition-all duration-300 ease-in-out lg:hidden",
+            mobileSearchOpen
+              ? "max-h-20 opacity-100"
+              : "pointer-events-none max-h-0 opacity-0"
           )}
         >
           <div className="px-4 pb-3 sm:px-6">

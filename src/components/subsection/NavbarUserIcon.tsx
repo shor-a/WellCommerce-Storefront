@@ -116,25 +116,25 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
           >
             {isAuthenticated ? (
               <>
-                <div className="flex flex-col gap-1 px-5 pt-5 pb-4">
+                <div className="flex flex-col gap-0.5 px-4 pt-4 pb-3">
                   <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     Welcome back
                   </span>
-                  <span className="font-heading text-base leading-tight font-bold tracking-tight text-foreground">
+                  <span className="font-heading text-sm leading-tight font-bold tracking-tight text-foreground">
                     {authUser}
                   </span>
                 </div>
 
                 <Separator />
 
-                <div className="flex flex-col py-2">
+                <div className="flex flex-col py-1">
                   {authMenuItems.map(({ id, label, icon: Icon, to }) => (
                     <Link
                       key={id}
                       to={to}
                       onClick={() => setUserOpen(false)}
                       className={cn(
-                        "flex items-center gap-3 px-5 py-2.5",
+                        "flex items-center gap-3 px-4 py-2",
                         "text-sm font-medium text-foreground",
                         "transition-colors duration-150",
                         "hover:bg-secondary focus-visible:bg-secondary",
@@ -152,12 +152,12 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
 
                 <Separator />
 
-                <div className="px-4 py-3">
+                <div className="px-4 py-2">
                   <button
                     type="button"
                     onClick={handleSignOut}
                     className={cn(
-                      "flex w-full items-center gap-3 px-1 py-2",
+                      "flex w-full items-center gap-3 px-1 py-1.5",
                       "text-sm font-medium text-destructive",
                       "transition-colors duration-150",
                       "cursor-pointer hover:text-destructive/80",
@@ -171,8 +171,8 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
               </>
             ) : (
               <>
-                <div className="flex flex-col items-center gap-0.5 px-5 pt-6 pb-4 text-center">
-                  <span className="font-heading text-lg font-bold tracking-tight text-foreground">
+                <div className="flex flex-col items-center gap-0.5 px-4 pt-5 pb-3 text-center">
+                  <span className="font-heading text-base font-bold tracking-tight text-foreground">
                     WELLCOMMERCE
                   </span>
                   <span className="text-xs leading-relaxed text-muted-foreground">
@@ -184,13 +184,13 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
 
                 <Separator />
 
-                <div className="flex flex-col gap-3 px-5 py-4">
+                <div className="flex flex-col gap-2.5 px-4 py-3">
                   <Button
                     render={<Link to={PageRoutes.LOGIN} />}
                     nativeButton={false}
                     variant="default"
                     className={cn(
-                      "h-11 w-full rounded-full",
+                      "h-10 w-full rounded-full",
                       "bg-primary text-primary-foreground",
                       "text-sm font-medium tracking-wide",
                       "transition-opacity duration-150 hover:opacity-80",
@@ -211,7 +211,7 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
                     nativeButton={false}
                     variant="outline"
                     className={cn(
-                      "h-11 w-full rounded-full",
+                      "h-10 w-full rounded-full",
                       "border-border/80 bg-background text-foreground",
                       "text-sm font-medium",
                       "transition-colors duration-150 hover:bg-secondary",
@@ -228,7 +228,7 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
                   </Button>
                 </div>
 
-                <div className="relative flex items-center px-5 pb-4">
+                <div className="relative flex items-center px-4 pb-3">
                   <Separator className="flex-1" />
                   <span className="mx-3 shrink-0 text-[11px] font-medium tracking-widest text-muted-foreground uppercase">
                     or
@@ -236,7 +236,7 @@ export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
                   <Separator className="flex-1" />
                 </div>
 
-                <div className="flex justify-center px-5 pb-5">
+                <div className="flex justify-center px-4 pb-4">
                   <p className="text-center text-xs text-muted-foreground">
                     Don&apos;t have an account?{" "}
                     <Link

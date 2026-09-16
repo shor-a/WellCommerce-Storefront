@@ -12,7 +12,7 @@ import {
   filterPriceRange,
   filterSizes,
 } from "@/constants/categoryConst"
-import type { PCategoryHook } from "@/hooks/ProductCategoryHooks"
+import type { PCategoryHook } from "@/hooks/productCategoryHooks"
 import {
   Collapsible,
   CollapsibleContent,

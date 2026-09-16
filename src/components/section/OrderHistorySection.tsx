@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
@@ -51,6 +52,8 @@ export const OrderHistorySection = ({
   onCancelOrder,
   onPageChange,
 }: OrderHistorySectionProps) => {
+  const [sortOpen, setSortOpen] = useState(false)
+
   const handleActionForCollapsed = (order: Order) => {
     if (order.status === OrderStatus.SHIPPED)
       return () => onTrackOrder(order.orderId)
@@ -81,9 +84,9 @@ export const OrderHistorySection = ({
               Showing {rangeStart}–{rangeEnd} of {totalOrders} Orders
             </span>
           )}
-          <span className="hidden sm:inline">
+          <span className="flex items-center">
             Sort by:
-            <Popover>
+            <Popover open={sortOpen} onOpenChange={setSortOpen}>
               <PopoverTrigger
                 className="inline-flex h-auto items-center gap-1 rounded px-2 py-1 text-sm font-medium text-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                 aria-label={`Sort by: ${sortOption}`}
@@ -102,7 +105,10 @@ export const OrderHistorySection = ({
                         ? "font-semibold text-foreground"
                         : "text-muted-foreground"
                     )}
-                    onClick={() => onSortChange(option)}
+                    onClick={() => {
+                      onSortChange(option)
+                      setSortOpen(false)
+                    }}
                   >
                     {option}
                   </button>

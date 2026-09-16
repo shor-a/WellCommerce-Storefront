@@ -12,11 +12,11 @@ const Hero = () => {
         <div className="container mx-auto gap-10 px-4 lg:px-10">
           {/* Mobile: stacked column — text then image. Desktop: side-by-side row */}
           <div className="flex w-full flex-col lg:flex-row lg:justify-start">
-            <div className="lg:basis-7/12">
-              <h1 className="mb-4 text-4xl lg:text-5xl">
+            <div className="flex flex-col md:items-center lg:basis-7/12 lg:items-start">
+              <h1 className="mb-4 text-4xl md:text-5xl">
                 FIND CLOTHES THAT MATCHES YOUR STYLE
               </h1>
-              <p className="mb-0 text-sm text-muted-foreground lg:mb-6 lg:text-base">
+              <p className="mb-0 text-sm text-muted-foreground md:text-base lg:mb-6">
                 Browse through our diverse range of meticulously crafted
                 garments, designed to bring out your individually and cater to
                 your sense of style.
@@ -35,7 +35,7 @@ const Hero = () => {
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
-                className="-mt-0.5 mb-8 w-full border-2 border-white/15 lg:mt-0 lg:mb-10 lg:w-auto lg:border-0"
+                className="-mt-0.5 mb-8 w-full border-2 border-white/15 md:w-100 lg:mt-0 lg:mb-10 lg:w-auto lg:border-0"
                 size="xl"
               >
                 Shop Now

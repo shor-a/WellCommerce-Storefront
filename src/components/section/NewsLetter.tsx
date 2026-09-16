@@ -13,11 +13,11 @@ export const NewsLetter = ({ className }: NewsProp) => {
     <Card
       className={cn(
         className,
-        `w-full max-w-[1100px] overflow-hidden rounded-[20px] border-0 bg-black text-white shadow-none`
+        `w-full max-w-[950px] overflow-hidden rounded-[20px] border-0 bg-black text-white shadow-none`
       )}
     >
       <CardContent className="flex flex-col gap-7 px-6 py-8 md:flex-row md:items-center md:justify-between md:gap-10 md:px-16 md:py-6">
-        <h2 className="text-[32px] leading-[35px] font-bold tracking-[0] md:max-w-[551px] md:text-[36px] md:leading-[50px]">
+        <h2 className="text-[32px] leading-[35px] font-bold tracking-[0] md:max-w-[551px] md:leading-[50px]">
           STAY UPTO DATE ABOUT OUR LATEST OFFERS
         </h2>
         <form

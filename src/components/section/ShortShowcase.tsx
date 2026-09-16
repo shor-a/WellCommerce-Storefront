@@ -56,7 +56,7 @@ const ShortShowcase = ({
             ))}
           </div>
           {showAllBtn ? (
-            <div className="flex w-full items-center justify-center pb-10">
+            <div className="flex w-full items-center justify-center pb-8">
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
