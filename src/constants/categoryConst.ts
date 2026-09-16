@@ -31,9 +31,9 @@ export const filterSizes: ProductSizeType[] = [
 
 export const filterCategories: string[] = [
   "T-shirts",
-  "Shorts",
-  "Shirts",
+  "Long Sleeved",
   "Hoodie",
+  "Shorts",
   "Jeans",
 ]
 

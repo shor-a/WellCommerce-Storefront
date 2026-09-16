@@ -172,7 +172,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[5],
     ratingCount: 210,
-    category: "Shirts",
+    category: "Long Sleeved",
     dressStyle: "Casual",
     description:
       "A timeless checkered flannel shirt with a relaxed fit. Versatile enough for casual outings or smart-casual occasions.",
@@ -204,7 +204,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[7],
     ratingCount: 275,
-    category: "Shirts",
+    category: "Long Sleeved",
     dressStyle: "Formal",
     description:
       "A relaxed-fit shirt with vertical stripes that elongate the silhouette. Perfect for both office and weekend wear.",

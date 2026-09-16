@@ -75,7 +75,7 @@ export const FilterSidebar = ({
 
       {/* Category list */}
       <Collapsible className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Category</span>
           <ChevronLeft
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -89,7 +89,7 @@ export const FilterSidebar = ({
                 key={cat}
                 type="button"
                 aria-pressed={selectedCategory.includes(cat)}
-                className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+                className={`flex w-full cursor-pointer items-center justify-between py-1 text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
                   selectedCategory.includes(cat)
                     ? "font-semibold text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -108,7 +108,7 @@ export const FilterSidebar = ({
 
       {/* Price */}
       <Collapsible defaultOpen className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Price</span>
           <ChevronLeft
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -139,7 +139,7 @@ export const FilterSidebar = ({
 
       {/* Colors */}
       <Collapsible defaultOpen className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Colors</span>
           <ChevronLeft
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -169,7 +169,7 @@ export const FilterSidebar = ({
 
       {/* Size */}
       <Collapsible defaultOpen className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Size</span>
           <ChevronLeft
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -195,7 +195,7 @@ export const FilterSidebar = ({
 
       {/* Dress Style */}
       <Collapsible className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Dress Style</span>
           <ChevronLeft
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -210,7 +210,7 @@ export const FilterSidebar = ({
                 key={style}
                 type="button"
                 aria-pressed={selectedDressStyle.includes(style)}
-                className={`flex items-center justify-between text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+                className={`flex w-full cursor-pointer items-center justify-between py-1 text-base focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
                   selectedDressStyle.includes(style)
                     ? "font-semibold text-foreground"
                     : "text-muted-foreground hover:text-foreground"

@@ -1,57 +1,78 @@
+import { useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import type { ProductSize } from "@/constants/sizeConst"
 import {
   filterPriceRange,
   SortOption,
+  filterSortOptions,
   type SortOption as SortOptionType,
 } from "@/constants/categoryConst"
-import { useState } from "react"
+import { NavFilterParam } from "@/constants/navbarConst"
 
 export type PCategoryHook = ReturnType<typeof ProductCategoryHooks>
 
 const ProductCategoryHooks = () => {
+  const [searchParams] = useSearchParams()
+
+  // ── Seed initial state from URL params
+  const paramCategory = searchParams.get(NavFilterParam.CATEGORY)
+  const paramSort = searchParams.get(NavFilterParam.SORT)
+
+  const initialCategory = paramCategory ? [paramCategory] : []
+  const initialSort: SortOptionType =
+    filterSortOptions.find((o) => o === paramSort) ?? SortOption.MOST_POPULAR
+
+  // ── Filter state
   const [selectedColor, setColor] = useState<string[]>([])
   const [selectedSize, setSize] = useState<ProductSize[]>([])
   const [sliderRange, setSlider] = useState<[number, number]>([
     filterPriceRange.min,
     filterPriceRange.max,
   ])
-  const [selectedCategory, setCategory] = useState<string[]>([])
+  const [selectedCategory, setCategory] = useState<string[]>(initialCategory)
   const [selectedDressStyle, setDressStyle] = useState<string[]>([])
-  const [sortOption, setSortOption] = useState<SortOptionType>(
-    SortOption.MOST_POPULAR
-  )
+  const [sortOption, setSortOption] = useState<SortOptionType>(initialSort)
   const [currentPage, setCurrentPage] = useState(1)
 
+  // ── Toggle helpers
   const setMultipleColor = (addColor: string) => {
     setCurrentPage(1)
-    const exists = selectedColor.some((color) => addColor === color)
-    return exists
-      ? setColor(selectedColor.filter((color) => addColor !== color))
-      : setColor([...selectedColor, addColor])
+    const exists = selectedColor.some((c) => c === addColor)
+    setColor(
+      exists
+        ? selectedColor.filter((c) => c !== addColor)
+        : [...selectedColor, addColor]
+    )
   }
 
   const setMultipleSize = (addSize: ProductSize) => {
     setCurrentPage(1)
-    const exists = selectedSize.some((size) => size === addSize)
-    return exists
-      ? setSize(selectedSize.filter((size) => size !== addSize))
-      : setSize([...selectedSize, addSize])
+    const exists = selectedSize.some((s) => s === addSize)
+    setSize(
+      exists
+        ? selectedSize.filter((s) => s !== addSize)
+        : [...selectedSize, addSize]
+    )
   }
 
   const setMultipleCategory = (addCategory: string) => {
     setCurrentPage(1)
-    const exists = selectedCategory.some((cat) => cat === addCategory)
-    return exists
-      ? setCategory(selectedCategory.filter((cat) => cat !== addCategory))
-      : setCategory([...selectedCategory, addCategory])
+    const exists = selectedCategory.some((c) => c === addCategory)
+    setCategory(
+      exists
+        ? selectedCategory.filter((c) => c !== addCategory)
+        : [...selectedCategory, addCategory]
+    )
   }
 
   const setMultipleDressStyle = (addStyle: string) => {
     setCurrentPage(1)
-    const exists = selectedDressStyle.some((style) => style === addStyle)
-    return exists
-      ? setDressStyle(selectedDressStyle.filter((style) => style !== addStyle))
-      : setDressStyle([...selectedDressStyle, addStyle])
+    const exists = selectedDressStyle.some((s) => s === addStyle)
+    setDressStyle(
+      exists
+        ? selectedDressStyle.filter((s) => s !== addStyle)
+        : [...selectedDressStyle, addStyle]
+    )
   }
 
   const handleSliderChange = (range: [number, number]) => {
@@ -68,9 +89,10 @@ const ProductCategoryHooks = () => {
     setCurrentPage(1)
     setColor([])
     setSize([])
-    setSlider([0, 300])
+    setSlider([filterPriceRange.min, filterPriceRange.max])
     setCategory([])
     setDressStyle([])
+    setSortOption(SortOption.MOST_POPULAR)
   }
 
   return {

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useSearchParams } from "react-router-dom"
 import {
   X,
   ChevronRight,
@@ -14,7 +14,10 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { PageRoutes } from "@/config/routes"
-import { mobileNavLinks } from "@/constants/navbarConst"
+import {
+  mobileNavSections,
+  type NavLink as NavLinkType,
+} from "@/constants/navbarConst"
 
 interface NavbarMobileMenuProps {
   isOpen: boolean
@@ -31,6 +34,61 @@ const authMenuItems = [
   { id: "wishlist", label: "My Wishlist", icon: Heart, to: PageRoutes.HOME },
   { id: "settings", label: "Settings", icon: Settings, to: PageRoutes.HOME },
 ] as const
+
+const MobileNavItem = ({
+  link,
+  onClose,
+}: {
+  link: NavLinkType
+  onClose: () => void
+}) => {
+  const { pathname } = useLocation()
+  const [searchParams] = useSearchParams()
+  const Icon = link.icon
+
+  const isActive =
+    pathname === PageRoutes.BROWSE &&
+    (!link.activeParam
+      ? searchParams.toString() === ""
+      : searchParams.get(link.activeParam.key) === link.activeParam.value)
+
+  return (
+    <Link
+      to={link.to}
+      onClick={onClose}
+      className={cn(
+        "flex items-center gap-3 px-5 py-3 transition-colors duration-150",
+        "focus-visible:bg-secondary focus-visible:outline-none",
+        isActive
+          ? "bg-secondary text-foreground"
+          : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+      )}
+    >
+      {/* Icon pill */}
+      <span
+        className={cn(
+          "flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors duration-150",
+          isActive
+            ? "bg-foreground text-background"
+            : "bg-secondary text-muted-foreground"
+        )}
+      >
+        <Icon strokeWidth={1.75} className="size-4" />
+      </span>
+
+      <span className="text-sm font-medium">{link.label}</span>
+
+      {isActive ? (
+        <span className="ml-auto size-1.5 rounded-full bg-foreground" />
+      ) : (
+        <ChevronRight
+          strokeWidth={1.75}
+          className="ml-auto size-4 shrink-0 text-muted-foreground/50"
+        />
+      )}
+    </Link>
+  )
+}
 
 export const NavbarMobileMenu = ({
   isOpen,
@@ -51,15 +109,14 @@ export const NavbarMobileMenu = ({
   useEffect(() => {
     if (!isOpen) return
     const handleOutside = (e: MouseEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(e.target as Node)) {
+      if (drawerRef.current && !drawerRef.current.contains(e.target as Node))
         onClose()
-      }
     }
     document.addEventListener("mousedown", handleOutside)
     return () => document.removeEventListener("mousedown", handleOutside)
   }, [isOpen, onClose])
 
-  // Lock body scroll when open
+  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : ""
     return () => {
@@ -67,7 +124,7 @@ export const NavbarMobileMenu = ({
     }
   }, [isOpen])
 
-  // Close on Escape key
+  // Escape key
   useEffect(() => {
     if (!isOpen) return
     const handleKey = (e: KeyboardEvent) => {
@@ -82,13 +139,13 @@ export const NavbarMobileMenu = ({
       {/* Backdrop */}
       <div
         aria-hidden="true"
+        onClick={onClose}
         className={cn(
           "fixed inset-0 z-40 bg-foreground/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
           isOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         )}
-        onClick={onClose}
       />
 
       {/* Drawer panel */}
@@ -125,39 +182,30 @@ export const NavbarMobileMenu = ({
 
         <Separator />
 
-        {/* Nav links */}
-        <nav className="flex flex-1 flex-col overflow-y-auto py-3">
-          {mobileNavLinks.map((link) => (
-            <Link
-              key={link.id}
-              to={link.to}
-              onClick={onClose}
-              className={cn(
-                "flex items-center justify-between px-5 py-3",
-                "text-sm font-medium text-foreground",
-                "transition-colors duration-150 hover:bg-secondary",
-                "cursor-pointer outline-none focus-visible:bg-secondary"
-              )}
-            >
-              {link.label}
-              <ChevronRight
-                strokeWidth={1.75}
-                className="size-4 shrink-0 text-muted-foreground"
-              />
-            </Link>
+        {/* Scrollable nav body */}
+        <nav className="flex flex-1 flex-col overflow-y-auto">
+          {mobileNavSections.map((section, sectionIdx) => (
+            <div key={section.sectionId}>
+              {sectionIdx > 0 && <Separator />}
+              <p className="px-5 pt-4 pb-2 text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+                {section.heading}
+              </p>
+              {section.items.map((link) => (
+                <MobileNavItem key={link.id} link={link} onClose={onClose} />
+              ))}
+            </div>
           ))}
 
-          {/* Auth section separator */}
-          <Separator className="my-2" />
+          <Separator className="mt-2" />
 
+          {/* Auth section */}
           {isAuthenticated ? (
             <>
-              {/* Welcome */}
-              <div className="px-5 py-2">
-                <p className="py-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                  Welcome back
+              <div className="px-5 pt-4 pb-2">
+                <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+                  Account
                 </p>
-                <p className="font-heading text-sm font-bold tracking-tight text-foreground">
+                <p className="mt-2 font-heading text-sm font-bold tracking-tight text-foreground">
                   {authUser}
                 </p>
               </div>
@@ -174,11 +222,14 @@ export const NavbarMobileMenu = ({
                     "cursor-pointer outline-none focus-visible:bg-secondary"
                   )}
                 >
-                  <Icon
-                    strokeWidth={1.75}
-                    className="size-4 shrink-0 text-muted-foreground"
-                  />
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-muted-foreground">
+                    <Icon strokeWidth={1.75} className="size-4" />
+                  </span>
                   {label}
+                  <ChevronRight
+                    strokeWidth={1.75}
+                    className="ml-auto size-4 shrink-0 text-muted-foreground/50"
+                  />
                 </Link>
               ))}
 
@@ -186,18 +237,23 @@ export const NavbarMobileMenu = ({
                 type="button"
                 onClick={handleSignOut}
                 className={cn(
-                  "flex w-full items-center gap-3 px-5 py-3",
+                  "mb-4 flex w-full items-center gap-3 px-5 py-3",
                   "text-sm font-medium text-destructive",
                   "transition-colors duration-150 hover:bg-secondary",
                   "cursor-pointer outline-none focus-visible:bg-secondary"
                 )}
               >
-                <LogOut strokeWidth={1.75} className="size-4 shrink-0" />
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-destructive/10 text-destructive">
+                  <LogOut strokeWidth={1.75} className="size-4" />
+                </span>
                 Sign Out
               </button>
             </>
           ) : (
-            <div className="flex flex-col gap-2.5 px-5 py-3">
+            <div className="flex flex-col gap-2.5 px-5 py-4">
+              <p className="mb-1 text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+                Account
+              </p>
               <Button
                 render={<Link to={PageRoutes.LOGIN} onClick={onClose} />}
                 nativeButton={false}

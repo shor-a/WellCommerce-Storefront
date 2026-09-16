@@ -31,26 +31,39 @@ export const NavbarSearchBar = ({
   onBlurClose,
 }: NavbarSearchBarProps) => {
   const [search, setSearch] = useState<string>("")
-  const [dropdownTop, setDropdownTop] = useState(0)
+  const [dropdownRect, setDropdownRect] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  })
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  // For the mobile fixed dropdown: measure the bottom of the sticky header
-  // so the results panel sits right below it regardless of whether
-  // the OfferNavbar is visible or not.
+  // For the fixed dropdown: measure both the header bottom AND the wrapper's
+  // left/width so the results panel aligns exactly with the search bar.
   useEffect(() => {
     if (!fullWidth) return
 
     const measure = () => {
       const header = document.querySelector("header")
-      if (header) setDropdownTop(header.getBoundingClientRect().bottom)
+      const wrapper = wrapperRef.current
+      if (!header || !wrapper) return
+      const headerBottom = header.getBoundingClientRect().bottom
+      const wRect = wrapper.getBoundingClientRect()
+      setDropdownRect({
+        top: headerBottom,
+        left: wRect.left,
+        width: wRect.width,
+      })
     }
 
     measure()
     window.addEventListener("resize", measure)
     window.addEventListener("scroll", measure, { passive: true })
+    window.visualViewport?.addEventListener("resize", measure)
     return () => {
       window.removeEventListener("resize", measure)
       window.removeEventListener("scroll", measure)
+      window.visualViewport?.removeEventListener("resize", measure)
     }
   }, [fullWidth])
 
@@ -82,13 +95,21 @@ export const NavbarSearchBar = ({
           className={cn(
             hasResults ? "" : "hidden",
             // Desktop: absolute, anchored to the bar
-            // Mobile: fixed, anchored just below the header via inline style
+            // Mobile/collapsed: fixed, sized to match the search bar exactly
             fullWidth
-              ? "fixed right-0 left-0 z-50 mx-4 sm:mx-6"
+              ? "fixed z-50"
               : "absolute top-full right-0 z-50 mt-1 w-max max-w-sm min-w-full",
             "max-h-72 overflow-y-auto rounded-sm border bg-background shadow-lg"
           )}
-          style={fullWidth ? { top: dropdownTop } : undefined}
+          style={
+            fullWidth
+              ? {
+                  top: dropdownRect.top,
+                  left: dropdownRect.left,
+                  width: dropdownRect.width,
+                }
+              : undefined
+          }
         >
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Product search results">
@@ -101,7 +122,7 @@ export const NavbarSearchBar = ({
                 onClick={() => setSearch("")}
               >
                 <CommandItem
-                  value={product.itemId}
+                  value={String(product.itemId)}
                   className="cursor-pointer px-3 py-2"
                 >
                   <div className="flex w-full items-center gap-3">

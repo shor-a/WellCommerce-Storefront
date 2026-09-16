@@ -59,15 +59,14 @@ export const OrderFiltersAside = ({
           onChange={(e) => onSearchChange(e.target.value)}
           className={cn(
             "w-full rounded-full border border-border bg-secondary py-2 pr-4 pl-8 text-sm text-foreground placeholder:text-muted-foreground",
-            "transition-colors duration-150",
-            "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+            "transition-colors duration-150"
           )}
         />
       </div>
 
       {/* Status filter */}
       <Collapsible defaultOpen className="group flex flex-col gap-5">
-        <CollapsibleTrigger className="flex w-full items-center justify-between">
+        <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between">
           <span className="text-xl font-bold text-foreground">Status</span>
           <ChevronDownIcon
             className="size-4 text-foreground transition-transform group-data-open:rotate-180"
@@ -87,7 +86,7 @@ export const OrderFiltersAside = ({
                   aria-pressed={isActive}
                   onClick={() => onStatusChange(status)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-full px-4 py-2 text-sm font-medium transition-all duration-150",
+                    "flex w-full cursor-pointer items-center justify-between rounded-full px-4 py-2 text-sm font-medium transition-all duration-150",
                     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
                     isActive
                       ? "bg-primary text-primary-foreground"
