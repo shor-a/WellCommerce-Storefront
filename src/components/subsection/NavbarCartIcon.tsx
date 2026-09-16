@@ -15,6 +15,7 @@ import { ShoppingCart, ArrowRight } from "lucide-react"
 import { PageRoutes } from "@/config/routes"
 import { Link } from "react-router-dom"
 import { useCartStore } from "@/hooks/cartStores"
+import { destructProductId } from "@/constants/cartConst"
 
 const NavbarCartIcon = () => {
   const cartItems = useCartStore((state) => state.cart)
@@ -92,7 +93,14 @@ const NavbarCartIcon = () => {
             <div className="flex flex-col gap-3 px-4 py-3">
               {cartItems.length > 0 ? (
                 cartItems.map((cartItem) => (
-                  <CartItemRow key={cartItem.cartItemID} cartItem={cartItem} />
+                  <Link
+                    key={cartItem.cartItemID}
+                    to={`/product-detail/${destructProductId(cartItem.cartItemID)}`}
+                    onClick={() => setCartOpen(false)}
+                    className="block cursor-pointer rounded-xl p-1 transition-colors duration-150 hover:bg-secondary"
+                  >
+                    <CartItemRow cartItem={cartItem} />
+                  </Link>
                 ))
               ) : (
                 <span className="font-heading text-sm font-bold tracking-tight">

@@ -10,44 +10,15 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
-import {
-  CircleUserRound,
-  LogIn,
-  UserPlus,
-  Package,
-  Heart,
-  Settings,
-  LogOut,
-} from "lucide-react"
+import { CircleUserRound, LogIn, UserPlus, LogOut } from "lucide-react"
 
 import { PageRoutes } from "@/config/routes"
 import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
-
-interface NavbarUserIconProps {
-  className?: string
-}
-
-const authMenuItems = [
-  {
-    id: "orders",
-    label: "Order History",
-    icon: Package,
-    to: PageRoutes.ORDER_HISTORY,
-  },
-  {
-    id: "wishlist",
-    label: "My Wishlist",
-    icon: Heart,
-    to: PageRoutes.WISHLIST,
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: Settings,
-    to: PageRoutes.SETTINGS,
-  },
-] as const
+import {
+  authMenuItems,
+  type NavbarUserIconProps,
+} from "@/constants/navbarConst"
 
 export const NavbarUserIcon = ({ className }: NavbarUserIconProps) => {
   const isAuthenticated = localStorage.getItem("authenticated")

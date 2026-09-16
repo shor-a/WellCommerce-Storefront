@@ -2,7 +2,11 @@ import { CartPageItemRow } from "@/components/atomic/CartPageItemRow"
 import { CartOrderSummary } from "@/components/subsection/CartOrderSummary"
 import { Separator } from "@/components/ui/separator"
 import { ShoppingCart } from "lucide-react"
-import { DELIVERY_FEE, DISCOUNT_RATE } from "@/constants/cartConst"
+import {
+  DELIVERY_FEE,
+  DISCOUNT_RATE,
+  destructProductId,
+} from "@/constants/cartConst"
 import { useCartStore } from "@/hooks/cartStores"
 import { cn } from "@/lib/utils"
 
@@ -32,7 +36,10 @@ export const CartSection = () => {
               {cartItems.length > 0 ? (
                 cartItems.map((item, index) => (
                   <div key={item.cartItemID}>
-                    <CartPageItemRow cartItem={item} />
+                    <CartPageItemRow
+                      cartItem={item}
+                      productId={destructProductId(item.cartItemID)}
+                    />
                     {index < cartItems.length - 1 && (
                       <Separator className="mt-6" />
                     )}

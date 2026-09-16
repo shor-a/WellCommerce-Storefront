@@ -15,6 +15,8 @@ import {
 } from "@/components/atomic/ClothingIcons"
 import type { SVGProps } from "react"
 
+import { Package, Heart, Settings } from "lucide-react"
+
 // Shared icon component type — covers both Lucide icons and custom SVG icons
 export type IconComponent =
   | LucideIcon
@@ -211,3 +213,28 @@ export const mobileNavSections: MobileNavSection[] = [
     ],
   },
 ]
+
+export interface NavbarUserIconProps {
+  className?: string
+}
+
+export const authMenuItems = [
+  {
+    id: "orders",
+    label: "Order History",
+    icon: Package,
+    to: PageRoutes.ORDER_HISTORY,
+  },
+  {
+    id: "wishlist",
+    label: "My Wishlist",
+    icon: Heart,
+    to: PageRoutes.WISHLIST,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: Settings,
+    to: PageRoutes.SETTINGS,
+  },
+] as const

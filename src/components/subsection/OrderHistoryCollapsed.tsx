@@ -34,7 +34,7 @@ export const OrderHistoryCollapsed = ({
       onClick={onToggle}
       aria-expanded={false}
       className={cn(
-        "w-full rounded-[20px] border border-border bg-card p-6 text-left",
+        "w-full cursor-pointer rounded-[20px] border border-border bg-card p-6 text-left",
         "shadow-[0_1px_2px_0_rgb(0_0_0/0.05)] transition-all duration-200",
         "hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",

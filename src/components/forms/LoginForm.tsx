@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
-import { Mail, Lock, Eye, EyeOff } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react"
 import { SiGoogle, SiApple } from "@icons-pack/react-simple-icons"
 
 import { cn } from "@/lib/utils"
@@ -87,8 +87,15 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
       <div className="relative -mt-6 rounded-t-3xl bg-background px-4 py-8 lg:absolute lg:inset-y-0 lg:mt-0 lg:flex lg:items-center lg:rounded-none lg:bg-transparent lg:px-0 lg:py-0">
         <div className="mx-auto w-full max-w-[390px] lg:mx-0 lg:ml-[100px] lg:max-w-[480px]">
           <div className="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-6 overflow-y-auto rounded-[20px] border border-black/10 bg-white/95 p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md lg:p-10">
-            {/* Logo */}
-            <div className="text-center">
+            {/* Logo — back arrow sits absolute-left, no effect on centering or height */}
+            <div className="relative text-center">
+              <Link
+                to={PageRoutes.HOME}
+                aria-label="Back to home"
+                className="absolute top-1/2 left-0 -translate-y-1/2 cursor-pointer text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none"
+              >
+                <ArrowLeft strokeWidth={2.5} className="size-6" />
+              </Link>
               <span className="font-heading text-2xl font-bold tracking-tight text-foreground lg:text-3xl lg:leading-none">
                 WELLCOMMERCE
               </span>

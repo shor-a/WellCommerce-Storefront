@@ -2,34 +2,54 @@ import type { Cart } from "@/constants/cartConst"
 import { Button } from "@/components/ui/button"
 import { Minus, Plus, Trash2 } from "lucide-react"
 import { useCartStore } from "@/hooks/cartStores"
+import { Link } from "react-router-dom"
+import { cn } from "@/lib/utils"
 
 interface CartPageItemRowProps {
   cartItem: Cart
+  productId: number
 }
 
-export const CartPageItemRow = ({ cartItem }: CartPageItemRowProps) => {
+export const CartPageItemRow = ({
+  cartItem,
+  productId,
+}: CartPageItemRowProps) => {
   const { addToCart, removeFromCart } = useCartStore()
 
   return (
     <div className="flex gap-4">
-      {/* Product image */}
-      <div className="size-24 shrink-0 overflow-hidden rounded-lg bg-secondary lg:size-[124px]">
-        {cartItem.itemImg && (
-          <img
-            src={cartItem.itemImg}
-            alt={cartItem.itemName}
-            className="h-full w-full object-cover object-top"
-          />
+      {/* Image + name — wrapped in Link, entire block is clickable */}
+      <Link
+        to={`/product-detail/${productId}`}
+        className={cn(
+          "group flex shrink-0 flex-col gap-3",
+          "cursor-pointer rounded-lg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
         )}
-      </div>
+      >
+        {/* Product image */}
+        <div className="size-24 overflow-hidden rounded-lg bg-secondary transition-opacity duration-150 group-hover:opacity-80 lg:size-[124px]">
+          {cartItem.itemImg && (
+            <img
+              src={cartItem.itemImg}
+              alt={cartItem.itemName}
+              className="h-full w-full object-cover object-top"
+            />
+          )}
+        </div>
+      </Link>
 
-      {/* Info + actions */}
+      {/* Info + actions — outside the link, never triggers navigation */}
       <div className="flex min-w-0 flex-1 flex-col gap-3">
-        {/* Top row: name + delete */}
+        {/* Name + delete */}
         <div className="flex items-start justify-between gap-2">
-          <p className="text-base leading-tight font-bold text-foreground lg:text-xl">
-            {cartItem.itemName}
-          </p>
+          <Link
+            to={`/product-detail/${productId}`}
+            className="cursor-pointer focus-visible:outline-none"
+          >
+            <p className="text-base leading-tight font-bold text-foreground transition-colors hover:text-foreground/70 lg:text-xl">
+              {cartItem.itemName}
+            </p>
+          </Link>
           <Button
             type="button"
             variant="ghost"
@@ -52,7 +72,7 @@ export const CartPageItemRow = ({ cartItem }: CartPageItemRowProps) => {
           </p>
         </div>
 
-        {/* Bottom row: price + quantity stepper */}
+        {/* Price + quantity stepper */}
         <div className="flex items-center justify-between">
           <span className="font-heading text-2xl font-bold text-foreground">
             ${cartItem.finalPrice}
