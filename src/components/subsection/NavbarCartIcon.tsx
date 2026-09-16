@@ -73,7 +73,7 @@ const NavbarCartIcon = () => {
             side="bottom"
             align="end"
             sideOffset={8}
-            className="w-64 p-0"
+            className="w-70 p-0"
             onMouseEnter={openCart}
             onMouseLeave={closeCartDelayed}
           >
@@ -97,7 +97,7 @@ const NavbarCartIcon = () => {
                     key={cartItem.cartItemID}
                     to={`/product-detail/${destructProductId(cartItem.cartItemID)}`}
                     onClick={() => setCartOpen(false)}
-                    className="block cursor-pointer rounded-xl p-1 transition-colors duration-150 hover:bg-secondary"
+                    className="block cursor-pointer rounded-lg px-2 py-1 transition-colors duration-150 hover:bg-secondary"
                   >
                     <CartItemRow cartItem={cartItem} />
                   </Link>

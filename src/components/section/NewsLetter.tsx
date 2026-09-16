@@ -16,8 +16,8 @@ export const NewsLetter = ({ className }: NewsProp) => {
         `w-full max-w-[950px] overflow-hidden rounded-[20px] border-0 bg-black text-white shadow-none`
       )}
     >
-      <CardContent className="flex flex-col gap-7 px-6 py-8 md:flex-row md:items-center md:justify-between md:gap-10 md:px-16 md:py-6">
-        <h2 className="text-[32px] leading-[35px] font-bold tracking-[0] md:max-w-[551px] md:leading-[50px]">
+      <CardContent className="flex flex-col gap-7 px-6 py-4 md:flex-row md:items-center md:justify-between md:gap-10 md:px-16">
+        <h2 className="text-xl leading-[35px] font-bold tracking-[0] md:max-w-[551px] lg:text-[32px]">
           STAY UPTO DATE ABOUT OUR LATEST OFFERS
         </h2>
         <form
@@ -27,7 +27,7 @@ export const NewsLetter = ({ className }: NewsProp) => {
           <label className="sr-only" htmlFor="newsletter-email">
             Enter your email address
           </label>
-          <div className="flex h-12 items-center gap-3 rounded-[62px] bg-white px-4">
+          <div className="flex h-10 items-center gap-3 rounded-[62px] bg-white px-4 lg:h-12">
             <Mail
               aria-hidden="true"
               className="h-6 w-6 shrink-0 text-black/40"
@@ -42,7 +42,7 @@ export const NewsLetter = ({ className }: NewsProp) => {
           </div>
           <Button
             type="submit"
-            className="h-12 w-full rounded-[62px] bg-white px-4 text-base font-medium text-black hover:bg-white/90"
+            className="h-10 w-full rounded-[62px] bg-white px-4 text-base font-medium text-black hover:bg-white/90 lg:h-12"
           >
             Subscribe to Newsletter
           </Button>

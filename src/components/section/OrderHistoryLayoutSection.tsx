@@ -11,6 +11,7 @@ import type {
   WishlistMenu as WishlistMenuType,
   OrderModalType,
 } from "@/constants/orderHistoryConst"
+import { OrderHistoryView } from "@/constants/orderHistoryConst"
 import type { WishlistItem } from "@/hooks/wishlistStores"
 
 interface OrderHistoryLayoutSectionProps {
@@ -94,16 +95,18 @@ export const OrderHistoryLayoutSection = ({
     className={cn("w-full bg-background", className)}
   >
     <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-      {/* mobile filters */}
-      <div className="mb-6 lg:hidden">
-        <OrderHistoryMobileFilters
-          activeStatus={activeStatus}
-          searchQuery={searchQuery}
-          statusCounts={statusCounts}
-          onStatusChange={onStatusChange}
-          onSearchChange={onSearchChange}
-        />
-      </div>
+      {/* mobile filters — hidden in wishlist view */}
+      {activeView === OrderHistoryView.ORDERS && (
+        <div className="mb-6 lg:hidden">
+          <OrderHistoryMobileFilters
+            activeStatus={activeStatus}
+            searchQuery={searchQuery}
+            statusCounts={statusCounts}
+            onStatusChange={onStatusChange}
+            onSearchChange={onSearchChange}
+          />
+        </div>
+      )}
 
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         {/* desktop sidebar */}
