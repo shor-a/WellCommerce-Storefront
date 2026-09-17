@@ -18,7 +18,6 @@ export const CartPageItemRow = ({
 
   return (
     <div className="flex gap-4">
-      {/* Image + name — wrapped in Link, entire block is clickable */}
       <Link
         to={`/product-detail/${productId}`}
         className={cn(
@@ -38,7 +37,7 @@ export const CartPageItemRow = ({
         </div>
       </Link>
 
-      {/* Info + actions — outside the link, never triggers navigation */}
+      {/* Info + actions*/}
       <div className="flex min-w-0 flex-1 flex-col gap-3">
         {/* Name + delete */}
         <div className="flex items-start justify-between gap-2">

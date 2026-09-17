@@ -24,7 +24,7 @@ interface NavbarProps {
 }
 
 // Collapses the inline search bar to an icon when the visual viewport is too
-// narrow to fit everything — fires on both window resize and browser zoom.
+// narrow to fit everything  fires on both window resize and browser zoom.
 const SEARCH_COLLAPSE_WIDTH = 1150
 
 const useCollapseSearch = () => {
@@ -57,7 +57,7 @@ const useIsNavLinkActive = (link: NavLinkType): boolean => {
   const { pathname } = useLocation()
   const [searchParams] = useSearchParams()
   if (pathname !== PageRoutes.BROWSE) return false
-  // No activeParam = "Brands" — active only when browsing with no filters applied
+  // No activeParam = "Brands"  active only when browsing with no filters applied
   if (!link.activeParam) return searchParams.toString() === ""
   return searchParams.get(link.activeParam.key) === link.activeParam.value
 }
@@ -241,7 +241,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         )}
       >
         <div className="container mx-auto flex items-center gap-3 px-4 py-4 sm:px-6 lg:gap-4 lg:px-10">
-          {/* Hamburger — sm/md only */}
+          {/* Hamburger  sm/md only */}
           <Button
             variant="ghost"
             size="icon"
@@ -261,7 +261,7 @@ export const Navbar = ({ className }: NavbarProps) => {
             WELLCOMMERCE
           </Link>
 
-          {/* Desktop nav links — flex-1 + justify-center keeps them centered between brand and search */}
+          {/* Desktop nav links  flex-1 + justify-center keeps them centered between brand and search */}
           <nav
             aria-label="Main navigation"
             className="hidden min-w-0 flex-1 items-center justify-center gap-4 lg:flex"
@@ -278,7 +278,7 @@ export const Navbar = ({ className }: NavbarProps) => {
             ))}
           </nav>
 
-          {/* Desktop search — full bar when enough room, icon toggle when zoomed in */}
+          {/* Desktop search  full bar when enough room, icon toggle when zoomed in */}
           {!searchCollapsed ? (
             <NavbarSearchBar className="hidden lg:flex lg:w-44 xl:w-56" />
           ) : (
@@ -321,7 +321,7 @@ export const Navbar = ({ className }: NavbarProps) => {
           </div>
         </div>
 
-        {/* Search panel — used by mobile toggle and collapsed desktop search icon */}
+        {/* Search panel  used by mobile toggle and collapsed desktop search icon */}
         <div
           className={cn(
             "transition-all duration-300 ease-in-out",

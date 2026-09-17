@@ -26,7 +26,7 @@ export const CheckoutOrderSummary = ({
 
   return (
     <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
-      <h2 className="text-2xl font-bold">Order Summary</h2>
+      <h2 className="text-xl font-bold md:text-2xl">Order Summary</h2>
 
       {items.length === 0 ? (
         <p className="py-8 text-center text-sm text-muted-foreground">

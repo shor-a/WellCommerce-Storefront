@@ -50,10 +50,10 @@ export const Footer = ({ className }: FooterProps) => {
           <div className="flex flex-col gap-8 lg:flex-row lg:gap-0">
             {/* Brand Section */}
             <div className="flex flex-col gap-5 lg:basis-[20%] lg:pr-6">
-              <h2 className="font-heading text-[26px] leading-tight font-bold lg:text-[33px]">
+              <h2 className="font-heading text-2xl leading-tight font-bold md:text-3xl">
                 WELLCOMMERCE
               </h2>
-              <p className="max-w-[248px] text-sm leading-relaxed text-muted-foreground">
+              <p className="max-w-[248px] text-xs leading-relaxed text-muted-foreground">
                 We have clothes that suits your style and which you're proud to
                 wear. From women to men.
               </p>

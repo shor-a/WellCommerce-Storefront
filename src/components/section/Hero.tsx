@@ -10,13 +10,13 @@ const Hero = () => {
     <>
       <div className="hero bg-secondary pt-10 pb-0 lg:pt-20">
         <div className="container mx-auto gap-10 px-4 lg:px-10">
-          {/* Mobile: stacked column — text then image. Desktop: side-by-side row */}
+          {/* Mobile: stacked column  text then image. Desktop: side-by-side row */}
           <div className="flex w-full flex-col lg:flex-row lg:justify-start">
             <div className="flex flex-col md:items-center lg:basis-7/12 lg:items-start">
-              <h1 className="mb-4 text-4xl md:text-5xl">
+              <h1 className="mb-4 text-2xl md:text-5xl">
                 FIND CLOTHES THAT MATCHES YOUR STYLE
               </h1>
-              <p className="mb-0 text-sm text-muted-foreground md:text-base lg:mb-6">
+              <p className="mb-0 max-w-80 self-start text-xs text-muted-foreground md:max-w-150 md:text-sm lg:mb-6">
                 Browse through our diverse range of meticulously crafted
                 garments, designed to bring out your individually and cater to
                 your sense of style.
@@ -44,7 +44,7 @@ const Hero = () => {
               {/* Mobile: flex row with dividers; Desktop: grid 3-cols with dividers */}
               <div className="mb-8 flex flex-row items-start justify-between lg:mb-0 lg:grid lg:grid-cols-3 lg:gap-4">
                 <div className="flex-1 border-r border-border pr-4 text-center lg:border-r-2 lg:pr-0 lg:text-left">
-                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                  <p className="text-2xl font-bold text-foreground md:text-4xl">
                     200+
                   </p>
                   <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">
@@ -52,7 +52,7 @@ const Hero = () => {
                   </p>
                 </div>
                 <div className="flex-1 border-r border-border px-4 text-center lg:border-r-2 lg:px-0 lg:text-left">
-                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                  <p className="text-2xl font-bold text-foreground md:text-4xl">
                     2,000+
                   </p>
                   <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">
@@ -60,7 +60,7 @@ const Hero = () => {
                   </p>
                 </div>
                 <div className="flex-1 pl-4 text-center lg:pl-0 lg:text-left">
-                  <p className="text-2xl font-bold text-foreground lg:text-4xl">
+                  <p className="text-2xl font-bold text-foreground md:text-4xl">
                     30,000+
                   </p>
                   <p className="lg:text-md mt-1 text-xs text-muted-foreground lg:mt-3">

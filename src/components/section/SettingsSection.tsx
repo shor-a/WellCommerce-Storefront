@@ -21,7 +21,9 @@ const Card = ({
   <div className="flex flex-col gap-5 rounded-2xl border border-border bg-background px-6 py-6">
     <div className="flex items-center gap-2">
       <Icon strokeWidth={1.75} className="size-5 text-foreground" />
-      <h2 className="text-base font-bold text-foreground">{title}</h2>
+      <h2 className="text-xs font-bold text-foreground md:text-base">
+        {title}
+      </h2>
     </div>
     <Separator />
     {children}
@@ -35,13 +37,13 @@ export const SettingsSection = ({ className }: SettingsSectionProps) => (
   >
     <div className="container mx-auto px-4 sm:px-6 lg:px-10">
       <div className="mb-8">
-        <h1 className="font-heading text-3xl font-bold text-foreground">
+        <h1 className="font-heading text-xl font-bold text-foreground md:text-3xl">
           Settings
         </h1>
       </div>
 
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-        {/* Left — Personal Info + Change Password */}
+        {/* Left  Personal Info + Change Password */}
         <div className="flex flex-col gap-6 lg:basis-1/2">
           <Card icon={User} title="Personal Information">
             <SettingsPersonalInfoForm />
@@ -51,7 +53,7 @@ export const SettingsSection = ({ className }: SettingsSectionProps) => (
           </Card>
         </div>
 
-        {/* Right — Shipping Address */}
+        {/* Right  Shipping Address */}
         <div className="lg:sticky lg:top-8 lg:basis-1/2">
           <Card icon={MapPin} title="Shipping Address">
             <SettingsShippingAddressForm />

@@ -95,7 +95,7 @@ export const OrderHistoryLayoutSection = ({
     className={cn("w-full bg-background", className)}
   >
     <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-      {/* mobile filters — hidden in wishlist view */}
+      {/* mobile filters  hidden in wishlist view */}
       {activeView === OrderHistoryView.ORDERS && (
         <div className="mb-6 lg:hidden">
           <OrderHistoryMobileFilters

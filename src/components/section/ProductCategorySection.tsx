@@ -73,7 +73,7 @@ export const ProductCategorySection = () => {
       <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
         {/* Desktop layout: sidebar + product grid side by side */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-          {/* Desktop filter sidebar — hidden on mobile */}
+          {/* Desktop filter sidebar  hidden on mobile */}
           <aside
             aria-label="Product filters"
             className="hidden lg:block lg:shrink-0 lg:basis-1/4"
@@ -106,7 +106,7 @@ export const ProductCategorySection = () => {
         </div>
       </div>
 
-      {/* Mobile filter sheet — rendered outside the grid so it overlays correctly */}
+      {/* Mobile filter sheet  rendered outside the grid so it overlays correctly */}
       <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
         <SheetContent>
           <div className="p-5">

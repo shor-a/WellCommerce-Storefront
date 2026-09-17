@@ -163,7 +163,7 @@ export const ProductSection = () => {
 
             <Separator />
 
-            {/* CTA row — quantity stepper + Add to Cart + Wishlist */}
+            {/* CTA row  quantity stepper + Add to Cart + Wishlist */}
             <div className="flex gap-3">
               <QuantityStepper quantity={quantity} changeQty={changeQty} />
               <Button

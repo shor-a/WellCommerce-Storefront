@@ -1,4 +1,5 @@
 import { DownloadIcon } from "lucide-react"
+import { generatePath, Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -10,6 +11,7 @@ import {
   getPaymentLabel,
   type Order,
 } from "@/constants/orderHistoryConst"
+import { PageRoutes } from "@/config/routes"
 
 interface OrderHistoryExpandedProps {
   order: Order
@@ -84,7 +86,19 @@ export const OrderHistoryExpanded = ({
       <p className="mb-4 text-base font-bold text-foreground">Items</p>
       <div className="flex flex-col gap-4">
         {order.items.map((item) => (
-          <OrderItemRow key={item.itemId} item={item} />
+          <Link
+            key={item.itemId}
+            to={generatePath(PageRoutes.PRODUCT, {
+              productid: String(item.itemId),
+            })}
+            className={cn(
+              "rounded-xl transition-colors duration-150",
+              "hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none",
+              "-mx-2 px-2 py-1"
+            )}
+          >
+            <OrderItemRow item={item} />
+          </Link>
         ))}
       </div>
     </div>

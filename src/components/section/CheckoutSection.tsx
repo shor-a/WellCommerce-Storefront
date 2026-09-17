@@ -43,7 +43,7 @@ export const CheckoutSection = ({
 }: CheckoutSectionProps) => (
   <main className={cn("w-full bg-background", className)}>
     <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-      <h1 className="mb-6 text-3xl lg:text-3xl">Checkout</h1>
+      <h1 className="mb-6 text-xl md:text-3xl">Checkout</h1>
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
         <div className="lg:basis-7/12">
           <CheckoutTabsSection

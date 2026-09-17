@@ -27,7 +27,7 @@ const ShortShowcase = ({
     <>
       <section className={cn("showcase", className)}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-          <h2 className="text-center text-3xl lg:text-4xl">{title}</h2>
+          <h2 className="text-center text-xl md:text-3xl">{title}</h2>
           <div className="grid grid-cols-2 gap-4 pt-10 pb-5 lg:grid-cols-4">
             {product.map((p) => (
               <Link

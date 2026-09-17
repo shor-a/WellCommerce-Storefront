@@ -1,5 +1,5 @@
 .hero {
-  /* Mobile: no background image — hero-sm.webp renders as an <img> element */
+  /* Mobile: no background image hero-sm.webp renders as an <img> element */
   background-image: none;
   height: 100%;
   width: 100%;

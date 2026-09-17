@@ -59,7 +59,7 @@ export const OrderFiltersAside = ({
 
       <Separator />
 
-      {/* Search — only shown in orders view */}
+      {/* Search  only shown in orders view */}
       {activeView === OrderHistoryView.ORDERS && (
         <div className="relative">
           <SearchIcon

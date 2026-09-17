@@ -25,7 +25,7 @@ export const CartSection = () => {
   return (
     <section aria-label="Shopping cart" className="w-full bg-background">
       <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
-        <h1 className="mb-6 text-3xl lg:text-3xl">Your cart</h1>
+        <h1 className="mb-6 text-xl md:text-3xl">Your cart</h1>
 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
           {/* ── Cart items list ── */}

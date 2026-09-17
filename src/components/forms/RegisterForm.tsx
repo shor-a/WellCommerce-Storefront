@@ -75,7 +75,7 @@ const RegisterForm = ({
         className={cn("relative min-h-screen w-full bg-background", className)}
         aria-label="Login"
       >
-        {/* Desktop full-bleed background — different element, hidden on mobile */}
+        {/* Desktop full-bleed background  different element, hidden on mobile */}
         <img
           src={registerBg}
           alt=""
@@ -84,7 +84,7 @@ const RegisterForm = ({
           aria-hidden="true"
         />
 
-        {/* Mobile hero image — different element, hidden on desktop */}
+        {/* Mobile hero image  different element, hidden on desktop */}
         <div className="relative h-[312px] w-full shrink-0 lg:hidden">
           <img
             src={smRegisterBg}
@@ -95,11 +95,11 @@ const RegisterForm = ({
           />
         </div>
 
-        {/* Card — title and welcome*/}
+        {/* Card  title and welcome*/}
         <div className="relative -mt-6 rounded-t-3xl bg-background px-4 py-8 lg:absolute lg:inset-y-0 lg:mt-0 lg:flex lg:items-center lg:rounded-none lg:bg-transparent lg:px-0 lg:py-0">
           <div className="mx-auto w-full max-w-[390px] lg:mx-0 lg:ml-[100px] lg:max-w-[480px]">
             <div className="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-5 overflow-y-auto rounded-[20px] border border-black/10 bg-white/95 p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md lg:p-10">
-              {/* Logo — back arrow sits absolute-left, no effect on centering or height */}
+              {/* Logo  back arrow sits absolute-left, no effect on centering or height */}
               <div className="relative text-center">
                 <Link
                   to={PageRoutes.HOME}
@@ -131,7 +131,7 @@ const RegisterForm = ({
                   </p>
                 )}
 
-                {/* Different copy per breakpoint — hidden/block is correct here */}
+                {/* Different copy per breakpoint  hidden/block is correct here */}
                 <p className="text-base text-muted-foreground lg:hidden">
                   Discover your style
                 </p>

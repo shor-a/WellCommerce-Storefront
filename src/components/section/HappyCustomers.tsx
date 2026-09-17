@@ -49,7 +49,7 @@ export const HappyCustomers = ({ testimonies }: HappyCustomersProps) => {
       <div className="container mx-auto flex flex-col gap-8 px-4 sm:px-6 lg:px-[100px]">
         {/* Header row with prev/next buttons */}
         <div className="flex items-center justify-between">
-          <h1 className="text-left font-heading text-3xl font-bold text-foreground lg:text-5xl">
+          <h1 className="text-left font-heading text-xl font-bold text-foreground md:text-3xl">
             OUR HAPPY CUSTOMERS
           </h1>
           <div className="flex items-center gap-2">

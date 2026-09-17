@@ -21,7 +21,7 @@ interface NavbarSearchBarProps {
    * escapes the sticky header + overflow-hidden wrapper that would clip it.
    */
   fullWidth?: boolean
-  /** Fired on input blur — used to collapse the mobile search row */
+  /** Fired on input blur  used to collapse the mobile search row */
   onBlurClose?: () => void
 }
 

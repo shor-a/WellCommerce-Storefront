@@ -1,12 +1,6 @@
-import { useState } from "react"
-import { ChevronDown, Heart } from "lucide-react"
+import { Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import {
   OrderStatus,
   OrderHistoryView,
@@ -18,6 +12,7 @@ import {
 } from "@/constants/orderHistoryConst"
 import type { WishlistItem } from "@/hooks/wishlistStores"
 import ProductPagination from "../atomic/ProductPagination"
+import { SortPopover } from "@/components/atomic/SortPopover"
 import { OrderHistoryCollapsed } from "@/components/subsection/OrderHistoryCollapsed"
 import { OrderHistoryExpanded } from "@/components/subsection/OrderHistoryExpanded"
 import { WishlistItemCard } from "@/components/subsection/WishlistItemCard"
@@ -69,8 +64,6 @@ export const OrderHistorySection = ({
   onWishlistRemove,
   onWishlistUpdateQty,
 }: OrderHistorySectionProps) => {
-  const [sortOpen, setSortOpen] = useState(false)
-
   const handleActionForCollapsed = (order: Order) => {
     if (order.status === OrderStatus.SHIPPED)
       return () => onTrackOrder(order.orderId)
@@ -136,50 +129,23 @@ export const OrderHistorySection = ({
     <section className={cn("w-full bg-background lg:basis-3/4")}>
       {/* top bar: title + count + sort */}
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="font-heading text-3xl font-bold text-foreground">
+        <h1 className="font-heading text-xl font-bold text-foreground md:text-3xl">
           Order History
         </h1>
 
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        <div className="flex shrink-0 items-center gap-3 text-sm text-muted-foreground">
           {totalOrders === 0 ? (
-            <span>No orders found</span>
+            <span className="whitespace-nowrap">No orders found</span>
           ) : (
-            <span>
+            <span className="whitespace-nowrap">
               Showing {rangeStart}–{rangeEnd} of {totalOrders} Orders
             </span>
           )}
-          <span className="flex items-center">
-            Sort by:
-            <Popover open={sortOpen} onOpenChange={setSortOpen}>
-              <PopoverTrigger
-                className="inline-flex h-auto items-center gap-1 rounded px-2 py-1 text-sm font-medium text-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                aria-label={`Sort by: ${sortOption}`}
-              >
-                {sortOption}
-                <ChevronDown className="size-4" strokeWidth={1.5} />
-              </PopoverTrigger>
-              <PopoverContent align="end" side="bottom" className="w-48 p-1">
-                {orderSortOptions.map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    className={cn(
-                      "w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none",
-                      option === sortOption
-                        ? "font-semibold text-foreground"
-                        : "text-muted-foreground"
-                    )}
-                    onClick={() => {
-                      onSortChange(option)
-                      setSortOpen(false)
-                    }}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </PopoverContent>
-            </Popover>
-          </span>
+          <SortPopover
+            value={sortOption}
+            options={orderSortOptions}
+            onChange={onSortChange}
+          />
         </div>
       </div>
 

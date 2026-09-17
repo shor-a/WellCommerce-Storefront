@@ -17,7 +17,7 @@ import type { SVGProps } from "react"
 
 import { Package, Heart, Settings } from "lucide-react"
 
-// Shared icon component type — covers both Lucide icons and custom SVG icons
+// Shared icon component type  covers both Lucide icons and custom SVG icons
 export type IconComponent =
   | LucideIcon
   | ((

@@ -30,7 +30,7 @@ export const useOrderHistoryFilters = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  // View mode — driven purely by the URL path
+  // View mode  driven purely by the URL path
   const activeView: OrderHistoryViewType =
     pathname === PageRoutes.WISHLIST
       ? OrderHistoryView.WISHLIST
