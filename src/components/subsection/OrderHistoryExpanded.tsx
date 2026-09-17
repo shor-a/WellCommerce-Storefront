@@ -11,7 +11,7 @@ import {
   getPaymentLabel,
   type Order,
 } from "@/constants/orderHistoryConst"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 interface OrderHistoryExpandedProps {
   order: Order

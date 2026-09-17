@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import Rating from "@/components/atomic/Rating"
 import DiscPrice from "../atomic/DiscPrice"
 import { generatePath, Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 interface ShowcaseProps {
   className?: string

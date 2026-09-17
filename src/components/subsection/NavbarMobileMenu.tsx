@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import {
   mobileNavSections,
   type NavLink as NavLinkType,

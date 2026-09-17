@@ -15,7 +15,7 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 import loginBg from "@/assets/images/general/login_register.webp"
 import smLoginBg from "@/assets/images/general/sm_login_register.webp"

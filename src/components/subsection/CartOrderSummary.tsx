@@ -1,10 +1,11 @@
 import { Tag, ArrowRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { DISCOUNT_RATE } from "@/constants/cartConst"
+import useAuth from "@/hooks/useAuthHooks"
 
 interface CartOrderSummaryProps {
   subtotal: number
@@ -19,6 +20,12 @@ export const CartOrderSummary = ({
   deliveryFee,
   total,
 }: CartOrderSummaryProps) => {
+  const { requireAuth } = useAuth()
+  const navigate = useNavigate()
+
+  const handleCheckout = () => {
+    requireAuth(() => navigate(PageRoutes.CHECKOUT))
+  }
   return (
     <div className="flex flex-col gap-6 rounded-2xl border border-border p-6">
       <h2 className="text-xl font-bold md:text-2xl">Order Summary</h2>
@@ -75,12 +82,12 @@ export const CartOrderSummary = ({
       </div>
 
       <Button
-        render={<Link to={PageRoutes.CHECKOUT} />}
         type="button"
         variant="default"
         size="xl"
         className="w-full rounded-full text-base"
         aria-label="Go to checkout"
+        onClick={handleCheckout}
       >
         Go to Checkout
         <ArrowRight className="size-5" strokeWidth={2} />

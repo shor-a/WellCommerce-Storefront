@@ -1,4 +1,4 @@
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import {
   Shirt,
   ShoppingBag,

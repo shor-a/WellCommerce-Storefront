@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { PaymentStep } from "@/constants/checkoutConst"
 import type { PaymentStep as PaymentStepType } from "@/constants/checkoutConst"
 

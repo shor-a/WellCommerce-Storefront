@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import CartItemRow from "@/components/atomic/CartItemRow"
 
 import { ShoppingCart, ArrowRight } from "lucide-react"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { Link } from "react-router-dom"
 import { useCartStore } from "@/hooks/cartStores"
 import { destructProductId } from "@/constants/cartConst"

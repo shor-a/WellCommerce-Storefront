@@ -2,7 +2,7 @@ import type { DressStyle } from "@/constants/homepageConst"
 
 import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 interface BrowseStyleSectionProps {
   styles: DressStyle[]

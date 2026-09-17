@@ -7,7 +7,7 @@ import DiscPrice from "@/components/atomic/DiscPrice"
 import { Rating } from "@/components/atomic/Rating"
 import { SortPopover } from "@/components/atomic/SortPopover"
 import { generatePath, Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import {
   filterSortOptions,
   type SortOption as SortOptionType,

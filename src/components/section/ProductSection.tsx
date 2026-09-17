@@ -10,6 +10,7 @@ import DiscPrice from "@/components/atomic/DiscPrice"
 
 import { useCartStore } from "@/hooks/cartStores"
 import { useWishlistStore, buildWishlistItem } from "@/hooks/wishlistStores"
+import useAuth from "@/hooks/useAuthHooks"
 
 import { useState } from "react"
 import { Heart } from "lucide-react"
@@ -21,6 +22,7 @@ import type { ProductSize } from "@/constants/sizeConst"
 export const ProductSection = () => {
   const { addToCart } = useCartStore()
   const { toggleWishlist, isWishlisted } = useWishlistStore()
+  const { requireAuth } = useAuth()
 
   const { productid } = useParams()
   const productDetail =
@@ -172,18 +174,20 @@ export const ProductSection = () => {
                 className="flex-1 rounded-full text-base"
                 aria-label="Add to cart"
                 onClick={() => {
-                  addToCart(quantity, {
-                    itemName: productDetail.itemName,
-                    cartItemID: constructCID(
-                      productDetail.itemId,
-                      selectedColor,
-                      selectedSize
-                    ),
-                    itemQty: quantity,
-                    itemImg: productDetail.itemImg,
-                    itemColor: selectedColor,
-                    itemSize: selectedSize,
-                    finalPrice: discountedPrice,
+                  requireAuth(() => {
+                    addToCart(quantity, {
+                      itemName: productDetail.itemName,
+                      cartItemID: constructCID(
+                        productDetail.itemId,
+                        selectedColor,
+                        selectedSize
+                      ),
+                      itemQty: quantity,
+                      itemImg: productDetail.itemImg,
+                      itemColor: selectedColor,
+                      itemSize: selectedSize,
+                      finalPrice: discountedPrice,
+                    })
                   })
                 }}
               >
@@ -198,7 +202,7 @@ export const ProductSection = () => {
                   wishlisted ? "Remove from wishlist" : "Add to wishlist"
                 }
                 aria-pressed={wishlisted}
-                onClick={handleToggleWishlist}
+                onClick={() => requireAuth(handleToggleWishlist)}
                 className={cn(
                   "shrink-0 rounded-full transition-colors duration-200",
                   wishlisted

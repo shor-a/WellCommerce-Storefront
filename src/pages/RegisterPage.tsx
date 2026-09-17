@@ -1,5 +1,5 @@
 import RegisterForm from "@/components/forms/RegisterForm"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { allUsers } from "@/constants/loginConst"
 import type {
   RegisterResponse,
@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom"
 
 const RegisterPage = () => {
   const navigate = useNavigate()
-
   const [registerState, setRegister] = useState<RegisterResponse>()
 
   const handleRegister = (regData: ZodRegisterType) => {
@@ -20,11 +19,9 @@ const RegisterPage = () => {
       message: "Registration success",
     }
 
-    // if (registerRes.status === StatusCodes.OK) {
     allUsers.push(regData)
     setRegister(regRes)
     navigate(PageRoutes.LOGIN)
-    // }
   }
 
   return (

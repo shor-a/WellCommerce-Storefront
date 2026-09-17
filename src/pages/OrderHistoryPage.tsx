@@ -3,7 +3,7 @@ import Footer from "@/components/section/Footer"
 import NavigationText from "@/components/section/NavigationText"
 import { OrderHistoryLayoutSection } from "@/components/section/OrderHistoryLayoutSection"
 import { useOrderHistoryFilters } from "@/hooks/orderHistoryHooks"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 const orderHistoryCrumbs = [
   { label: "Home", href: PageRoutes.HOME },

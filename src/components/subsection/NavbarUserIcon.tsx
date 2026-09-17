@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator"
 
 import { CircleUserRound, LogIn, UserPlus, LogOut } from "lucide-react"
 
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import {

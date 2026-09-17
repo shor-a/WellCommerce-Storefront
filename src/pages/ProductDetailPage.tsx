@@ -7,7 +7,7 @@ import ProductSection from "@/components/section/ProductSection"
 import ShortShowcase from "@/components/section/ShortShowcase"
 import { allProducts } from "@/constants/productConst"
 import { allProductDetails } from "@/constants/productDetailConst"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 const ProductDetailPage = () => {
   const { productid } = useParams()

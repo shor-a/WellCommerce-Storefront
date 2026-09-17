@@ -10,7 +10,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { allProducts } from "@/constants/productConst"
 import Rating from "@/components/atomic/Rating"
 

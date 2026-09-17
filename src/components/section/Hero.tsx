@@ -1,7 +1,7 @@
 import heroSm from "@/assets/images/general/hero-sm.webp"
 import { Button } from "../ui/button"
 
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { brandsImage } from "@/constants/homepageConst"
 import { Link } from "react-router-dom"
 

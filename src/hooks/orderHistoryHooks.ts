@@ -13,11 +13,11 @@ import {
   type Order,
 } from "@/constants/orderHistoryConst"
 import { useOrderHistoryStore } from "@/hooks/orderHistoryStores"
-import { useOrderActionModal } from "@/hooks/useOrderActionModal"
+import { useOrderActionModal } from "@/hooks/useOrderActionModalHooks"
 import { useCartStore } from "@/hooks/cartStores"
 import { useWishlistStore } from "@/hooks/wishlistStores"
 import type { Cart } from "@/constants/cartConst"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 
 export const useOrderHistoryFilters = () => {
   const orderHistory = useOrderHistoryStore((state) => state.orders)

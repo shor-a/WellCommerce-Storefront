@@ -2,8 +2,8 @@ import { X } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { PageRoutes } from "@/config/routes"
-import useOfferNavbar from "@/hooks/useOfferNavbar"
+import { PageRoutes } from "@/config/routes/routes"
+import useOfferNavbar from "@/hooks/useOfferNavbarHooks"
 
 interface OfferNavbarProps {
   className?: string

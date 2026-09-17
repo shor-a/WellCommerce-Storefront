@@ -19,7 +19,7 @@ import { StatusCodes } from "http-status-codes"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes"
+import { PageRoutes } from "@/config/routes/routes"
 import { Controller, useForm } from "react-hook-form"
 import {
   Eye,
