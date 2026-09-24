@@ -33,26 +33,26 @@ export const productReviews: ReviewCardData[] = [
     reviewerName: "Olivia P.",
     starValue: 4,
     reviewText:
-      '"As a UI/UX enthusiast, I value simplicity and functionality. This t-shirt not only represents those principles but also feels great to wear. It\'s evident that the designer poured their creativity into making this t-shirt stand out."',
+      '"I value simplicity and functionality. This t-shirt not only represents those principles but also feels great to wear. It\'s evident that the designer poured their creativity into making this t-shirt stand out."',
     postedDate: "August 17, 2023",
     verified: true,
   },
-  {
-    reviewId: "r5",
-    reviewerName: "Liam K.",
-    starValue: 4,
-    reviewText:
-      "\"This t-shirt is a fusion of comfort and creativity. The fabric is soft, and the design speaks volumes about the designer's skill. It's like wearing a piece of art that reflects my passion for both design and fashion.\"",
-    postedDate: "August 18, 2023",
-    verified: true,
-  },
-  {
-    reviewId: "r6",
-    reviewerName: "Ava H.",
-    starValue: 4.5,
-    reviewText:
-      "\"I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter.\"",
-    postedDate: "August 19, 2023",
-    verified: true,
-  },
+  // {
+  //   reviewId: "r5",
+  //   reviewerName: "Liam K.",
+  //   starValue: 4,
+  //   reviewText:
+  //     "\"This t-shirt is a fusion of comfort and creativity. The fabric is soft, and the design speaks volumes about the designer's skill. It's like wearing a piece of art that reflects my passion for both design and fashion.\"",
+  //   postedDate: "August 18, 2023",
+  //   verified: true,
+  // },
+  // {
+  //   reviewId: "r6",
+  //   reviewerName: "Ava H.",
+  //   starValue: 4.5,
+  //   reviewText:
+  //     "\"I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter.\"",
+  //   postedDate: "August 19, 2023",
+  //   verified: true,
+  // },
 ]

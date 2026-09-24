@@ -18,12 +18,6 @@ const HappyCustV2 = () => {
     setActiveReview((current) => Math.min(reviews.length - 1, current + 1))
   }
 
-  const removeBlur = (): boolean => {
-    return activeReview === 2 || activeReview === reviews.length - 2
-      ? true
-      : false
-  }
-
   return (
     <section className="happy-customers w-full bg-background pt-30 pb-20">
       <div className="container mx-auto px-10">
@@ -68,9 +62,7 @@ const HappyCustV2 = () => {
           {reviews.map((review, reviewIndex: number) => (
             <Card
               key={`${review.name}-${reviewIndex}`}
-              className={`h-[225px] w-[400px] rounded-[20px] border-primary bg-background shadow-none ring-2 ${
-                removeBlur() && review.blurred ? "blur-[2px]" : ""
-              }`}
+              className={`h-[225px] w-[400px] rounded-[20px] border-primary bg-background shadow-none ring-2`}
             >
               <CardContent className="flex flex-col items-start gap-[10px] px-8 py-3">
                 <Rating starValue={5} className="size-5" />

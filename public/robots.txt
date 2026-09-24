@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /order-history
+Disallow: /settings
+
+Sitemap: https://wellcommerce.pages.dev/sitemap.xml

@@ -15,6 +15,7 @@ import SettingsPage from "./pages/SettingsPage"
 import { PrivateRoute } from "./config/routes/PrivateRoute"
 import { GuestRoute } from "./config/routes/GuestRoute"
 import { CartRoute } from "./config/routes/CartRoute"
+import NotFoundPage from "./pages/NotFoundPage"
 
 export function App() {
   return (
@@ -47,6 +48,9 @@ export function App() {
             <Route path={PageRoutes.CHECKOUT} element={<CheckoutPage />} />
           </Route>
         </Route>
+
+        {/* 404 - page not found */}
+        <Route path={PageRoutes.NOTFOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )

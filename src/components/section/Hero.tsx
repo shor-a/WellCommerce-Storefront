@@ -16,7 +16,7 @@ const Hero = () => {
               <h1 className="mb-4 text-2xl md:text-5xl">
                 FIND CLOTHES THAT MATCHES YOUR STYLE
               </h1>
-              <p className="mb-0 max-w-80 self-start text-xs text-muted-foreground md:max-w-150 md:text-sm lg:mb-6">
+              <p className="mb-2 max-w-80 self-start text-xs text-muted-foreground md:max-w-150 md:text-sm lg:mb-6">
                 Browse through our diverse range of meticulously crafted
                 garments, designed to bring out your individually and cater to
                 your sense of style.
@@ -35,7 +35,7 @@ const Hero = () => {
               <Button
                 render={<Link to={PageRoutes.BROWSE} />}
                 nativeButton={false}
-                className="-mt-0.5 mb-8 w-full border-2 border-white/15 md:w-110 lg:mt-0 lg:mb-10 lg:w-auto lg:border-0"
+                className="-mt-0.5 mb-4 w-full border-2 border-white/15 md:w-110 lg:mt-0 lg:mb-6 lg:w-auto lg:border-0"
                 size="xl"
               >
                 Shop Now

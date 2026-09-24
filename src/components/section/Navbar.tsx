@@ -222,7 +222,6 @@ const DesktopDropdown = ({
 export const Navbar = ({ className }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
-  const rowRef = useRef<HTMLDivElement>(null)
   const searchCollapsed = useCollapseSearch()
 
   const handleOpenMenu = () => setMobileMenuOpen(true)

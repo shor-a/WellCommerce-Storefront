@@ -32,7 +32,7 @@ import {
   ArrowLeft,
 } from "lucide-react"
 import { Input } from "../ui/input"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 interface RegisterProps {
@@ -64,10 +64,6 @@ const RegisterForm = ({
       newsletter: false,
     },
   })
-
-  useEffect(() => {
-    const _focusElement = document.getElementById("full-name")?.focus()
-  }, [])
 
   return (
     <>

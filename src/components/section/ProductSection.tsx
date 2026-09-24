@@ -217,7 +217,6 @@ export const ProductSection = () => {
                     wishlisted ? "fill-destructive stroke-destructive" : ""
                   )}
                 />
-                Wishlist
               </Button>
             </div>
           </div>

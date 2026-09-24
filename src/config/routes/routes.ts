@@ -10,4 +10,5 @@ export const PageRoutes = {
   WISHLIST: "/order-history/wishlist",
   SETTINGS: "/settings",
   CHECKOUT: "/checkout",
+  NOTFOUND: "*",
 } as const

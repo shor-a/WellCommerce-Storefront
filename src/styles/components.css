@@ -10,7 +10,9 @@
   .hero {
     background-image: url(../assets/images/general/hero-lg.webp);
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 70% 0%;
+    /* background-size: cover; */
+    background-size: auto 105%;
+    background-position: 60% 35%;
+    /* background-position: 70% 0%; */
   }
 }

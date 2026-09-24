@@ -106,6 +106,7 @@ export const useCheckout = () => {
 
     setPaymentStep(PaymentStep.VALIDATING)
     setIsModalOpen(true)
+    sessionStorage.setItem("payingNow", "true")
 
     setTimeout(() => setPaymentStep(PaymentStep.PROCESSING), 800)
     setTimeout(() => setPaymentStep(PaymentStep.CONFIRMED), 1800)
@@ -117,6 +118,7 @@ export const useCheckout = () => {
   }
 
   const handleCloseModal = () => {
+    sessionStorage.removeItem("payingNow")
     setIsModalOpen(false)
     setPaymentStep(PaymentStep.VALIDATING)
   }
