@@ -24,7 +24,7 @@ export interface Product {
 export const allProducts: Product[] = [
   {
     itemId: 1,
-    itemName: "T-shirt with Tape Details",
+    itemName: "T-Shirt with Tape Details",
     itemPrice: 120,
     itemRating: 4.5,
     discount: 0,
@@ -32,7 +32,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 2,
-    itemName: "Polo Collar T-shirt",
+    itemName: "Polo Collar T-Shirt",
     itemPrice: 210,
     itemRating: 4.5,
     discount: 0,
@@ -48,7 +48,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 4,
-    itemName: "Sleeve Stripped T-shirt",
+    itemName: "Sleeve Stripped T-Shirt",
     itemPrice: 160,
     itemRating: 5.0,
     discount: 30,
@@ -72,7 +72,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 7,
-    itemName: "Courage Graphic T-shirt",
+    itemName: "Courage Graphic T-Shirt",
     itemPrice: 145,
     itemRating: 4.0,
     discount: 0,
@@ -88,7 +88,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 9,
-    itemName: "War Courage Graphic T-shirt",
+    itemName: "War Courage Graphic T-Shirt",
     itemPrice: 135,
     itemRating: 4.0,
     discount: 0,
@@ -112,7 +112,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 12,
-    itemName: "New Rules Tape Sleeve T-shirt",
+    itemName: "New Rules Tape Sleeve T-Shirt",
     itemPrice: 125,
     itemRating: 5.0,
     discount: 10,
@@ -120,7 +120,7 @@ export const allProducts: Product[] = [
   },
   {
     itemId: 13,
-    itemName: "One Life Graphic T-shirt",
+    itemName: "One Life Graphic T-Shirt",
     itemPrice: 300,
     itemRating: 4.5,
     discount: 40,

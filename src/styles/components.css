@@ -5,14 +5,45 @@
   width: 100%;
 }
 
-/* Desktop: restore the background image at lg (1024px+) */
 @media (min-width: 1024px) {
   .hero {
+    /* background-size: cover; */
     background-image: url(../assets/images/general/hero-lg.webp);
     background-repeat: no-repeat;
-    /* background-size: cover; */
-    background-size: auto 105%;
-    background-position: 60% 35%;
+    background-size: auto clamp(300px, 40vw, 450px);
+    background-position: 20% 20%;
+  }
+}
+
+/* Desktop: restore the background image at lg (1024px+) */
+@media (min-width: 1200px) {
+  .hero {
+    background-size: auto clamp(400px, 45vw, 500px);
+    background-position: 20% 20%;
     /* background-position: 70% 0%; */
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero {
+    background-position: 24% 20%;
+  }
+}
+
+@media (min-width: 2000px) {
+  .hero {
+    background-position: 30% 20%;
+  }
+}
+
+@media (min-width: 2250px) {
+  .hero {
+    background-position: 38% 20%;
+  }
+}
+
+@media (min-width: 2500px) {
+  .hero {
+    background-position: 42% 20%;
   }
 }

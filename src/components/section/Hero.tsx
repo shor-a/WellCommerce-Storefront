@@ -12,7 +12,8 @@ const Hero = () => {
         <div className="container mx-auto gap-10 px-4 lg:px-10">
           {/* Mobile: stacked column  text then image. Desktop: side-by-side row */}
           <div className="flex w-full flex-col lg:flex-row lg:justify-start">
-            <div className="flex flex-col md:items-center lg:basis-7/12 lg:items-start">
+            <div className="lg:basis-6/14"></div>
+            <div className="flex flex-col md:items-center lg:basis-8/14 lg:items-start">
               <h1 className="mb-4 text-2xl md:text-5xl">
                 FIND CLOTHES THAT MATCHES YOUR STYLE
               </h1>

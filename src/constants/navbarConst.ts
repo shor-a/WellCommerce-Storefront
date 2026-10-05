@@ -52,7 +52,7 @@ export interface NavDropdownLink {
   sections: NavDropdownSection[]
 }
 
-const browseWith = (key: string, value: string) =>
+export const browseWith = (key: string, value: string) =>
   `${PageRoutes.BROWSE}?${key}=${encodeURIComponent(value)}`
 
 export const navDropdownLinks: NavDropdownLink[] = [
@@ -69,8 +69,8 @@ export const navDropdownLinks: NavDropdownLink[] = [
             id: "tshirts",
             label: "T-Shirts",
             icon: Shirt,
-            to: browseWith(NavFilterParam.CATEGORY, "T-shirts"),
-            activeParam: { key: NavFilterParam.CATEGORY, value: "T-shirts" },
+            to: browseWith(NavFilterParam.CATEGORY, "T-Shirts"),
+            activeParam: { key: NavFilterParam.CATEGORY, value: "T-Shirts" },
           },
           {
             id: "shirts",
@@ -153,8 +153,8 @@ export const mobileNavSections: MobileNavSection[] = [
         id: "tshirts",
         label: "T-Shirts",
         icon: Shirt,
-        to: browseWith(NavFilterParam.CATEGORY, "T-shirts"),
-        activeParam: { key: NavFilterParam.CATEGORY, value: "T-shirts" },
+        to: browseWith(NavFilterParam.CATEGORY, "T-Shirts"),
+        activeParam: { key: NavFilterParam.CATEGORY, value: "T-Shirts" },
       },
       {
         id: "shirts",

@@ -92,7 +92,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[0],
     ratingCount: 120,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Casual",
     description:
       "A casual t-shirt featuring distinctive tape details. Made from soft, breathable cotton for all-day comfort and effortless style.",
@@ -108,7 +108,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[1],
     ratingCount: 156,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Formal",
     description:
       "A classic polo collar t-shirt with a clean, structured look. Crafted from breathable piqué fabric for smart-casual styling.",
@@ -124,7 +124,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[2],
     ratingCount: 75,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Casual",
     description:
       "A clean and classic pink polo shirt with a relaxed fit. Perfect for smart-casual occasions or everyday wear.",
@@ -140,7 +140,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[3],
     ratingCount: 340,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Gym",
     description:
       "A sporty raglan tee with bold sleeve stripes. Lightweight fabric makes it ideal for active days or casual wear.",
@@ -188,7 +188,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[6],
     ratingCount: 188,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Casual",
     description:
       "A bold colorblock raglan tee with striking sleeve contrast. Crafted from premium cotton for a comfortable, relaxed fit.",
@@ -220,7 +220,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[8],
     ratingCount: 203,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Party",
     description:
       "An expressive graphic tee with vivid artwork. Made from soft cotton blend for comfortable everyday wear.",
@@ -268,7 +268,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[11],
     ratingCount: 289,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Party",
     description:
       "A minimal black tee with subtle branding and tape sleeve detailing. Clean design for a modern, understated look.",
@@ -284,7 +284,7 @@ export const allProductDetails: ProductDetail[] = [
   {
     ...allProducts[12],
     ratingCount: 451,
-    category: "T-shirts",
+    category: "T-Shirts",
     dressStyle: "Casual",
     description:
       "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",

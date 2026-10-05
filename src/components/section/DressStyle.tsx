@@ -2,7 +2,7 @@ import type { DressStyle } from "@/constants/homepageConst"
 
 import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom"
-import { PageRoutes } from "@/config/routes/routes"
+import { browseWith, NavFilterParam } from "@/constants/navbarConst"
 
 interface BrowseStyleSectionProps {
   styles: DressStyle[]
@@ -22,7 +22,7 @@ export const BrowseStyleSection = ({ styles }: BrowseStyleSectionProps) => (
           {styles.map((style) => (
             <Link
               key={style.label}
-              to={PageRoutes.BROWSE}
+              to={browseWith(NavFilterParam.DRESS_STYLE, style.label)}
               className={cn(
                 "group relative overflow-hidden rounded-[20px] bg-background",
                 // wide cards span 2 columns on lg, narrow span 1

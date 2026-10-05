@@ -16,9 +16,11 @@ const ProductCategoryHooks = () => {
 
   // ── Seed initial state from URL params
   const paramCategory = searchParams.get(NavFilterParam.CATEGORY)
+  const paramStyle = searchParams.get(NavFilterParam.DRESS_STYLE)
   const paramSort = searchParams.get(NavFilterParam.SORT)
 
   const initialCategory = paramCategory ? [paramCategory] : []
+  const initialDressStyle = paramStyle ? [paramStyle] : []
   const initialSort: SortOptionType =
     filterSortOptions.find((o) => o === paramSort) ?? SortOption.MOST_POPULAR
 
@@ -30,7 +32,8 @@ const ProductCategoryHooks = () => {
     filterPriceRange.max,
   ])
   const [selectedCategory, setCategory] = useState<string[]>(initialCategory)
-  const [selectedDressStyle, setDressStyle] = useState<string[]>([])
+  const [selectedDressStyle, setDressStyle] =
+    useState<string[]>(initialDressStyle)
   const [sortOption, setSortOption] = useState<SortOptionType>(initialSort)
   const [currentPage, setCurrentPage] = useState(1)
 
