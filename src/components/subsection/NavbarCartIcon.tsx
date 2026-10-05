@@ -73,7 +73,7 @@ const NavbarCartIcon = () => {
             side="bottom"
             align="end"
             sideOffset={8}
-            className="w-70 p-0"
+            className="w-85 p-0"
             onMouseEnter={openCart}
             onMouseLeave={closeCartDelayed}
           >

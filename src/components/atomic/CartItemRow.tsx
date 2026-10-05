@@ -25,18 +25,18 @@ export const CartItemRow = ({ cartItem }: CartItemRowProps) => {
             {cartItem.itemName}
           </p>
         </div>
-        <div className="flex flex-row">
-          <div className="basis-2/6">
+        <div className="flex flex-row gap-2">
+          <div className="shrink-0 basis-5/12">
             <p className="text-xs font-medium text-muted-foreground">
               Qty: {cartItem.itemQty}
             </p>
           </div>
-          <div className="basis-2/6">
+          <div className="shrink-0 basis-3/12">
             <p className="text-xs font-medium text-muted-foreground">
               {cartItem.itemColor}
             </p>
           </div>
-          <div className="basis-2/6">
+          <div className="shrink-0 basis-4/12">
             <p className="text-xs font-medium text-muted-foreground">
               {cartItem.itemSize}
             </p>
@@ -44,7 +44,7 @@ export const CartItemRow = ({ cartItem }: CartItemRowProps) => {
         </div>
       </div>
 
-      <p className="shrink-0 text-sm font-bold text-foreground">
+      <p className="w-20 shrink-0 text-right text-sm font-bold text-foreground">
         ${cartItem.itemQty * discountedPrice}
       </p>
     </div>
