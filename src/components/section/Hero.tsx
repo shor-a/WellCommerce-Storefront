@@ -24,7 +24,7 @@ const Hero = () => {
               </p>
 
               {/* Mobile: full-width image flush into button; Desktop: hidden (bg-image handles it) */}
-              <div className="-mx-4 flex justify-center lg:hidden">
+              <div className="flex justify-center lg:hidden">
                 <img
                   src={heroSm}
                   alt="Hero fashion models"
