@@ -95,7 +95,10 @@ const NavbarCartIcon = () => {
                 cartItems.map((cartItem) => (
                   <Link
                     key={cartItem.cartItemID}
-                    to={`/product-detail/${destructProductId(cartItem.cartItemID)}`}
+                    to={PageRoutes.PRODUCT.replace(
+                      ":productid",
+                      String(destructProductId(cartItem.cartItemID))
+                    )}
                     onClick={() => setCartOpen(false)}
                     className="block cursor-pointer rounded-lg px-2 py-1 transition-colors duration-150 hover:bg-secondary"
                   >

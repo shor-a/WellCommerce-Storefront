@@ -4,6 +4,7 @@ import { Minus, Plus, Trash2 } from "lucide-react"
 import { useCartStore } from "@/hooks/cartStores"
 import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
+import { PageRoutes } from "@/config/routes/routes"
 
 interface CartPageItemRowProps {
   cartItem: Cart
@@ -19,7 +20,7 @@ export const CartPageItemRow = ({
   return (
     <div className="flex gap-4">
       <Link
-        to={`/product-detail/${productId}`}
+        to={PageRoutes.PRODUCT.replace(":productid", String(productId))}
         className={cn(
           "group flex shrink-0 flex-col gap-3",
           "cursor-pointer rounded-lg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
@@ -42,7 +43,7 @@ export const CartPageItemRow = ({
         {/* Name + delete */}
         <div className="flex items-start justify-between gap-2">
           <Link
-            to={`/product-detail/${productId}`}
+            to={PageRoutes.PRODUCT.replace(":productid", String(productId))}
             className="cursor-pointer focus-visible:outline-none"
           >
             <p className="text-base leading-tight font-bold text-foreground transition-colors hover:text-foreground/70 lg:text-xl">

@@ -32,9 +32,16 @@ interface LoginFormProps {
   className?: string
   loginState?: LoginResponse
   formSubmit: (data: LoginType) => void
+  // Origin path to return to after auth
+  from?: string
 }
 
-const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
+const LoginForm = ({
+  className,
+  loginState,
+  formSubmit,
+  from,
+}: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const {
@@ -283,6 +290,7 @@ const LoginForm = ({ className, loginState, formSubmit }: LoginFormProps) => {
               Don&apos;t have an account?{" "}
               <Link
                 to={PageRoutes.REGISTER}
+                state={{ from }}
                 className="font-medium text-foreground underline-offset-4 hover:underline"
               >
                 Sign Up

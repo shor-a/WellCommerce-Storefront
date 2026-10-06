@@ -39,7 +39,9 @@ const LoginPage = () => {
     })
   }
 
-  return <LoginForm loginState={loginState} formSubmit={handleLogin} />
+  return (
+    <LoginForm loginState={loginState} formSubmit={handleLogin} from={from} />
+  )
 }
 
 export default LoginPage

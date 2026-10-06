@@ -39,12 +39,15 @@ interface RegisterProps {
   className?: string
   registerState?: RegisterResponse
   handleRegister: (data: ZodRegisterType) => void
+  /** Origin path to return to after auth*/
+  from?: string
 }
 
 const RegisterForm = ({
   className,
   registerState,
   handleRegister,
+  from,
 }: RegisterProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
@@ -379,11 +382,12 @@ const RegisterForm = ({
                 OR
               </FieldSeparator>
 
-              {/* Sign up link */}
+              {/* Sign in link */}
               <p className="text-center text-base text-muted-foreground lg:text-sm">
                 Already have an account?{" "}
                 <Link
                   to={PageRoutes.LOGIN}
+                  state={{ from }}
                   className="font-medium text-foreground underline-offset-4 hover:underline"
                 >
                   Sign In
