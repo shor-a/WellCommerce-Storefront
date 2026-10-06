@@ -22,18 +22,14 @@ export const OrderItemRow = ({ item, compact = false }: OrderItemRowProps) => {
           className="h-full w-full object-cover object-top"
         />
       </div>
-
       {/* info */}
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <p className="truncate text-base font-normal text-foreground">
-          {item.itemName}
-        </p>
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
+        <p className="text-base font-normal text-foreground">{item.itemName}</p>
         <p className="text-sm text-muted-foreground">
           Size: {item.size} • Color: {item.color}
         </p>
         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
       </div>
-
       {/* price */}
       <p className="shrink-0 text-2xl font-bold text-foreground">
         ${item.price}

@@ -41,7 +41,7 @@ export const WishlistItemCard = ({
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         {/* Top row: name + remove */}
         <div className="flex items-start justify-between gap-2">
-          <h3 className="truncate text-sm font-semibold leading-snug text-foreground sm:text-base">
+          <h3 className="text-sm leading-snug font-semibold text-foreground sm:text-base">
             {item.itemName}
           </h3>
           <button
@@ -51,7 +51,7 @@ export const WishlistItemCard = ({
             className={cn(
               "shrink-0 rounded-full p-1.5 text-muted-foreground",
               "transition-colors duration-150 hover:bg-destructive/10 hover:text-destructive",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
               "cursor-pointer"
             )}
           >
@@ -103,13 +103,13 @@ export const WishlistItemCard = ({
                 "flex size-6 items-center justify-center rounded-full text-foreground",
                 "transition-colors duration-150 hover:bg-background",
                 "disabled:cursor-not-allowed disabled:opacity-40",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                 "cursor-pointer"
               )}
             >
               <Minus strokeWidth={2.5} className="size-3" />
             </button>
-            <span className="min-w-[24px] text-center text-sm font-medium tabular-nums text-foreground">
+            <span className="min-w-[24px] text-center text-sm font-medium text-foreground tabular-nums">
               {item.quantity}
             </span>
             <button
@@ -121,7 +121,7 @@ export const WishlistItemCard = ({
                 "flex size-6 items-center justify-center rounded-full text-foreground",
                 "transition-colors duration-150 hover:bg-background",
                 "disabled:cursor-not-allowed disabled:opacity-40",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                 "cursor-pointer"
               )}
             >

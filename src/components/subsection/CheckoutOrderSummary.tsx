@@ -45,7 +45,7 @@ export const CheckoutOrderSummary = ({
                 />
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-2">
-                <p className="truncate text-base font-bold text-foreground">
+                <p className="text-base font-bold text-foreground">
                   {item.itemName}
                 </p>
                 <p className="text-sm text-muted-foreground">

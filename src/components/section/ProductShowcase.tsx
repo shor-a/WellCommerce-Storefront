@@ -105,7 +105,7 @@ export const ProductShowcase = ({
                       className="h-full w-full object-cover object-top"
                     />
                   </div>
-                  <p className="truncate text-sm font-bold text-foreground sm:text-base">
+                  <p className="text-sm font-bold text-foreground sm:text-base">
                     {product.itemName}
                   </p>
                   <Rating starValue={product.itemRating} showScale />

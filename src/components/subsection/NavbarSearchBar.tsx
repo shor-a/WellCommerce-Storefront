@@ -132,7 +132,7 @@ export const NavbarSearchBar = ({
                       alt={product.itemName}
                     />
                     <div className="flex min-w-0 flex-col gap-0.5">
-                      <p className="truncate text-sm leading-tight font-medium">
+                      <p className="text-sm leading-tight font-medium">
                         {product.itemName}
                       </p>
                       <Rating
