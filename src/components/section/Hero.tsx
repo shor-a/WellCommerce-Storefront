@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <>
       <div className="hero bg-secondary pt-10 pb-0 lg:pt-20">
-        <div className="container mx-auto gap-10 px-4 lg:px-10">
+        <div className="container mx-auto gap-10 px-4 lg:min-h-[350px] lg:px-10">
           {/* Mobile: stacked column  text then image. Desktop: side-by-side row */}
           <div className="flex w-full flex-col lg:flex-row lg:justify-start">
             <div className="lg:basis-6/14"></div>

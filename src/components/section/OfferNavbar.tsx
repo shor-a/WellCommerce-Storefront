@@ -23,9 +23,9 @@ export const OfferNavbar = ({ className }: OfferNavbarProps) => {
         className
       )}
     >
-      <div className="container mx-auto flex items-center px-4 py-2 sm:px-6 lg:px-10">
+      <div className="container mx-auto flex items-center px-4 py-0.5 sm:px-6 lg:px-10">
         {/* Left spacer on desktop  mirrors X button width to keep text truly centered */}
-        <div className="hidden shrink-0 lg:block lg:w-5" aria-hidden="true" />
+        <div className="w-5 shrink-0 lg:block" aria-hidden="true" />
 
         <div className="flex flex-1 flex-wrap items-center justify-center gap-x-1 gap-y-0">
           <p className="text-xs sm:text-sm">
@@ -39,13 +39,12 @@ export const OfferNavbar = ({ className }: OfferNavbarProps) => {
           </Link>
         </div>
 
-        {/* X button  desktop only; on mobile the banner is dismissible only by logging in */}
         <Button
           variant="ghost"
           size="icon"
           aria-label="Dismiss offer"
           onClick={dismiss}
-          className="hidden shrink-0 cursor-pointer text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground lg:flex"
+          className="shrink-0 cursor-pointer text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground lg:flex"
         >
           <X strokeWidth={3} className="size-4" />
         </Button>

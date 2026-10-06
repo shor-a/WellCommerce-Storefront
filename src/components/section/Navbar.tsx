@@ -25,7 +25,7 @@ interface NavbarProps {
 
 // Collapses the inline search bar to an icon when the visual viewport is too
 // narrow to fit everything  fires on both window resize and browser zoom.
-const SEARCH_COLLAPSE_WIDTH = 1150
+const SEARCH_COLLAPSE_WIDTH = 1260
 
 const useCollapseSearch = () => {
   const [collapsed, setCollapsed] = useState(
@@ -35,17 +35,13 @@ const useCollapseSearch = () => {
   )
 
   useEffect(() => {
+    const vv = window.visualViewport
     const check = () => {
-      setCollapsed(
-        (window.visualViewport?.width ?? window.innerWidth) <
-          SEARCH_COLLAPSE_WIDTH
-      )
+      setCollapsed((vv?.width ?? window.innerWidth) < SEARCH_COLLAPSE_WIDTH)
     }
-    window.visualViewport?.addEventListener("resize", check)
-    window.addEventListener("resize", check)
+    vv?.addEventListener("resize", check)
     return () => {
-      window.visualViewport?.removeEventListener("resize", check)
-      window.removeEventListener("resize", check)
+      vv?.removeEventListener("resize", check)
     }
   }, [])
 

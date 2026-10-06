@@ -11,7 +11,7 @@
     background-image: url(../assets/images/general/hero-lg.webp);
     background-repeat: no-repeat;
     background-size: auto clamp(300px, 40vw, 450px);
-    background-position: 20% 20%;
+    background-position: 20% 40%;
   }
 }
 
@@ -44,6 +44,6 @@
 
 @media (min-width: 2500px) {
   .hero {
-    background-position: 42% 20%;
+    background-position: 43.5% 20%;
   }
 }

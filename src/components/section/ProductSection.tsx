@@ -166,12 +166,12 @@ export const ProductSection = () => {
             <Separator />
 
             {/* CTA row  quantity stepper + Add to Cart + Wishlist */}
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <QuantityStepper quantity={quantity} changeQty={changeQty} />
               <Button
                 variant="default"
                 size="xl"
-                className="flex-1 rounded-full text-base"
+                className="rounded-full text-base"
                 aria-label="Add to cart"
                 onClick={() => {
                   requireAuth(() => {
@@ -217,6 +217,7 @@ export const ProductSection = () => {
                     wishlisted ? "fill-destructive stroke-destructive" : ""
                   )}
                 />
+                Wishlist
               </Button>
             </div>
           </div>
