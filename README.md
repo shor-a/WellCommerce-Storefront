@@ -2,15 +2,12 @@
 
 Full-featured e-commerce storefront built with React 19, shadcn, and Tailwind CSS v4. Product discovery, cart management, multi-method checkout, and order tracking.
 
-**Live:** https://wellcommerce.pages.dev
+**Live:** https://wellcommerce.ashariflow.com
 
----
+**Screenshots:**
 
-## Design Origin
-
-The initial design comes from a Figma community freebie by **[Hamza Naeem](https://www.figma.com/files/team/1257686825828261983/resources/community/@hamzauix)**. This implementation follows the source faithfully, then extends it with additional pages, interactive states, and accessibility attributes the original file does not include.
-
-**Original Figma file:** https://www.figma.com/community/file/1273571982885059508/e-commerce-website-template-freebie
+<img width="254" height="400" alt="Frame 1" src="https://github.com/user-attachments/assets/6dd565eb-352c-4726-b243-acfda426b2b2" />
+<img width="562" height="400" alt="Frame 2" src="https://github.com/user-attachments/assets/138695de-bb83-4870-8a0d-b66e1f833639" />
 
 ---
 
@@ -121,4 +118,6 @@ pnpm build      # production build
 
 ## Credits
 
-Design by **Hamza Naeem**: [Figma Community Profile](https://www.figma.com/files/team/1257686825828261983/resources/community/@hamzauix) · [Original File](https://www.figma.com/community/file/1273571982885059508/e-commerce-website-template-freebie)
+The initial design comes from a Figma community freebie by **[Hamza Naeem](https://www.figma.com/files/team/1257686825828261983/resources/community/@hamzauix)**. This implementation follows the initial source design, then extends it with additional pages, interactive states, and accessibility attributes the original file does not include.
+
+**Original Figma file:** https://www.figma.com/community/file/1273571982885059508/e-commerce-website-template-freebie
